@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 180" fill="none">
+  <defs>
+    <filter id="ps"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#1e3a5f" flood-opacity="0.15"/></filter>
+    <marker id="pa" markerWidth="7" markerHeight="5" refX="5" refY="2.5" orient="auto">
+      <polygon points="0 0, 7 2.5, 0 5" fill="#2d5986"/>
+    </marker>
+  </defs>
+  <rect width="700" height="180" fill="white"/>
+
+  <text x="350" y="20" text-anchor="middle" fill="#2d5986" font-family="Segoe UI, sans-serif" font-size="13" font-weight="800">Pipeline Machine Learning</text>
+
+  <!-- Steps -->
+  <g filter="url(#ps)">
+    <rect x="8" y="38" width="80" height="65" rx="8" fill="#fee2e2" stroke="#ef4444" stroke-width="1"/>
+    <text x="48" y="62" text-anchor="middle" fill="#ef4444" font-family="Segoe UI, sans-serif" font-size="15">📋</text>
+    <text x="48" y="80" text-anchor="middle" fill="#ef4444" font-family="Segoe UI, sans-serif" font-size="8" font-weight="700">Surowe dane</text>
+    <text x="48" y="93" text-anchor="middle" fill="#ef4444" font-family="Segoe UI, sans-serif" font-size="7" opacity="0.7">brudne, niekompletne</text>
+  </g>
+  <line x1="92" y1="70" x2="106" y2="70" stroke="#2d5986" stroke-width="1.5" marker-end="url(#pa)"/>
+
+  <g filter="url(#ps)">
+    <rect x="110" y="38" width="80" height="65" rx="8" fill="#2d5986"/>
+    <text x="150" y="62" text-anchor="middle" fill="white" font-family="Segoe UI, sans-serif" font-size="15">🧹</text>
+    <text x="150" y="80" text-anchor="middle" fill="white" font-family="Segoe UI, sans-serif" font-size="8" font-weight="700">Czyszczenie</text>
+    <text x="150" y="93" text-anchor="middle" fill="#c7d2fe" font-family="Segoe UI, sans-serif" font-size="7">nulls, duplikaty</text>
+  </g>
+  <line x1="194" y1="70" x2="208" y2="70" stroke="#2d5986" stroke-width="1.5" marker-end="url(#pa)"/>
+
+  <g filter="url(#ps)">
+    <rect x="212" y="38" width="80" height="65" rx="8" fill="#2d5986"/>
+    <text x="252" y="62" text-anchor="middle" fill="white" font-family="Segoe UI, sans-serif" font-size="15">🔧</text>
+    <text x="252" y="80" text-anchor="middle" fill="white" font-family="Segoe UI, sans-serif" font-size="8" font-weight="700">Feature Eng.</text>
+    <text x="252" y="93" text-anchor="middle" fill="#c7d2fe" font-family="Segoe UI, sans-serif" font-size="7">encoding, scaling</text>
+  </g>
+  <line x1="296" y1="70" x2="310" y2="70" stroke="#2d5986" stroke-width="1.5" marker-end="url(#pa)"/>
+
+  <g filter="url(#ps)">
+    <rect x="314" y="38" width="80" height="65" rx="8" fill="#2d5986"/>
+    <text x="354" y="62" text-anchor="middle" fill="white" font-family="Segoe UI, sans-serif" font-size="15">✂️</text>
+    <text x="354" y="80" text-anchor="middle" fill="white" font-family="Segoe UI, sans-serif" font-size="8" font-weight="700">Train / Test</text>
+    <text x="354" y="93" text-anchor="middle" fill="#c7d2fe" font-family="Segoe UI, sans-serif" font-size="7">80% / 20%</text>
+  </g>
+  <line x1="398" y1="70" x2="412" y2="70" stroke="#2d5986" stroke-width="1.5" marker-end="url(#pa)"/>
+
+  <g filter="url(#ps)">
+    <rect x="416" y="38" width="80" height="65" rx="8" fill="#fef3c7" stroke="#fbbf24" stroke-width="1"/>
+    <text x="456" y="62" text-anchor="middle" fill="#92400e" font-family="Segoe UI, sans-serif" font-size="15">🧠</text>
+    <text x="456" y="80" text-anchor="middle" fill="#92400e" font-family="Segoe UI, sans-serif" font-size="8" font-weight="700">Trenowanie</text>
+    <text x="456" y="93" text-anchor="middle" fill="#92400e" font-family="Segoe UI, sans-serif" font-size="7">model.fit()</text>
+  </g>
+  <line x1="500" y1="70" x2="514" y2="70" stroke="#2d5986" stroke-width="1.5" marker-end="url(#pa)"/>
+
+  <g filter="url(#ps)">
+    <rect x="518" y="38" width="80" height="65" rx="8" fill="#fef3c7" stroke="#fbbf24" stroke-width="1"/>
+    <text x="558" y="62" text-anchor="middle" fill="#92400e" font-family="Segoe UI, sans-serif" font-size="15">📊</text>
+    <text x="558" y="80" text-anchor="middle" fill="#92400e" font-family="Segoe UI, sans-serif" font-size="8" font-weight="700">Ewaluacja</text>
+    <text x="558" y="93" text-anchor="middle" fill="#92400e" font-family="Segoe UI, sans-serif" font-size="7">accuracy, F1</text>
+  </g>
+  <line x1="602" y1="70" x2="616" y2="70" stroke="#2d5986" stroke-width="1.5" marker-end="url(#pa)"/>
+
+  <g filter="url(#ps)">
+    <rect x="620" y="38" width="72" height="65" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+    <text x="656" y="62" text-anchor="middle" fill="#166534" font-family="Segoe UI, sans-serif" font-size="15">🚀</text>
+    <text x="656" y="80" text-anchor="middle" fill="#166534" font-family="Segoe UI, sans-serif" font-size="8" font-weight="700">Deploy</text>
+    <text x="656" y="93" text-anchor="middle" fill="#166534" font-family="Segoe UI, sans-serif" font-size="7">produkcja</text>
+  </g>
+
+  <!-- Feedback loop -->
+  <path d="M558 108 C558 145, 252 145, 252 108" stroke="#ef4444" stroke-width="1" fill="none" stroke-dasharray="4 3" opacity="0.5"/>
+  <text x="405" y="155" text-anchor="middle" fill="#ef4444" font-family="Segoe UI, sans-serif" font-size="8" opacity="0.6">iteracja — poprawa cech i parametrów</text>
+
+  <!-- Bottom label -->
+  <text x="350" y="175" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="9">Surowe dane → Czyszczenie → Feature Engineering → Train/Test → Trenowanie → Ewaluacja → Deployment</text>
+</svg>

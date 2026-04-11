@@ -1,0 +1,208 @@
+.page {
+  padding: 3rem 0 5rem;
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.subtitle {
+  color: var(--ifm-color-emphasis-700);
+  max-width: 680px;
+  line-height: 1.7;
+}
+
+/* Category filter */
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.catBtn {
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--ifm-color-emphasis-300);
+  background: transparent;
+  color: var(--ifm-font-color-base);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.catBtn:hover {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+
+.catActive {
+  background: var(--ifm-color-primary) !important;
+  border-color: var(--ifm-color-primary) !important;
+  color: white !important;
+  font-weight: 700;
+}
+
+/* Progress */
+.progressSection {
+  margin-bottom: 2rem;
+}
+
+.progressInfo {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 0.4rem;
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background: var(--ifm-color-emphasis-200);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--ifm-color-primary), #10b981);
+  border-radius: 999px;
+  transition: width 0.35s ease;
+}
+
+.resetBtn {
+  margin-top: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--ifm-color-emphasis-600);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+/* Card area */
+.cardArea {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.cardCounter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-600);
+  margin-bottom: 1rem;
+}
+
+.categoryTag {
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.navBtn {
+  padding: 0.55rem 1.2rem;
+  border-radius: 8px;
+  border: 1.5px solid var(--ifm-color-emphasis-300);
+  background: transparent;
+  color: var(--ifm-font-color-base);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.navBtn:hover:not(:disabled) {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+
+.navBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.knownBtn {
+  padding: 0.55rem 1.2rem;
+  border-radius: 8px;
+  border: 1.5px solid var(--ifm-color-emphasis-300);
+  background: transparent;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--ifm-font-color-base);
+}
+
+.knownBtn:hover {
+  border-color: #10b981;
+  color: #10b981;
+}
+
+.knownActive {
+  background: #10b981 !important;
+  border-color: #10b981 !important;
+  color: white !important;
+}
+
+/* Shuffle */
+.shuffleRow {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.shuffleBtn {
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  border: 1.5px solid var(--ifm-color-emphasis-300);
+  background: transparent;
+  font-size: 0.82rem;
+  cursor: pointer;
+  color: var(--ifm-color-emphasis-700);
+  transition: all 0.15s;
+}
+
+.shuffleBtn:hover {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+
+/* Shortcuts */
+.shortcuts {
+  margin-top: 2.5rem;
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-600);
+  text-align: center;
+}
+
+.shortcuts kbd {
+  background: var(--ifm-color-emphasis-200);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+  padding: 0.1rem 0.4rem;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.78rem;
+}
+
+.empty {
+  text-align: center;
+  color: var(--ifm-color-emphasis-500);
+  padding: 3rem;
+}

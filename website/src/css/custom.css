@@ -1,0 +1,172 @@
+/* ============================================================
+   Paleta kolorów — Python w Zastosowaniach Big Data
+   Motyw: Indigo/Fiolet akademicki z akcentami błękitu
+   ============================================================ */
+
+/* Inter + JetBrains Mono via Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ---- Tryb jasny ---- */
+:root {
+  --ifm-color-primary: #4f46e5;
+  --ifm-color-primary-dark: #4338ca;
+  --ifm-color-primary-darker: #3730a3;
+  --ifm-color-primary-darkest: #312e81;
+  --ifm-color-primary-light: #6366f1;
+  --ifm-color-primary-lighter: #818cf8;
+  --ifm-color-primary-lightest: #a5b4fc;
+
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', 'Fira Code', monospace;
+  --ifm-font-size-base: 16px;
+  --ifm-line-height-base: 1.7;
+
+  --ifm-code-font-size: 90%;
+  --ifm-heading-font-weight: 700;
+  --ifm-navbar-height: 60px;
+
+  --site-accent-yellow: #fbbf24;
+  --site-accent-green: #10b981;
+  --site-accent-red: #ef4444;
+
+  --docusaurus-highlighted-code-line-bg: rgba(79, 70, 229, 0.08);
+}
+
+/* ---- Tryb ciemny ---- */
+[data-theme='dark'] {
+  --ifm-color-primary: #818cf8;
+  --ifm-color-primary-dark: #6366f1;
+  --ifm-color-primary-darker: #4f46e5;
+  --ifm-color-primary-darkest: #4338ca;
+  --ifm-color-primary-light: #a5b4fc;
+  --ifm-color-primary-lighter: #c7d2fe;
+  --ifm-color-primary-lightest: #e0e7ff;
+
+  --ifm-background-color: #0f0f1a;
+  --ifm-navbar-background-color: #12122a;
+  --ifm-footer-background-color: #0a0a18;
+
+  --docusaurus-highlighted-code-line-bg: rgba(129, 140, 248, 0.12);
+}
+
+/* ---- Global ---- */
+body {
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+/* Smooth anchor scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ---- Navbar ---- */
+.navbar__brand {
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+/* ---- Admonitions po polsku ---- */
+.admonition-note .admonition-heading h5::after {
+  content: ' Notatka';
+}
+.admonition-tip .admonition-heading h5::after {
+  content: ' Wskazówka';
+}
+.admonition-warning .admonition-heading h5::after {
+  content: ' Uwaga';
+}
+.admonition-danger .admonition-heading h5::after {
+  content: ' Uwaga!';
+}
+.admonition-info .admonition-heading h5::after {
+  content: ' Informacja';
+}
+
+/* ---- Code blocks ---- */
+.prism-code {
+  border-radius: 8px;
+}
+
+/* ---- Skip to main content (accessibility) ---- */
+.skipToContent_src-theme-SkipToContent-styles-module {
+  z-index: 9999;
+}
+
+/* ---- Hero gradient (used in index.tsx) ---- */
+.hero--gradient {
+  background: linear-gradient(135deg, #312e81 0%, #4f46e5 40%, #7c3aed 100%);
+  color: white;
+}
+
+/* ---- Feature cards ---- */
+.feature-card {
+  border-radius: 12px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(79, 70, 229, 0.15);
+}
+
+/* ---- Fiszki (flashcards) ---- */
+.flashcard-scene {
+  perspective: 1000px;
+}
+.flashcard {
+  width: 100%;
+  height: 220px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border-radius: 16px;
+}
+.flashcard.is-flipped {
+  transform: rotateY(180deg);
+}
+.flashcard__face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+.flashcard__face--front {
+  background: var(--ifm-color-primary);
+  color: white;
+}
+.flashcard__face--back {
+  background: var(--ifm-card-background-color, #fff);
+  color: var(--ifm-font-color-base);
+  transform: rotateY(180deg);
+  border: 2px solid var(--ifm-color-primary);
+}
+[data-theme='dark'] .flashcard__face--back {
+  background: #1e1e3f;
+}
+.flashcard__label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 0.75rem;
+}
+.flashcard__question {
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.flashcard__answer {
+  font-size: 1rem;
+  line-height: 1.6;
+}

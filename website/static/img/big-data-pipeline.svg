@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4F46E5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="300" fill="#FAFAFA"/>
+  
+  <!-- Stage 1: Raw Data -->
+  <g>
+    <rect x="20" y="80" width="200" height="140" rx="10" fill="#E0E7FF" stroke="#4F46E5" stroke-width="3"/>
+    <text x="120" y="110" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" font-weight="700" fill="#4F46E5">📊 Surowe Dane</text>
+    <text x="120" y="140" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#1E293B">Terabajty danych</text>
+    <text x="120" y="165" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#1E293B">CSV, JSON, DB</text>
+    <text x="120" y="190" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#1E293B">HDFS, S3, GCS</text>
+  </g>
+  
+  <!-- Arrow 1 -->
+  <g>
+    <line x1="220" y1="150" x2="270" y2="150" stroke="#4F46E5" stroke-width="4"/>
+    <polygon points="270,150 260,145 260,155" fill="#4F46E5"/>
+  </g>
+  
+  <!-- Stage 2: Processing -->
+  <g>
+    <rect x="290" y="80" width="200" height="140" rx="10" fill="#F0FDFA" stroke="#14B8A6" stroke-width="3"/>
+    <text x="390" y="110" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" font-weight="700" fill="#14B8A6">⚙️ Przetwarzanie</text>
+    <text x="390" y="140" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#1E293B">Apache Spark</text>
+    <text x="390" y="165" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#1E293B">PySpark, SQL</text>
+    <text x="390" y="190" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#1E293B">Transformacje</text>
+  </g>
+  
+  <!-- Arrow 2 -->
+  <g>
+    <line x1="490" y1="150" x2="540" y2="150" stroke="#14B8A6" stroke-width="4"/>
+    <polygon points="540,150 530,145 530,155" fill="#14B8A6"/>
+  </g>
+  
+  <!-- Stage 3: ML & Analytics -->
+  <g>
+    <rect x="560" y="80" width="200" height="140" rx="10" fill="#FEF3C7" stroke="#F59E0B" stroke-width="3"/>
+    <text x="660" y="110" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" font-weight="700" fill="#F59E0B">🤖 ML & Analiza</text>
+    <text x="660" y="140" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#1E293B">MLlib, scikit-learn</text>
+    <text x="660" y="165" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#1E293B">Modele predykcyjne</text>
+    <text x="660" y="190" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#1E293B">Klasyfikacja</text>
+  </g>
+  
+  <!-- Arrow 3 -->
+  <g>
+    <line x1="760" y1="150" x2="810" y2="150" stroke="#F59E0B" stroke-width="4"/>
+    <polygon points="810,150 800,145 800,155" fill="#F59E0B"/>
+  </g>
+  
+  <!-- Stage 4: Insights -->
+  <g>
+    <rect x="830" y="80" width="200" height="140" rx="10" fill="#DBEAFE" stroke="#3B82F6" stroke-width="3"/>
+    <text x="930" y="110" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" font-weight="700" fill="#3B82F6">💡 Wiedza</text>
+    <text x="930" y="140" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#1E293B">Dashboardy</text>
+    <text x="930" y="165" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#1E293B">Wizualizacje</text>
+    <text x="930" y="190" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#1E293B">Decyzje biznesowe</text>
+  </g>
+  
+  <!-- Bottom label -->
+  <text x="600" y="270" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" font-weight="600" fill="#64748B">Big Data Pipeline — od surowych danych do wiedzy</text>
+</svg>

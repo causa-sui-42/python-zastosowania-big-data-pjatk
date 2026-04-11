@@ -1,0 +1,89 @@
+/* 3D Flip Card */
+.scene {
+  perspective: 1000px;
+  width: 100%;
+}
+
+.card {
+  width: 100%;
+  min-height: 220px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border-radius: 16px;
+  outline: none;
+}
+
+.card:focus-visible {
+  box-shadow: 0 0 0 3px var(--ifm-color-primary);
+}
+
+.card.flipped {
+  transform: rotateY(180deg);
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.75rem;
+  text-align: center;
+}
+
+.front {
+  background: var(--ifm-color-primary);
+  color: white;
+  box-shadow: 0 8px 32px rgba(79, 70, 229, 0.25);
+}
+
+.back {
+  background: var(--ifm-background-color, #fff);
+  color: var(--ifm-font-color-base);
+  transform: rotateY(180deg);
+  border: 2px solid var(--ifm-color-primary);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='dark'] .back {
+  background: #1e1e3f;
+}
+
+.label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 0.75rem;
+}
+
+.front .label {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.question {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 600;
+  line-height: 1.45;
+  color: white;
+}
+
+.answer {
+  font-size: clamp(0.88rem, 2vw, 1rem);
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+.hint {
+  margin-top: 1rem;
+  font-size: 0.72rem;
+  opacity: 0.6;
+  color: white;
+}

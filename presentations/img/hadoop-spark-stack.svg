@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 320" fill="none">
+  <defs>
+    <filter id="s"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#1e3a5f" flood-opacity="0.15"/></filter>
+  </defs>
+  <rect width="700" height="320" fill="white"/>
+
+  <!-- YARN -->
+  <rect x="40" y="250" width="620" height="55" rx="8" fill="#1e3a5f" filter="url(#s)"/>
+  <text x="350" y="275" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="13" font-weight="700">YARN — Resource Manager</text>
+  <text x="350" y="293" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="10">Zarządzanie zasobami klastra (CPU, RAM)</text>
+
+  <!-- HDFS -->
+  <rect x="40" y="180" width="620" height="55" rx="8" fill="#2d5986" filter="url(#s)"/>
+  <text x="350" y="205" text-anchor="middle" fill="white" font-family="Segoe UI, sans-serif" font-size="13" font-weight="700">HDFS — Hadoop Distributed File System</text>
+  <text x="350" y="223" text-anchor="middle" fill="#c7d2fe" font-family="Segoe UI, sans-serif" font-size="10">Bloki 128 MB × 3 repliki | Odporność na awarie</text>
+
+  <!-- MapReduce -->
+  <rect x="40" y="90" width="180" height="70" rx="8" fill="#94a3b8" filter="url(#s)"/>
+  <text x="130" y="118" text-anchor="middle" fill="white" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700">MapReduce</text>
+  <text x="130" y="136" text-anchor="middle" fill="white" font-family="Segoe UI, sans-serif" font-size="9" opacity="0.8">Map → Shuffle → Reduce</text>
+  <text x="130" y="150" text-anchor="middle" fill="#ef4444" font-family="Segoe UI, sans-serif" font-size="9">wolny (zapis na dysk)</text>
+  <line x1="55" y1="128" x2="205" y2="128" stroke="#ef4444" stroke-width="1" opacity="0.5"/>
+
+  <!-- Spark -->
+  <rect x="250" y="50" width="200" height="110" rx="10" fill="#2d5986" stroke="#fbbf24" stroke-width="2" filter="url(#s)"/>
+  <text x="350" y="78" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="15" font-weight="800">⚡ Apache Spark</text>
+  <line x1="270" y1="88" x2="430" y2="88" stroke="#fbbf24" stroke-opacity="0.3"/>
+  <text x="305" y="108" text-anchor="middle" fill="white" font-family="Segoe UI, sans-serif" font-size="9">Spark SQL</text>
+  <text x="395" y="108" text-anchor="middle" fill="white" font-family="Segoe UI, sans-serif" font-size="9">DataFrame</text>
+  <text x="305" y="128" text-anchor="middle" fill="white" font-family="Segoe UI, sans-serif" font-size="9">MLlib</text>
+  <text x="395" y="128" text-anchor="middle" fill="white" font-family="Segoe UI, sans-serif" font-size="9">Streaming</text>
+  <text x="350" y="150" text-anchor="middle" fill="#22c55e" font-family="Segoe UI, sans-serif" font-size="10" font-weight="700">in-memory → 100× szybciej</text>
+
+  <!-- Ecosystem -->
+  <rect x="480" y="90" width="180" height="70" rx="8" fill="#374151" filter="url(#s)"/>
+  <text x="570" y="115" text-anchor="middle" fill="#c7d2fe" font-family="Segoe UI, sans-serif" font-size="11" font-weight="600">Ekosystem</text>
+  <text x="530" y="138" text-anchor="middle" fill="white" font-family="Segoe UI, sans-serif" font-size="9">Hive</text>
+  <text x="570" y="138" text-anchor="middle" fill="white" font-family="Segoe UI, sans-serif" font-size="9">Kafka</text>
+  <text x="610" y="138" text-anchor="middle" fill="white" font-family="Segoe UI, sans-serif" font-size="9">HBase</text>
+  <text x="570" y="152" text-anchor="middle" fill="white" font-family="Segoe UI, sans-serif" font-size="8" opacity="0.7">ZooKeeper</text>
+
+  <!-- Labels -->
+  <text x="350" y="30" text-anchor="middle" fill="#2d5986" font-family="Segoe UI, sans-serif" font-size="14" font-weight="800">Ekosystem Hadoop + Apache Spark</text>
+</svg>

@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="none">
+  <defs>
+    <linearGradient id="nodeGrad1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="nodeGrad2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#a5b4fc" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#fbbf24" stop-opacity="0.6"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softShadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#1e1b4b" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Connecting data flow lines -->
+  <g opacity="0.5">
+    <!-- Source to Hadoop -->
+    <path d="M155 130 C220 130, 220 120, 280 120" stroke="url(#lineGrad)" stroke-width="2" stroke-dasharray="6 4">
+      <animate attributeName="stroke-dashoffset" values="0;-20" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M155 200 C220 200, 220 180, 280 180" stroke="url(#lineGrad)" stroke-width="2" stroke-dasharray="6 4">
+      <animate attributeName="stroke-dashoffset" values="0;-20" dur="2.3s" repeatCount="indefinite"/>
+    </path>
+    <path d="M155 270 C220 270, 220 240, 280 240" stroke="url(#lineGrad)" stroke-width="2" stroke-dasharray="6 4">
+      <animate attributeName="stroke-dashoffset" values="0;-20" dur="1.8s" repeatCount="indefinite"/>
+    </path>
+    <!-- Hadoop to Spark -->
+    <path d="M380 120 C430 120, 430 150, 440 150" stroke="url(#lineGrad)" stroke-width="2.5" stroke-dasharray="6 4">
+      <animate attributeName="stroke-dashoffset" values="0;-20" dur="1.5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M380 180 C420 180, 430 190, 440 190" stroke="url(#lineGrad)" stroke-width="2.5" stroke-dasharray="6 4">
+      <animate attributeName="stroke-dashoffset" values="0;-20" dur="1.7s" repeatCount="indefinite"/>
+    </path>
+    <path d="M380 240 C430 240, 430 230, 440 230" stroke="url(#lineGrad)" stroke-width="2.5" stroke-dasharray="6 4">
+      <animate attributeName="stroke-dashoffset" values="0;-20" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <!-- Spark to Outputs -->
+    <path d="M570 170 C620 170, 620 120, 650 120" stroke="#fbbf24" stroke-width="2" stroke-dasharray="6 4" opacity="0.6">
+      <animate attributeName="stroke-dashoffset" values="0;-20" dur="1.6s" repeatCount="indefinite"/>
+    </path>
+    <path d="M570 200 C620 200, 620 200, 650 200" stroke="#10b981" stroke-width="2" stroke-dasharray="6 4" opacity="0.6">
+      <animate attributeName="stroke-dashoffset" values="0;-20" dur="1.9s" repeatCount="indefinite"/>
+    </path>
+    <path d="M570 230 C620 230, 620 280, 650 280" stroke="#818cf8" stroke-width="2" stroke-dasharray="6 4" opacity="0.6">
+      <animate attributeName="stroke-dashoffset" values="0;-20" dur="2.1s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Data sources (left) -->
+  <g filter="url(#softShadow)">
+    <!-- CSV File -->
+    <rect x="60" y="105" width="95" height="50" rx="10" fill="url(#nodeGrad2)"/>
+    <text x="107" y="126" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-size="11" font-weight="700">CSV</text>
+    <text x="107" y="143" text-anchor="middle" fill="#e0e7ff" font-family="Inter, sans-serif" font-size="9">500K wierszy</text>
+
+    <!-- Database -->
+    <rect x="60" y="175" width="95" height="50" rx="10" fill="url(#nodeGrad2)"/>
+    <text x="107" y="196" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-size="11" font-weight="700">Database</text>
+    <text x="107" y="213" text-anchor="middle" fill="#e0e7ff" font-family="Inter, sans-serif" font-size="9">PostgreSQL</text>
+
+    <!-- Streaming -->
+    <rect x="60" y="245" width="95" height="50" rx="10" fill="url(#nodeGrad2)"/>
+    <text x="107" y="266" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-size="11" font-weight="700">Stream</text>
+    <text x="107" y="283" text-anchor="middle" fill="#e0e7ff" font-family="Inter, sans-serif" font-size="9">Kafka</text>
+  </g>
+
+  <!-- HDFS / Storage (middle-left) -->
+  <g filter="url(#softShadow)">
+    <rect x="280" y="95" width="100" height="170" rx="12" fill="url(#nodeGrad1)"/>
+    <text x="330" y="130" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-size="13" font-weight="700">Hadoop</text>
+    <text x="330" y="150" text-anchor="middle" fill="#e0e7ff" font-family="Inter, sans-serif" font-size="10">HDFS</text>
+    <line x1="300" y1="165" x2="360" y2="165" stroke="#e0e7ff" stroke-opacity="0.4" stroke-width="1"/>
+    <text x="330" y="185" text-anchor="middle" fill="#e0e7ff" font-family="Inter, sans-serif" font-size="9">Block 1</text>
+    <text x="330" y="200" text-anchor="middle" fill="#e0e7ff" font-family="Inter, sans-serif" font-size="9">Block 2</text>
+    <text x="330" y="215" text-anchor="middle" fill="#e0e7ff" font-family="Inter, sans-serif" font-size="9">Block 3</text>
+    <text x="330" y="245" text-anchor="middle" fill="#c7d2fe" font-family="Inter, sans-serif" font-size="8">3× replikacja</text>
+  </g>
+
+  <!-- Spark Processing (center) -->
+  <g filter="url(#softShadow)">
+    <rect x="440" y="120" width="130" height="140" rx="14" fill="#4f46e5" stroke="#fbbf24" stroke-width="2"/>
+    <text x="505" y="152" text-anchor="middle" fill="#fbbf24" font-family="Inter, sans-serif" font-size="14" font-weight="800">⚡ Spark</text>
+    <line x1="460" y1="164" x2="550" y2="164" stroke="#fbbf24" stroke-opacity="0.3" stroke-width="1"/>
+    <text x="505" y="185" text-anchor="middle" fill="#e0e7ff" font-family="Inter, sans-serif" font-size="10">SparkSession</text>
+    <text x="505" y="202" text-anchor="middle" fill="#e0e7ff" font-family="Inter, sans-serif" font-size="10">DataFrame API</text>
+    <text x="505" y="219" text-anchor="middle" fill="#e0e7ff" font-family="Inter, sans-serif" font-size="10">Spark SQL</text>
+    <text x="505" y="246" text-anchor="middle" fill="#fbbf24" font-family="Inter, sans-serif" font-size="9" font-weight="600">100× szybciej</text>
+  </g>
+
+  <!-- Outputs (right) -->
+  <g filter="url(#softShadow)">
+    <!-- Analytics -->
+    <rect x="650" y="95" width="105" height="50" rx="10" fill="#fbbf24" fill-opacity="0.15" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="702" y="116" text-anchor="middle" fill="#fbbf24" font-family="Inter, sans-serif" font-size="11" font-weight="700">Analityka</text>
+    <text x="702" y="133" text-anchor="middle" fill="#fbbf24" font-family="Inter, sans-serif" font-size="9" opacity="0.8">pandas + matplotlib</text>
+
+    <!-- ML Model -->
+    <rect x="650" y="175" width="105" height="50" rx="10" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-width="1.5"/>
+    <text x="702" y="196" text-anchor="middle" fill="#10b981" font-family="Inter, sans-serif" font-size="11" font-weight="700">ML Model</text>
+    <text x="702" y="213" text-anchor="middle" fill="#10b981" font-family="Inter, sans-serif" font-size="9" opacity="0.8">MLlib + Pipeline</text>
+
+    <!-- Cloud -->
+    <rect x="650" y="255" width="105" height="50" rx="10" fill="#818cf8" fill-opacity="0.15" stroke="#818cf8" stroke-width="1.5"/>
+    <text x="702" y="276" text-anchor="middle" fill="#818cf8" font-family="Inter, sans-serif" font-size="11" font-weight="700">Cloud</text>
+    <text x="702" y="293" text-anchor="middle" fill="#818cf8" font-family="Inter, sans-serif" font-size="9" opacity="0.8">BigQuery + GCP</text>
+  </g>
+
+  <!-- Section labels -->
+  <text x="107" y="85" text-anchor="middle" fill="#a5b4fc" font-family="Inter, sans-serif" font-size="10" font-weight="600" letter-spacing="0.08em">ŹRÓDŁA DANYCH</text>
+  <text x="330" y="78" text-anchor="middle" fill="#a5b4fc" font-family="Inter, sans-serif" font-size="10" font-weight="600" letter-spacing="0.08em">STORAGE</text>
+  <text x="505" y="102" text-anchor="middle" fill="#a5b4fc" font-family="Inter, sans-serif" font-size="10" font-weight="600" letter-spacing="0.08em">PRZETWARZANIE</text>
+  <text x="702" y="78" text-anchor="middle" fill="#a5b4fc" font-family="Inter, sans-serif" font-size="10" font-weight="600" letter-spacing="0.08em">WYNIKI</text>
+
+  <!-- Bottom label -->
+  <text x="400" y="350" text-anchor="middle" fill="#818cf8" font-family="Inter, sans-serif" font-size="12" font-weight="600" opacity="0.7">Big Data Pipeline — od surowych danych do wiedzy</text>
+
+  <!-- Floating data particles (decorative) -->
+  <g opacity="0.4">
+    <circle cx="210" cy="140" r="2" fill="#fbbf24">
+      <animate attributeName="cx" values="210;260" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.8;0" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="215" cy="200" r="1.5" fill="#10b981">
+      <animate attributeName="cx" values="215;265" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.7;0" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="205" cy="260" r="2" fill="#818cf8">
+      <animate attributeName="cx" values="205;260" dur="2.8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;0" dur="2.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="410" cy="160" r="2.5" fill="#fbbf24">
+      <animate attributeName="cx" values="410;440" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.7;0" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="600" cy="170" r="2" fill="#10b981">
+      <animate attributeName="cx" values="600;640" dur="2.2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;0" dur="2.2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 260" fill="none">
+  <defs>
+    <filter id="ss"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#1e3a5f" flood-opacity="0.15"/></filter>
+    <marker id="sa" markerWidth="7" markerHeight="5" refX="5" refY="2.5" orient="auto">
+      <polygon points="0 0, 7 2.5, 0 5" fill="#fbbf24"/>
+    </marker>
+    <marker id="sb" markerWidth="7" markerHeight="5" refX="5" refY="2.5" orient="auto">
+      <polygon points="0 0, 7 2.5, 0 5" fill="#2d5986"/>
+    </marker>
+  </defs>
+  <rect width="700" height="260" fill="white"/>
+  <text x="350" y="20" text-anchor="middle" fill="#2d5986" font-family="Segoe UI, sans-serif" font-size="14" font-weight="800">Architektura Spark Streaming + Kafka</text>
+
+  <!-- Sources -->
+  <g filter="url(#ss)">
+    <rect x="15" y="40" width="85" height="30" rx="6" fill="#fee2e2" stroke="#ef4444" stroke-width="1"/>
+    <text x="57" y="59" text-anchor="middle" fill="#ef4444" font-family="Segoe UI, sans-serif" font-size="9" font-weight="600">IoT sensory</text>
+  </g>
+  <g filter="url(#ss)">
+    <rect x="15" y="78" width="85" height="30" rx="6" fill="#fee2e2" stroke="#ef4444" stroke-width="1"/>
+    <text x="57" y="97" text-anchor="middle" fill="#ef4444" font-family="Segoe UI, sans-serif" font-size="9" font-weight="600">Logi serwisów</text>
+  </g>
+  <g filter="url(#ss)">
+    <rect x="15" y="116" width="85" height="30" rx="6" fill="#fee2e2" stroke="#ef4444" stroke-width="1"/>
+    <text x="57" y="135" text-anchor="middle" fill="#ef4444" font-family="Segoe UI, sans-serif" font-size="9" font-weight="600">Kliknięcia web</text>
+  </g>
+
+  <!-- Animated dots -->
+  <circle cx="115" cy="55" r="2.5" fill="#ef4444" opacity="0.6"><animate attributeName="cx" values="108;150" dur="1.5s" repeatCount="indefinite"/></circle>
+  <circle cx="115" cy="93" r="2" fill="#ef4444" opacity="0.5"><animate attributeName="cx" values="108;150" dur="1.8s" repeatCount="indefinite"/></circle>
+  <circle cx="115" cy="131" r="2.5" fill="#ef4444" opacity="0.6"><animate attributeName="cx" values="108;150" dur="1.3s" repeatCount="indefinite"/></circle>
+
+  <!-- Kafka -->
+  <g filter="url(#ss)">
+    <rect x="155" y="35" width="120" height="120" rx="8" fill="#1e3a5f" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="215" y="58" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700">Apache Kafka</text>
+    <text x="215" y="74" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="8">Message Broker</text>
+    <line x1="168" y1="80" x2="262" y2="80" stroke="#fbbf24" stroke-opacity="0.2"/>
+    <rect x="168" y="88" width="94" height="16" rx="3" fill="#fbbf24" fill-opacity="0.1" stroke="#fbbf24" stroke-width="0.6"/>
+    <text x="215" y="100" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="7">topic: iot-events</text>
+    <rect x="168" y="108" width="94" height="16" rx="3" fill="#fbbf24" fill-opacity="0.1" stroke="#fbbf24" stroke-width="0.6"/>
+    <text x="215" y="120" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="7">topic: web-clicks</text>
+    <rect x="168" y="128" width="94" height="16" rx="3" fill="#fbbf24" fill-opacity="0.1" stroke="#fbbf24" stroke-width="0.6"/>
+    <text x="215" y="140" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="7">topic: logs</text>
+  </g>
+
+  <!-- Arrow Kafka → Spark -->
+  <line x1="280" y1="95" x2="310" y2="95" stroke="#fbbf24" stroke-width="2" marker-end="url(#sa)"/>
+
+  <!-- Structured Streaming -->
+  <g filter="url(#ss)">
+    <rect x="315" y="30" width="170" height="140" rx="10" fill="#2d5986" stroke="#4f86c6" stroke-width="1"/>
+    <text x="400" y="54" text-anchor="middle" fill="white" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700">Structured Streaming</text>
+    <text x="400" y="70" text-anchor="middle" fill="#c7d2fe" font-family="Segoe UI, sans-serif" font-size="8">Apache Spark</text>
+    <line x1="330" y1="76" x2="470" y2="76" stroke="white" stroke-opacity="0.15"/>
+
+    <!-- Micro-batches -->
+    <text x="400" y="92" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="8">Micro-batches:</text>
+    <rect x="332" y="97" width="30" height="16" rx="2" fill="white" opacity="0.15"/><text x="347" y="109" text-anchor="middle" fill="white" font-size="7" font-family="Segoe UI, sans-serif">t₁</text>
+    <rect x="366" y="97" width="30" height="16" rx="2" fill="white" opacity="0.2"/><text x="381" y="109" text-anchor="middle" fill="white" font-size="7" font-family="Segoe UI, sans-serif">t₂</text>
+    <rect x="400" y="97" width="30" height="16" rx="2" fill="white" opacity="0.25"/><text x="415" y="109" text-anchor="middle" fill="white" font-size="7" font-family="Segoe UI, sans-serif">t₃</text>
+    <rect x="434" y="97" width="30" height="16" rx="2" fill="#fbbf24" opacity="0.3"/><text x="449" y="109" text-anchor="middle" fill="#fbbf24" font-size="7" font-family="Segoe UI, sans-serif">t₄</text>
+
+    <rect x="332" y="120" width="60" height="16" rx="4" fill="#22c55e" fill-opacity="0.2" stroke="#22c55e" stroke-width="0.6"/>
+    <text x="362" y="131" text-anchor="middle" fill="#22c55e" font-family="Segoe UI, sans-serif" font-size="7">Window</text>
+    <rect x="398" y="120" width="70" height="16" rx="4" fill="#22c55e" fill-opacity="0.2" stroke="#22c55e" stroke-width="0.6"/>
+    <text x="433" y="131" text-anchor="middle" fill="#22c55e" font-family="Segoe UI, sans-serif" font-size="7">Watermark</text>
+
+    <text x="400" y="158" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="9" font-weight="600">Exactly-once + Checkpoint</text>
+  </g>
+
+  <!-- Arrow Spark → Sinks -->
+  <line x1="490" y1="75" x2="520" y2="55" stroke="#2d5986" stroke-width="1.5" marker-end="url(#sb)"/>
+  <line x1="490" y1="95" x2="520" y2="95" stroke="#2d5986" stroke-width="1.5" marker-end="url(#sb)"/>
+  <line x1="490" y1="115" x2="520" y2="135" stroke="#2d5986" stroke-width="1.5" marker-end="url(#sb)"/>
+
+  <!-- Sinks -->
+  <g filter="url(#ss)">
+    <rect x="525" y="38" width="110" height="30" rx="6" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+    <text x="580" y="57" text-anchor="middle" fill="#166534" font-family="Segoe UI, sans-serif" font-size="9" font-weight="600">Dashboard (real-time)</text>
+  </g>
+  <g filter="url(#ss)">
+    <rect x="525" y="78" width="110" height="30" rx="6" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+    <text x="580" y="97" text-anchor="middle" fill="#166534" font-family="Segoe UI, sans-serif" font-size="9" font-weight="600">Baza danych</text>
+  </g>
+  <g filter="url(#ss)">
+    <rect x="525" y="118" width="110" height="30" rx="6" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+    <text x="580" y="137" text-anchor="middle" fill="#166534" font-family="Segoe UI, sans-serif" font-size="9" font-weight="600">Alerty / Email</text>
+  </g>
+
+  <!-- Labels -->
+  <text x="57" y="32" text-anchor="middle" fill="#ef4444" font-family="Segoe UI, sans-serif" font-size="8" font-weight="600">ŹRÓDŁA</text>
+  <text x="215" y="28" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="8" font-weight="600">BROKER</text>
+  <text x="400" y="23" text-anchor="middle" fill="#2d5986" font-family="Segoe UI, sans-serif" font-size="8" font-weight="600">PRZETWARZANIE</text>
+  <text x="580" y="32" text-anchor="middle" fill="#22c55e" font-family="Segoe UI, sans-serif" font-size="8" font-weight="600">WYNIKI</text>
+
+  <!-- Batch vs Stream comparison -->
+  <rect x="80" y="185" width="240" height="40" rx="6" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="200" y="202" text-anchor="middle" fill="#475569" font-family="Segoe UI, sans-serif" font-size="10" font-weight="700">Batch Processing</text>
+  <text x="200" y="218" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="8">minuty–godziny latencji</text>
+
+  <rect x="380" y="185" width="240" height="40" rx="6" fill="#eff6ff" stroke="#2d5986" stroke-width="1.5"/>
+  <text x="500" y="202" text-anchor="middle" fill="#2d5986" font-family="Segoe UI, sans-serif" font-size="10" font-weight="700">Stream Processing</text>
+  <text x="500" y="218" text-anchor="middle" fill="#2d5986" font-family="Segoe UI, sans-serif" font-size="8">milisekundy–sekundy latencji</text>
+
+  <text x="350" y="250" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="9">Źródła danych → Kafka → Structured Streaming → Dashboard / DB / Alerty</text>
+</svg>

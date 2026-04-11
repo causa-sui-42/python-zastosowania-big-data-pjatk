@@ -1,0 +1,256 @@
+.page {
+  padding: 3rem 0 5rem;
+}
+
+.hero {
+  max-width: 780px;
+  margin-bottom: 3rem;
+}
+
+.lead {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: var(--ifm-color-emphasis-800);
+}
+
+.section {
+  margin-bottom: 3rem;
+}
+
+/* Zasady grid */
+.zasadyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.zasadaCard {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  padding: 1.25rem;
+  transition: box-shadow 0.2s;
+}
+
+.zasadaCard:hover {
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.1);
+}
+
+.zasadaIkona {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.zasadaTytul {
+  font-size: 1rem !important;
+  margin-bottom: 0.35rem !important;
+}
+
+.zasadaOpis {
+  font-size: 0.87rem;
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Two-column layout */
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .twoCol {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Requirements list */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listItem {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.64rem 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-100);
+}
+
+.listLabel {
+  background: var(--ifm-color-primary);
+  color: white;
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.listOpis {
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-800);
+}
+
+/* Grades list */
+.gradeList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.gradeItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.64rem 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-100);
+  font-size: 0.9rem;
+}
+
+.procent {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--ifm-color-primary);
+  min-width: 3rem;
+}
+
+/* Note */
+.note {
+  margin-top: 0.75rem;
+  font-size: 0.87rem;
+  color: var(--ifm-color-emphasis-700);
+  border-left: 3px solid var(--ifm-color-primary);
+  padding-left: 0.75rem;
+}
+
+/* Contact */
+.contactCard {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  padding: 1.5rem;
+  line-height: 1.75;
+}
+
+.contactCard p {
+  margin-bottom: 0.5rem;
+}
+
+/* Syllabus */
+.syllabusIntro {
+  font-size: 1rem;
+  color: var(--ifm-color-emphasis-800);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.syllabusGrid {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.syllabusItem {
+  display: flex;
+  gap: 1.25rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.syllabusItem:hover {
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.12);
+  border-color: var(--ifm-color-primary-light);
+}
+
+.syllabusNum {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #4F46E5, #7C3AED);
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 800;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+.syllabusContent {
+  flex: 1;
+}
+
+.syllabusContent h3 {
+  font-size: 1.15rem;
+  margin: 0 0 0.5rem 0;
+  color: var(--ifm-color-emphasis-900);
+  font-weight: 700;
+}
+
+.syllabusContent p {
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-700);
+  margin: 0 0 0.75rem 0;
+  line-height: 1.6;
+}
+
+.syllabusLinks {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.syllabusLinks a {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--ifm-color-primary-light);
+  border-radius: 6px;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.syllabusLinks a:hover {
+  background: var(--ifm-color-primary);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.comingSoon {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-500);
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .syllabusItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .syllabusNum {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.1rem;
+  }
+}

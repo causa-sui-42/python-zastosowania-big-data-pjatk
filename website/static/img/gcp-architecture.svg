@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" fill="none">
+  <defs>
+    <linearGradient id="gcpGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#4338ca"/>
+    </linearGradient>
+    <filter id="cloudShadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#1e1b4b" flood-opacity="0.2"/>
+    </filter>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#10b981"/>
+    </marker>
+    <marker id="arrowIndigo" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#818cf8"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="360" y="28" text-anchor="middle" fill="#4f46e5" font-family="Inter, sans-serif" font-size="16" font-weight="800">Architektura Big Data w Google Cloud Platform</text>
+
+  <!-- Cloud boundary -->
+  <rect x="30" y="45" width="660" height="300" rx="20" fill="#4f46e5" fill-opacity="0.04" stroke="#818cf8" stroke-width="1.5" stroke-dasharray="8 4"/>
+  <text x="360" y="66" text-anchor="middle" fill="#818cf8" font-family="Inter, sans-serif" font-size="11" font-weight="600">Google Cloud Platform</text>
+
+  <!-- Row 1: Data Sources → Cloud Storage -->
+  <!-- Data Sources -->
+  <g filter="url(#cloudShadow)">
+    <rect x="50" y="85" width="120" height="100" rx="12" fill="#ef4444" fill-opacity="0.1" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="110" y="110" text-anchor="middle" fill="#ef4444" font-family="Inter, sans-serif" font-size="12" font-weight="700">Źródła danych</text>
+    <text x="110" y="130" text-anchor="middle" fill="#ef4444" font-family="Inter, sans-serif" font-size="9" opacity="0.8">CSV / JSON</text>
+    <text x="110" y="145" text-anchor="middle" fill="#ef4444" font-family="Inter, sans-serif" font-size="9" opacity="0.8">Bazy danych</text>
+    <text x="110" y="160" text-anchor="middle" fill="#ef4444" font-family="Inter, sans-serif" font-size="9" opacity="0.8">API / Streaming</text>
+  </g>
+
+  <!-- Arrow -->
+  <line x1="175" y1="135" x2="200" y2="135" stroke="#10b981" stroke-width="2" marker-end="url(#arrowGreen)"/>
+
+  <!-- Cloud Storage -->
+  <g filter="url(#cloudShadow)">
+    <rect x="205" y="85" width="140" height="100" rx="12" fill="url(#gcpGrad)"/>
+    <text x="275" y="110" text-anchor="middle" fill="#fbbf24" font-family="Inter, sans-serif" font-size="13" font-weight="700">Cloud Storage</text>
+    <text x="275" y="130" text-anchor="middle" fill="#c7d2fe" font-family="Inter, sans-serif" font-size="10">gs://my-bucket/</text>
+    <rect x="222" y="140" width="55" height="20" rx="4" fill="#818cf8" opacity="0.3"/>
+    <text x="249" y="154" text-anchor="middle" fill="#e0e7ff" font-family="Inter, sans-serif" font-size="8">input/</text>
+    <rect x="282" y="140" width="55" height="20" rx="4" fill="#818cf8" opacity="0.3"/>
+    <text x="309" y="154" text-anchor="middle" fill="#e0e7ff" font-family="Inter, sans-serif" font-size="8">output/</text>
+    <text x="275" y="178" text-anchor="middle" fill="#a5b4fc" font-family="Inter, sans-serif" font-size="8">$0.02/GB/mies.</text>
+  </g>
+
+  <!-- Processing: Dataproc + BigQuery side by side -->
+  <!-- Arrow from Storage to Dataproc -->
+  <line x1="350" y1="115" x2="390" y2="115" stroke="#818cf8" stroke-width="2" marker-end="url(#arrowIndigo)"/>
+  <!-- Arrow from Storage to BigQuery -->
+  <line x1="350" y1="155" x2="390" y2="225" stroke="#818cf8" stroke-width="1.5" marker-end="url(#arrowIndigo)"/>
+
+  <!-- Dataproc Cluster -->
+  <g filter="url(#cloudShadow)">
+    <rect x="395" y="80" width="175" height="110" rx="12" fill="#4f46e5" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="482" y="104" text-anchor="middle" fill="#fbbf24" font-family="Inter, sans-serif" font-size="13" font-weight="700">Dataproc</text>
+    <text x="482" y="120" text-anchor="middle" fill="#c7d2fe" font-family="Inter, sans-serif" font-size="9">Managed Spark Cluster</text>
+    <line x1="415" y1="128" x2="550" y2="128" stroke="#fbbf24" stroke-opacity="0.2"/>
+    <!-- Master + Workers -->
+    <rect x="410" y="135" width="70" height="25" rx="5" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1"/>
+    <text x="445" y="151" text-anchor="middle" fill="#10b981" font-family="Inter, sans-serif" font-size="8" font-weight="600">Master ×1</text>
+    <rect x="488" y="135" width="70" height="25" rx="5" fill="#fbbf24" fill-opacity="0.15" stroke="#fbbf24" stroke-width="1"/>
+    <text x="523" y="151" text-anchor="middle" fill="#fbbf24" font-family="Inter, sans-serif" font-size="8" font-weight="600">Workers ×N</text>
+    <text x="482" y="178" text-anchor="middle" fill="#a5b4fc" font-family="Inter, sans-serif" font-size="8">~90 sek. setup</text>
+  </g>
+
+  <!-- BigQuery -->
+  <g filter="url(#cloudShadow)">
+    <rect x="395" y="210" width="175" height="100" rx="12" fill="#1e1b4b"/>
+    <text x="482" y="235" text-anchor="middle" fill="#818cf8" font-family="Inter, sans-serif" font-size="13" font-weight="700">BigQuery</text>
+    <text x="482" y="252" text-anchor="middle" fill="#c7d2fe" font-family="Inter, sans-serif" font-size="9">Serverless Data Warehouse</text>
+    <line x1="415" y1="260" x2="550" y2="260" stroke="#818cf8" stroke-opacity="0.2"/>
+    <text x="482" y="278" text-anchor="middle" fill="#e0e7ff" font-family="Inter, sans-serif" font-size="9">SQL na petabajtach</text>
+    <text x="482" y="295" text-anchor="middle" fill="#a5b4fc" font-family="Inter, sans-serif" font-size="8">$5/TB skanowania</text>
+  </g>
+
+  <!-- Results -->
+  <!-- Arrow from Dataproc to Results -->
+  <line x1="575" y1="135" x2="607" y2="135" stroke="#10b981" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <!-- Arrow from BigQuery to Results -->
+  <line x1="575" y1="260" x2="607" y2="200" stroke="#10b981" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+
+  <!-- Results box -->
+  <g filter="url(#cloudShadow)">
+    <rect x="612" y="110" width="70" height="110" rx="10" fill="#10b981" fill-opacity="0.12" stroke="#10b981" stroke-width="1.5"/>
+    <text x="647" y="140" text-anchor="middle" fill="#10b981" font-family="Inter, sans-serif" font-size="10" font-weight="700">Wyniki</text>
+    <text x="647" y="160" text-anchor="middle" fill="#10b981" font-family="Inter, sans-serif" font-size="8" opacity="0.8">Parquet</text>
+    <text x="647" y="175" text-anchor="middle" fill="#10b981" font-family="Inter, sans-serif" font-size="8" opacity="0.8">Dashboard</text>
+    <text x="647" y="190" text-anchor="middle" fill="#10b981" font-family="Inter, sans-serif" font-size="8" opacity="0.8">ML Model</text>
+    <text x="647" y="210" text-anchor="middle" fill="#10b981" font-family="Inter, sans-serif" font-size="8" opacity="0.8">Raporty</text>
+  </g>
+
+  <!-- Bottom label -->
+  <text x="360" y="370" text-anchor="middle" fill="#6366f1" font-family="Inter, sans-serif" font-size="10" opacity="0.6">Wykład 6 — Cloud Computing i zarządzanie klastrami Spark w chmurze GCP</text>
+</svg>

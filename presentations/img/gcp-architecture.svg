@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 280" fill="none">
+  <defs>
+    <filter id="gs"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#1e3a5f" flood-opacity="0.15"/></filter>
+    <marker id="ga" markerWidth="7" markerHeight="5" refX="5" refY="2.5" orient="auto">
+      <polygon points="0 0, 7 2.5, 0 5" fill="#22c55e"/>
+    </marker>
+  </defs>
+  <rect width="700" height="280" fill="white"/>
+  <text x="350" y="22" text-anchor="middle" fill="#2d5986" font-family="Segoe UI, sans-serif" font-size="14" font-weight="800">Big Data w Google Cloud Platform</text>
+
+  <!-- Cloud boundary -->
+  <rect x="25" y="35" width="650" height="210" rx="14" fill="#f0f4ff" stroke="#2d5986" stroke-width="1" stroke-dasharray="6 3"/>
+  <text x="350" y="52" text-anchor="middle" fill="#2d5986" font-family="Segoe UI, sans-serif" font-size="10" font-weight="600">Google Cloud Platform</text>
+
+  <!-- Sources -->
+  <rect x="40" y="70" width="100" height="75" rx="8" fill="#fee2e2" stroke="#ef4444" stroke-width="1" filter="url(#gs)"/>
+  <text x="90" y="95" text-anchor="middle" fill="#ef4444" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700">Źródła danych</text>
+  <text x="90" y="112" text-anchor="middle" fill="#ef4444" font-family="Segoe UI, sans-serif" font-size="8" opacity="0.8">CSV / API / DB</text>
+  <text x="90" y="125" text-anchor="middle" fill="#ef4444" font-family="Segoe UI, sans-serif" font-size="8" opacity="0.8">Streaming</text>
+
+  <line x1="145" y1="108" x2="170" y2="108" stroke="#22c55e" stroke-width="1.5" marker-end="url(#ga)"/>
+
+  <!-- Cloud Storage -->
+  <rect x="175" y="65" width="120" height="85" rx="8" fill="#2d5986" filter="url(#gs)"/>
+  <text x="235" y="88" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700">Cloud Storage</text>
+  <text x="235" y="105" text-anchor="middle" fill="#c7d2fe" font-family="Segoe UI, sans-serif" font-size="9">gs://bucket/</text>
+  <text x="235" y="120" text-anchor="middle" fill="#c7d2fe" font-family="Segoe UI, sans-serif" font-size="8">input/ | output/</text>
+  <text x="235" y="140" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="7">$0.02/GB/mies.</text>
+
+  <!-- Arrows to processing -->
+  <line x1="300" y1="90" x2="325" y2="90" stroke="#22c55e" stroke-width="1.5" marker-end="url(#ga)"/>
+  <line x1="300" y1="125" x2="325" y2="175" stroke="#22c55e" stroke-width="1" marker-end="url(#ga)"/>
+
+  <!-- Dataproc -->
+  <rect x="330" y="60" width="160" height="80" rx="8" fill="#2d5986" stroke="#fbbf24" stroke-width="1.5" filter="url(#gs)"/>
+  <text x="410" y="82" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700">Dataproc</text>
+  <text x="410" y="98" text-anchor="middle" fill="#c7d2fe" font-family="Segoe UI, sans-serif" font-size="9">Managed Spark Cluster</text>
+  <text x="375" y="118" text-anchor="middle" fill="#22c55e" font-family="Segoe UI, sans-serif" font-size="8">Master ×1</text>
+  <text x="445" y="118" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="8">Workers ×N</text>
+  <text x="410" y="134" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="7">~90 sek. setup</text>
+
+  <!-- BigQuery -->
+  <rect x="330" y="160" width="160" height="75" rx="8" fill="#1e3a5f" filter="url(#gs)"/>
+  <text x="410" y="182" text-anchor="middle" fill="#818cf8" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700">BigQuery</text>
+  <text x="410" y="198" text-anchor="middle" fill="#c7d2fe" font-family="Segoe UI, sans-serif" font-size="9">Serverless DW</text>
+  <text x="410" y="215" text-anchor="middle" fill="#c7d2fe" font-family="Segoe UI, sans-serif" font-size="8">SQL na petabajtach</text>
+  <text x="410" y="230" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="7">$5/TB skanowania</text>
+
+  <!-- Results -->
+  <line x1="495" y1="100" x2="535" y2="130" stroke="#22c55e" stroke-width="1.5" marker-end="url(#ga)"/>
+  <line x1="495" y1="195" x2="535" y2="165" stroke="#22c55e" stroke-width="1" marker-end="url(#ga)"/>
+
+  <rect x="540" y="105" width="120" height="85" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="1" filter="url(#gs)"/>
+  <text x="600" y="130" text-anchor="middle" fill="#166534" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700">Wyniki</text>
+  <text x="600" y="148" text-anchor="middle" fill="#166534" font-family="Segoe UI, sans-serif" font-size="8">Parquet / Dashboard</text>
+  <text x="600" y="163" text-anchor="middle" fill="#166534" font-family="Segoe UI, sans-serif" font-size="8">ML Model</text>
+  <text x="600" y="178" text-anchor="middle" fill="#166534" font-family="Segoe UI, sans-serif" font-size="8">Raporty</text>
+
+  <!-- Footer -->
+  <text x="350" y="265" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="9">Źródła → Cloud Storage → Dataproc / BigQuery → Wyniki</text>
+</svg>
