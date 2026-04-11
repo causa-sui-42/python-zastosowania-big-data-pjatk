@@ -37,17 +37,17 @@ df = spark.createDataFrame(data, columns)
 
 ### Zadania do wykonania
 
-#### 1. 🔧 Preprocessing (4 punkty)
+#### 1. 🔧 Preprocessing
 - [ ] Użyj `StringIndexer` do zakodowania `device_type`
 - [ ] Użyj `VectorAssembler` do połączenia wszystkich features w jeden wektor
 - [ ] Przeskaluj features używając `StandardScaler`
 
-#### 2. 🤖 Model Pipeline (4 punkty)
+#### 2. 🤖 Model Pipeline
 - [ ] Stwórz `Pipeline` łączący wszystkie kroki preprocessing + model
 - [ ] Podziel dane na train/test (70/30) używając `.randomSplit()`
 - [ ] Wytrenuj `LogisticRegression` lub `RandomForestClassifier`
 
-#### 3. 📊 Ewaluacja (2 punkty)
+#### 3. 📊 Ewaluacja
 - [ ] Oblicz AUC (Area Under ROC Curve) używając `BinaryClassificationEvaluator`
 - [ ] Wyświetl macierz konfuzji (możesz użyć `.groupBy().pivot()`)
 
@@ -76,11 +76,7 @@ Actual 0  [45]  [10]
 
 ---
 
-## 📤 Jak wysłać?
-
-Stwórz plik `zadanie5_imie_nazwisko.py` lub notebook `.ipynb` i wyślij na platformę kursową.
-
-**Bonus:** 🌟 
+## � Bonus: 🌟 
 1. Dodaj `CrossValidator` do tuningowania hiperparametrów!
 2. Porównaj Logistic Regression vs Random Forest — który lepszy?
 
