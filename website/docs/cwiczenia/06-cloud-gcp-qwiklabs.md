@@ -6,6 +6,7 @@ description: "Praktyczne ćwiczenia z BigQuery, Dataproc i zarządzanie klastram
 ---
 
 import Admonition from '@theme/Admonition';
+import DownloadLink from '@site/src/components/DownloadLink';
 
 # Laboratorium 6: BigQuery, Dataproc i Spark w chmurze GCP
 
@@ -25,7 +26,7 @@ Laboratorium składa się z dwóch części:
 
 ## � Pobierz notebook
 
-<a href="/notebooks/cw-06-cloud-spark-gcp-qwiklabs.ipynb" download>📥 <strong>Pobierz: cw-06-cloud-spark-gcp-qwiklabs.ipynb</strong></a>
+<DownloadLink href="/notebooks/cw-06-cloud-spark-gcp-qwiklabs.ipynb">📥 <strong>Pobierz: cw-06-cloud-spark-gcp-qwiklabs.ipynb</strong></DownloadLink>
 
 ---
 

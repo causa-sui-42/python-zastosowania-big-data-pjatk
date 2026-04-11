@@ -6,6 +6,7 @@ description: "Praktyczna analiza 500 000 transakcji e-commerce na Apache Spark �
 ---
 
 import Admonition from '@theme/Admonition';
+import DownloadLink from '@site/src/components/DownloadLink';
 
 # Laboratorium 2: Analiza danych e-commerce z PySpark
 
@@ -28,7 +29,7 @@ Po wykonaniu ćwiczenia będziesz potrafić:
 
 ## � Pobierz notebook
 
-<a href="/notebooks/cw-02-big-data-pyspark-ecommerce.ipynb" download>📥 <strong>Pobierz: cw-02-big-data-pyspark-ecommerce.ipynb</strong></a>
+<DownloadLink href="/notebooks/cw-02-big-data-pyspark-ecommerce.ipynb">📥 <strong>Pobierz: cw-02-big-data-pyspark-ecommerce.ipynb</strong></DownloadLink>
 
 ---
 

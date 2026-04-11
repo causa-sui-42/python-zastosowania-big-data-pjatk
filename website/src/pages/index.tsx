@@ -4,6 +4,8 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import clsx from 'clsx';
+import { PLAN_ZAOCZNE } from '../data/schedule';
+import { getClosestLectureLink } from '../utils/scheduleUtils';
 
 import styles from './index.module.css';
 
@@ -104,7 +106,7 @@ function Hero(): ReactNode {
             <em>Praktycznie, z kodem i bez nudy.</em>
           </p>
           <div className={styles.heroButtons}>
-            <Link className={clsx('button button--lg', styles.btnPrimary)} to="/materialy/wyklady/03-spark-sql-dataframes">
+            <Link className={clsx('button button--lg', styles.btnPrimary)} to={getClosestLectureLink(PLAN_ZAOCZNE)}>
               📖 Zacznij od wykładu
             </Link>
             <Link className={clsx('button button--lg', styles.btnSecondary)} to="/materialy/zadania-domowe">

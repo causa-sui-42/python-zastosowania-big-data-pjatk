@@ -6,6 +6,7 @@ description: "Structured Streaming: rate source, window operations, watermarks, 
 ---
 
 import Admonition from '@theme/Admonition';
+import DownloadLink from '@site/src/components/DownloadLink';
 
 # Laboratorium 7: Spark Structured Streaming
 
@@ -29,7 +30,7 @@ Po wykonaniu ćwiczenia będziesz potrafić:
 
 ## � Pobierz notebook
 
-<a href="/notebooks/cw-07-spark-streaming.ipynb" download>📥 <strong>Pobierz: cw-07-spark-streaming.ipynb</strong></a>
+<DownloadLink href="/notebooks/cw-07-spark-streaming.ipynb">📥 <strong>Pobierz: cw-07-spark-streaming.ipynb</strong></DownloadLink>
 
 ---
 

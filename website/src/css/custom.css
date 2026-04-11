@@ -170,3 +170,45 @@ html {
   font-size: 1rem;
   line-height: 1.6;
 }
+
+/* ---- SVG Image Support ---- */
+/* Ensure SVG images render properly in documentation */
+.markdown img[src$=".svg"],
+.markdown svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.5rem auto;
+}
+
+/* SVG in light mode - ensure proper background */
+.markdown img[src$=".svg"] {
+  background-color: transparent;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+/* SVG in dark mode - add subtle background */
+[data-theme='dark'] .markdown img[src$=".svg"] {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Inline SVG elements */
+.markdown svg {
+  overflow: visible;
+}
+
+/* Diagram container styling */
+.svg-image-container,
+.diagram-container {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.svg-image-container img,
+.diagram-container img {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+}

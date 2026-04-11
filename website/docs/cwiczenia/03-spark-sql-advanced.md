@@ -6,6 +6,7 @@ description: "Praktyczne ćwiczenia z Spark SQL, joinów, window functions i UDF
 ---
 
 import Admonition from '@theme/Admonition';
+import DownloadLink from '@site/src/components/DownloadLink';
 
 # Laboratorium 3: Spark SQL i zaawansowane transformacje
 
@@ -29,7 +30,7 @@ Po wykonaniu ćwiczenia będziesz potrafić:
 
 ## � Pobierz notebook
 
-<a href="/notebooks/cw-03-spark-sql-advanced-transformations.ipynb" download>📥 <strong>Pobierz: cw-03-spark-sql-advanced-transformations.ipynb</strong></a>
+<DownloadLink href="/notebooks/cw-03-spark-sql-advanced-transformations.ipynb">📥 <strong>Pobierz: cw-03-spark-sql-advanced-transformations.ipynb</strong></DownloadLink>
 
 ---
 

@@ -6,6 +6,7 @@ description: "Praktyczne zastosowanie statystyki opisowej i wnioskowania — Num
 ---
 
 import Admonition from '@theme/Admonition';
+import DownloadLink from '@site/src/components/DownloadLink';
 
 # Laboratorium 1: Wstęp do statystyki w Pythonie
 
@@ -28,7 +29,7 @@ Po wykonaniu ćwiczenia będziesz potrafić:
 
 ## 📥 Pobierz notebook
 
-<a href="/notebooks/cw-01-wstep-do-statystyki.ipynb" download>📥 <strong>Pobierz: cw-01-wstep-do-statystyki.ipynb</strong></a>
+<DownloadLink href="/notebooks/cw-01-wstep-do-statystyki.ipynb">📥 <strong>Pobierz: cw-01-wstep-do-statystyki.ipynb</strong></DownloadLink>
 
 ---
 

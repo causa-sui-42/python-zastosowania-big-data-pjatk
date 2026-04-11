@@ -6,6 +6,7 @@ description: "Czyszczenie brudnych danych, feature engineering, budowanie i ewal
 ---
 
 import Admonition from '@theme/Admonition';
+import DownloadLink from '@site/src/components/DownloadLink';
 
 # Laboratorium 4: Przygotowanie danych i modele ML z scikit-learn
 
@@ -30,7 +31,7 @@ Po wykonaniu ćwiczenia będziesz potrafić:
 
 ## � Pobierz notebook
 
-<a href="/notebooks/cw-04-ml-data-preparation-scikit-learn.ipynb" download>📥 <strong>Pobierz: cw-04-ml-data-preparation-scikit-learn.ipynb</strong></a>
+<DownloadLink href="/notebooks/cw-04-ml-data-preparation-scikit-learn.ipynb">📥 <strong>Pobierz: cw-04-ml-data-preparation-scikit-learn.ipynb</strong></DownloadLink>
 
 ---
 

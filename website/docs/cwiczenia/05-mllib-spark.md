@@ -6,6 +6,7 @@ description: "Spark MLlib: VectorAssembler, Pipelines, klasyfikacja churn, Cross
 ---
 
 import Admonition from '@theme/Admonition';
+import DownloadLink from '@site/src/components/DownloadLink';
 
 # Laboratorium 5: MLlib — budowanie modeli ML na dużych zbiorach
 
@@ -29,7 +30,7 @@ Po wykonaniu ćwiczenia będziesz potrafić:
 
 ## � Pobierz notebook
 
-<a href="/notebooks/cw-05-mllib-spark-large-datasets.ipynb" download>📥 <strong>Pobierz: cw-05-mllib-spark-large-datasets.ipynb</strong></a>
+<DownloadLink href="/notebooks/cw-05-mllib-spark-large-datasets.ipynb">📥 <strong>Pobierz: cw-05-mllib-spark-large-datasets.ipynb</strong></DownloadLink>
 
 ---
 
