@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 200" fill="none">
+  <defs>
+    <linearGradient id="stepGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#4f46e5"/>
+    </linearGradient>
+    <filter id="stepShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#1e1b4b" flood-opacity="0.2"/>
+    </filter>
+    <marker id="arrowRight" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#818cf8"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="380" y="22" text-anchor="middle" fill="#4f46e5" font-family="Inter, sans-serif" font-size="14" font-weight="800">Pipeline Machine Learning</text>
+
+  <!-- Step 1: Raw Data -->
+  <g filter="url(#stepShadow)">
+    <rect x="10" y="50" width="90" height="80" rx="10" fill="#ef4444" fill-opacity="0.12" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="55" y="78" text-anchor="middle" fill="#ef4444" font-family="Inter, sans-serif" font-size="20">📋</text>
+    <text x="55" y="100" text-anchor="middle" fill="#ef4444" font-family="Inter, sans-serif" font-size="10" font-weight="700">Surowe</text>
+    <text x="55" y="114" text-anchor="middle" fill="#ef4444" font-family="Inter, sans-serif" font-size="10" font-weight="700">dane</text>
+  </g>
+  <line x1="105" y1="90" x2="120" y2="90" stroke="#818cf8" stroke-width="2" marker-end="url(#arrowRight)"/>
+
+  <!-- Step 2: Cleaning -->
+  <g filter="url(#stepShadow)">
+    <rect x="125" y="50" width="90" height="80" rx="10" fill="url(#stepGrad)"/>
+    <text x="170" y="78" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-size="20">🧹</text>
+    <text x="170" y="100" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-size="10" font-weight="700">Czyszczenie</text>
+    <text x="170" y="114" text-anchor="middle" fill="#c7d2fe" font-family="Inter, sans-serif" font-size="8">nulls, duplikaty</text>
+  </g>
+  <line x1="220" y1="90" x2="235" y2="90" stroke="#818cf8" stroke-width="2" marker-end="url(#arrowRight)"/>
+
+  <!-- Step 3: Feature Engineering -->
+  <g filter="url(#stepShadow)">
+    <rect x="240" y="50" width="90" height="80" rx="10" fill="url(#stepGrad)"/>
+    <text x="285" y="78" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-size="20">🔧</text>
+    <text x="285" y="100" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-size="10" font-weight="700">Feature Eng.</text>
+    <text x="285" y="114" text-anchor="middle" fill="#c7d2fe" font-family="Inter, sans-serif" font-size="8">encoding, scaling</text>
+  </g>
+  <line x1="335" y1="90" x2="350" y2="90" stroke="#818cf8" stroke-width="2" marker-end="url(#arrowRight)"/>
+
+  <!-- Step 4: Train/Test Split -->
+  <g filter="url(#stepShadow)">
+    <rect x="355" y="50" width="90" height="80" rx="10" fill="url(#stepGrad)"/>
+    <text x="400" y="78" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-size="20">✂️</text>
+    <text x="400" y="100" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-size="10" font-weight="700">Train/Test</text>
+    <text x="400" y="114" text-anchor="middle" fill="#c7d2fe" font-family="Inter, sans-serif" font-size="8">80% / 20%</text>
+  </g>
+  <line x1="450" y1="90" x2="465" y2="90" stroke="#818cf8" stroke-width="2" marker-end="url(#arrowRight)"/>
+
+  <!-- Step 5: Training -->
+  <g filter="url(#stepShadow)">
+    <rect x="470" y="50" width="90" height="80" rx="10" fill="#fbbf24" fill-opacity="0.15" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="515" y="78" text-anchor="middle" fill="#fbbf24" font-family="Inter, sans-serif" font-size="20">🧠</text>
+    <text x="515" y="100" text-anchor="middle" fill="#fbbf24" font-family="Inter, sans-serif" font-size="10" font-weight="700">Trenowanie</text>
+    <text x="515" y="114" text-anchor="middle" fill="#fbbf24" font-family="Inter, sans-serif" font-size="8" opacity="0.8">model.fit()</text>
+  </g>
+  <line x1="565" y1="90" x2="580" y2="90" stroke="#818cf8" stroke-width="2" marker-end="url(#arrowRight)"/>
+
+  <!-- Step 6: Evaluation -->
+  <g filter="url(#stepShadow)">
+    <rect x="585" y="50" width="90" height="80" rx="10" fill="#fbbf24" fill-opacity="0.15" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="630" y="78" text-anchor="middle" fill="#fbbf24" font-family="Inter, sans-serif" font-size="20">📊</text>
+    <text x="630" y="100" text-anchor="middle" fill="#fbbf24" font-family="Inter, sans-serif" font-size="10" font-weight="700">Ewaluacja</text>
+    <text x="630" y="114" text-anchor="middle" fill="#fbbf24" font-family="Inter, sans-serif" font-size="8" opacity="0.8">accuracy, F1</text>
+  </g>
+
+  <!-- Feedback loop arrow -->
+  <path d="M630 135 C630 170, 285 170, 285 135" stroke="#ef4444" stroke-width="1.5" fill="none" stroke-dasharray="5 3" opacity="0.5" marker-end="url(#arrowRed)"/>
+  <text x="460" y="175" text-anchor="middle" fill="#ef4444" font-family="Inter, sans-serif" font-size="8" opacity="0.6">iteracja — poprawa cech i hiperparametrów</text>
+
+  <defs>
+    <marker id="arrowRed" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#ef4444" opacity="0.5"/>
+    </marker>
+  </defs>
+
+  <!-- Bottom label -->
+  <text x="380" y="197" text-anchor="middle" fill="#6366f1" font-family="Inter, sans-serif" font-size="10" opacity="0.6">Wykład 4 — Wstęp do Machine Learning i przygotowanie danych</text>
+</svg>

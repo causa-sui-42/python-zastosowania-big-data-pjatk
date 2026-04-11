@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- Python snake icon simplified + data wave -->
+  <rect width="48" height="48" rx="10" fill="#4f46e5"/>
+  <!-- Python "P" letterform -->
+  <text x="9" y="34" font-family="Inter, sans-serif" font-weight="800" font-size="26" fill="white">Py</text>
+  <!-- Small spark lines -->
+  <polyline points="6,42 12,36 18,40 24,32 30,38 36,30 42,34" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>
