@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
+import Link from '@docusaurus/Link';
 import styles from './o-kursie.module.css';
 
 type Zasada = { ikona: string; tytul: string; opis: string };
@@ -69,7 +70,7 @@ export default function OKursie(): ReactNode {
             <p className={styles.syllabusIntro}>
               Kurs składa się z <strong>8 zjazdów</strong> (niedziele). Każdy zjazd zawiera wykład teoretyczny 
               oraz praktyczne ćwiczenia. Pełny harmonogram dostępny na stronie{' '}
-              <a href="/plan-zajec">Plan zajęć</a>.
+              <Link to="/plan-zajec">Plan zajęć</Link>.
             </p>
             
             <div className={styles.syllabusGrid}>
@@ -79,8 +80,8 @@ export default function OKursie(): ReactNode {
                   <h3>Statystyka — Projektant Rzeczywistości</h3>
                   <p>Podstawy statystyki opisowej i wnioskowania. Miary tendencji centralnej, rozkłady prawdopodobieństwa, testy hipotez.</p>
                   <div className={styles.syllabusLinks}>
-                    <a href="/materialy/wyklady/01-statystyka-projektant-rzeczywistosci">📖 Wykład 1</a>
-                    <a href="/materialy/cwiczenia/01-wstep-do-statystyki">🧪 Ćwiczenia 1</a>
+                    <Link to="/materialy/wyklady/01-statystyka-projektant-rzeczywistosci">📖 Wykład 1</Link>
+                    <Link to="/materialy/cwiczenia/01-wstep-do-statystyki">🧪 Ćwiczenia 1</Link>
                   </div>
                 </div>
               </div>
@@ -91,8 +92,8 @@ export default function OKursie(): ReactNode {
                   <h3>Wprowadzenie do Big Data, Hadoop i Spark</h3>
                   <p>Skala danych, wyzwania 5V, ekosystem Hadoop (HDFS, MapReduce, YARN), Apache Spark i analiza danych e-commerce z PySpark.</p>
                   <div className={styles.syllabusLinks}>
-                    <a href="/materialy/wyklady/02-big-data-hadoop-spark">📖 Wykład 2</a>
-                    <a href="/materialy/cwiczenia/02-pyspark-ecommerce">🧪 Ćwiczenia 2</a>
+                    <Link to="/materialy/wyklady/02-big-data-hadoop-spark">📖 Wykład 2</Link>
+                    <Link to="/materialy/cwiczenia/02-pyspark-ecommerce">🧪 Ćwiczenia 2</Link>
                   </div>
                 </div>
               </div>
@@ -103,8 +104,8 @@ export default function OKursie(): ReactNode {
                   <h3>Spark SQL i optymalizacja</h3>
                   <p>Zaawansowane transformacje, joiny, window functions, UDF, Catalyst Optimizer i wskazówki wydajnościowe.</p>
                   <div className={styles.syllabusLinks}>
-                    <a href="/materialy/wyklady/03-spark-sql-dataframes">📖 Wykład 3</a>
-                    <a href="/materialy/cwiczenia/03-spark-sql-advanced">🧪 Ćwiczenia 3</a>
+                    <Link to="/materialy/wyklady/03-spark-sql-dataframes">📖 Wykład 3</Link>
+                    <Link to="/materialy/cwiczenia/03-spark-sql-advanced">🧪 Ćwiczenia 3</Link>
                   </div>
                 </div>
               </div>
@@ -115,8 +116,8 @@ export default function OKursie(): ReactNode {
                   <h3>Machine Learning — podstawy</h3>
                   <p>Przygotowanie danych, feature engineering, budowanie modeli ML z scikit-learn, ewaluacja i metryki.</p>
                   <div className={styles.syllabusLinks}>
-                    <a href="/materialy/wyklady/04-intro-ml-data-preparation">📖 Wykład 4</a>
-                    <a href="/materialy/cwiczenia/04-ml-data-preparation">🧪 Ćwiczenia 4</a>
+                    <Link to="/materialy/wyklady/04-intro-ml-data-preparation">📖 Wykład 4</Link>
+                    <Link to="/materialy/cwiczenia/04-ml-data-preparation">🧪 Ćwiczenia 4</Link>
                   </div>
                 </div>
               </div>
@@ -127,8 +128,8 @@ export default function OKursie(): ReactNode {
                   <h3>MLlib — ML na dużych zbiorach</h3>
                   <p>Spark MLlib, VectorAssembler, Pipelines, klasyfikacja churn, CrossValidator i tuning hiperparametrów.</p>
                   <div className={styles.syllabusLinks}>
-                    <a href="/materialy/wyklady/05-mllib-spark-ml">📖 Wykład 5</a>
-                    <a href="/materialy/cwiczenia/05-mllib-spark">🧪 Ćwiczenia 5</a>
+                    <Link to="/materialy/wyklady/05-mllib-spark-ml">📖 Wykład 5</Link>
+                    <Link to="/materialy/cwiczenia/05-mllib-spark">🧪 Ćwiczenia 5</Link>
                   </div>
                 </div>
               </div>
@@ -139,8 +140,8 @@ export default function OKursie(): ReactNode {
                   <h3>Cloud Computing i GCP</h3>
                   <p>Zarządzanie klastrami Spark w chmurze, BigQuery, Dataproc, architektura data lake i data warehouse.</p>
                   <div className={styles.syllabusLinks}>
-                    <a href="/materialy/wyklady/06-cloud-computing-gcp">📖 Wykład 6</a>
-                    <a href="/materialy/cwiczenia/06-cloud-gcp-qwiklabs">🧪 Ćwiczenia 6</a>
+                    <Link to="/materialy/wyklady/06-cloud-computing-gcp">📖 Wykład 6</Link>
+                    <Link to="/materialy/cwiczenia/06-cloud-gcp-qwiklabs">🧪 Ćwiczenia 6</Link>
                   </div>
                 </div>
               </div>
@@ -151,8 +152,8 @@ export default function OKursie(): ReactNode {
                   <h3>Spark Streaming</h3>
                   <p>Structured Streaming, przetwarzanie w czasie rzeczywistym, okna czasowe, watermarks i system alertów IoT.</p>
                   <div className={styles.syllabusLinks}>
-                    <a href="/materialy/wyklady/07-spark-streaming">📖 Wykład 7</a>
-                    <a href="/materialy/cwiczenia/07-spark-streaming">🧪 Ćwiczenia 7</a>
+                    <Link to="/materialy/wyklady/07-spark-streaming">📖 Wykład 7</Link>
+                    <Link to="/materialy/cwiczenia/07-spark-streaming">🧪 Ćwiczenia 7</Link>
                   </div>
                 </div>
               </div>
@@ -163,7 +164,7 @@ export default function OKursie(): ReactNode {
                   <h3>Podsumowanie i projekt</h3>
                   <p>Przegląd kluczowych zagadnień z całego kursu. Obrona projektu zaliczeniowego przed prowadzącym.</p>
                   <div className={styles.syllabusLinks}>
-                    <a href="/materialy/projekt-zaliczeniowy">🎓 Projekt</a>
+                    <Link to="/materialy/projekt-zaliczeniowy">🎓 Projekt</Link>
                   </div>
                 </div>
               </div>
@@ -205,7 +206,7 @@ export default function OKursie(): ReactNode {
               </ul>
               <p className={styles.note}>
                 📄 Szczegółowe wymagania projektowe znajdziesz na stronie{' '}
-                <a href="/materialy/projekt-zaliczeniowy">Projekt zaliczeniowy</a>.
+                <Link to="/materialy/projekt-zaliczeniowy">Projekt zaliczeniowy</Link>.
               </p>
               <p className={styles.note} style={{ marginTop: '0.5rem', color: '#dc2626' }}>
                 ⚠️ <strong>Obecność jest obowiązkowa.</strong> Dopuszczalne są maksymalnie <strong>2 nieobecności</strong>{' '}
