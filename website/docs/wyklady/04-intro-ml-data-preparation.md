@@ -6,6 +6,7 @@ description: "Machine Learning od zera: czyszczenie danych, feature engineering,
 ---
 
 import Admonition from '@theme/Admonition';
+import DocImage from '@site/src/components/DocImage';
 
 # Wykład 4: Wstęp do Machine Learning i przygotowanie danych
 
@@ -50,7 +51,7 @@ ML to podejście, w którym komputer **uczy się z danych** zamiast być program
 
 ### 2. Pipeline danych ML
 
-<img src="/img/ml-pipeline.svg" alt="Pipeline Machine Learning" style={{maxWidth: '100%', margin: '1rem 0'}} />
+<DocImage src="/img/ml-pipeline.svg" alt="Pipeline Machine Learning" style={{maxWidth: '100%', margin: '1rem 0'}} />
 
 ### 3. Przygotowanie danych
 

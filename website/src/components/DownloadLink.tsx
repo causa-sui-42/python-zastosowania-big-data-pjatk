@@ -1,4 +1,5 @@
 import React from 'react';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 interface DownloadLinkProps {
   href: string;
@@ -17,12 +18,14 @@ export default function DownloadLink({
   children,
   className 
 }: DownloadLinkProps): JSX.Element {
+  const resolvedHref = useBaseUrl(href);
+
   const handleDownload = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     
     try {
       // Fetch the file content
-      const response = await fetch(href);
+      const response = await fetch(resolvedHref);
       
       if (!response.ok) {
         throw new Error(`Failed to fetch file: ${response.statusText}`);
@@ -31,7 +34,7 @@ export default function DownloadLink({
       const blob = await response.blob();
       
       // Extract filename from href if not provided
-      const downloadFilename = filename || href.split('/').pop() || 'download';
+      const downloadFilename = filename || resolvedHref.split('/').pop() || 'download';
       
       // Create a temporary URL for the blob
       const blobUrl = window.URL.createObjectURL(blob);
@@ -49,13 +52,13 @@ export default function DownloadLink({
     } catch (error) {
       console.error('Download failed:', error);
       // Fallback: try opening in new tab
-      window.open(href, '_blank');
+      window.open(resolvedHref, '_blank');
     }
   };
 
   return (
     <a 
-      href={href} 
+      href={resolvedHref} 
       onClick={handleDownload}
       className={className}
     >

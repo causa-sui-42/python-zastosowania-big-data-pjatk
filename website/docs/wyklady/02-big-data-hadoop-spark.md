@@ -6,6 +6,7 @@ description: "Dlaczego Big Data? Ekosystem Hadoop, architektura HDFS, MapReduce 
 ---
 
 import Admonition from '@theme/Admonition';
+import DocImage from '@site/src/components/DocImage';
 
 # Wykład 2: Wprowadzenie do Big Data, Hadoop i Spark
 
@@ -58,7 +59,7 @@ Hadoop to **platforma open-source** do przechowywania i przetwarzania danych w s
 
 Kluczowe komponenty:
 
-<img src="/img/hadoop-spark-ecosystem.svg" alt="Ekosystem Hadoop + Spark" style={{maxWidth: '100%', margin: '1rem 0'}} />
+<DocImage src="/img/hadoop-spark-ecosystem.svg" alt="Ekosystem Hadoop + Spark" style={{maxWidth: '100%', margin: '1rem 0'}} />
 
 **HDFS** — przechowuje pliki w blokach (domyślnie 128 MB) replikowanych na 3 węzłach. Odporny na awarie!
 

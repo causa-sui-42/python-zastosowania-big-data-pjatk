@@ -1,7 +1,5 @@
 # Zadanie domowe 2: Podstawy PySpark na własnych danych
 
-**Termin:** Do 11.04.2026, 23:59  
-**Punktacja:** 10 punktów  
 **Poziom trudności:** ⭐⭐⭐ (Średni)
 
 ---
@@ -21,13 +19,13 @@ Sugestie źródeł:
 - [UCI ML Repository](https://archive.ics.uci.edu/ml/index.php)
 - [Google Dataset Search](https://datasetsearch.research.google.com/)
 
-### Część 1: Setup i wczytanie (2 pkt)
+### Część 1: Setup i wczytanie
 - Zainicjalizuj `SparkSession` w Google Colab
 - Wczytaj dane do Spark DataFrame (CSV, JSON lub Parquet)
 - Wyświetl schemat (`printSchema()`) i pierwsze 10 wierszy
 - Policz liczbę rekordów i kolumn
 
-### Część 2: Transformacje (4 pkt)
+### Część 2: Transformacje
 Wykonaj minimum **5 różnych operacji**:
 - Filtrowanie (`filter()` lub `where()`)
 - Selekcja kolumn (`select()`)
@@ -36,12 +34,12 @@ Wykonaj minimum **5 różnych operacji**:
 - Usunięcie duplikatów (`dropDuplicates()`)
 - Zmiana typu kolumny (`cast()`)
 
-### Część 3: Agregacje (3 pkt)
+### Część 3: Agregacje
 - Wykonaj `groupBy()` z agregacjami (`count()`, `avg()`, `sum()`, `max()`, `min()`)
 - Użyj min. **3 różnych funkcji agregujących**
 - Pokaż top 10 wyników (`limit(10)`)
 
-### Część 4: Spark SQL (1 pkt)
+### Część 4: Spark SQL
 - Zarejestruj DataFrame jako widok tymczasowy (`createOrReplaceTempView()`)
 - Napisz zapytanie SQL wykonujące agregację lub join
 - Wyświetl wynik
@@ -54,26 +52,6 @@ Wykonaj minimum **5 różnych operacji**:
 - Instalacja: `!pip install pyspark`
 - Wszystkie transformacje muszą być w **PySpark** (nie pandas)
 - Kod z komentarzami wyjaśniającymi każdy krok
-
----
-
-## 📤 Forma oddania
-
-1. Wyeksportuj notebook jako **PDF** (Google Colab: File > Print > Save as PDF)
-2. Prześlij na platformę e-learningową
-3. Nazwa pliku: `zad2_pyspark_NAZWISKO_IMIE.pdf`
-
----
-
-## 🏆 Kryteria oceny
-
-| Kryterium | Punkty |
-|-----------|--------|
-| Poprawność inicjalizacji Spark | 2 pkt |
-| Różnorodność transformacji | 4 pkt |
-| Poprawność agregacji | 3 pkt |
-| Użycie Spark SQL | 1 pkt |
-| **Razem** | **10 pkt** |
 
 ---
 

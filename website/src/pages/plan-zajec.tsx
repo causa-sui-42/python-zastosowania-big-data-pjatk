@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
+import Link from '@docusaurus/Link';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { PLAN_ZAOCZNE } from '../data/schedule';
 import styles from './plan-zajec.module.css';
 
@@ -11,6 +13,8 @@ const TYP_CONFIG = {
 };
 
 export default function PlanZajec(): ReactNode {
+  const { siteConfig } = useDocusaurusContext();
+  const base = siteConfig.baseUrl.replace(/\/$/, '');
   return (
     <Layout
       title="Plan zajęć"
@@ -60,7 +64,7 @@ export default function PlanZajec(): ReactNode {
                     </td>
                     <td>
                       {wykladMaterialy && wykladHref ? (
-                        <a href={wykladHref}>{wykladMaterialy}</a>
+                        <Link to={wykladHref}>{wykladMaterialy}</Link>
                       ) : (
                         <span className={styles.soon}>—</span>
                       )}
@@ -73,14 +77,14 @@ export default function PlanZajec(): ReactNode {
                     </td>
                     <td>
                       {labMaterialy && labHref ? (
-                        <a href={labHref}>{labMaterialy}</a>
+                        <Link to={labHref}>{labMaterialy}</Link>
                       ) : (
                         <span className={styles.soon}>—</span>
                       )}
                     </td>
                     <td>
                       {zadanieDomowe && zadanieHref ? (
-                        <a href={zadanieHref} download>
+                        <a href={`${base}${zadanieHref}`} download>
                           📝 {zadanieDomowe}
                         </a>
                       ) : (

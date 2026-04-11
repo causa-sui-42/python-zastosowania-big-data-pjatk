@@ -1,6 +1,5 @@
 # 📝 Zadanie domowe 4 — ML Data Preparation Pipeline
 
-**Termin:** Przed wykładem 5 (17.05.2026)  
 **Szacowany czas:** 25-30 minut  
 **Cel:** Przygotowanie danych i budowa prostego modelu ML
 
@@ -46,21 +45,21 @@ df['cena_tys'] = (
 
 ### Zadania do wykonania
 
-#### 1. 🧹 Preprocessing (4 punkty)
+#### 1. 🧹 Preprocessing
 - [ ] Sprawdź i obsłuż brakujące wartości (dodaj kilka losowych `NaN` do testów)
 - [ ] Zakoduj kolumnę kategoryczną `dzielnica` (OneHotEncoder lub pandas get_dummies)
 - [ ] Przeskaluj cechy numeryczne (StandardScaler)
 
-#### 2. 🔧 Feature Engineering (3 punkty)
+#### 2. 🔧 Feature Engineering
 - [ ] Stwórz nową cechę: `wiek_budynku` = 2026 - `rok_budowy`
 - [ ] Stwórz `powierzchnia_na_pokoj` = `powierzchnia_m2 / liczba_pokoi`
 - [ ] (Opcjonalnie) Dodaj interakcję: `pietro_x_parking`
 
-#### 3. 🤖 Model Training (2 punkty)
+#### 3. 🤖 Model Training
 - [ ] Podziel dane na train/test (80/20)
 - [ ] Wytrenuj `RandomForestRegressor` lub `LinearRegression`
 
-#### 4. 📊 Ewaluacja (1 punkt)
+#### 4. 📊 Ewaluacja
 - [ ] Oblicz MAE (Mean Absolute Error)
 - [ ] Oblicz R² score
 - [ ] Wyświetl 5 predykcji vs rzeczywiste wartości
@@ -82,11 +81,7 @@ Rzeczywista: 620k | Predykcja: 641k | Błąd: 21k
 
 ---
 
-## 📤 Jak wysłać?
-
-Stwórz notebook `zadanie4_imie_nazwisko.ipynb` i wyślij na platformę kursową.
-
-**Bonus:** 🌟 Porównaj 3 różne modele (LinearRegression, RandomForest, GradientBoosting) i wybierz najlepszy!
+## � Bonus: 🌟 Porównaj 3 różne modele (LinearRegression, RandomForest, GradientBoosting) i wybierz najlepszy!
 
 ---
 

@@ -6,6 +6,7 @@ description: "Spark MLlib: Pipelines, VectorAssembler, klasyfikacja, regresja, e
 ---
 
 import Admonition from '@theme/Admonition';
+import DocImage from '@site/src/components/DocImage';
 
 # Wykład 5: Machine Learning na dużych zbiorach — MLlib w Spark
 
@@ -41,7 +42,7 @@ Po tym wykładzie będziesz wiedzieć:
 
 ### 1. scikit-learn vs MLlib
 
-<img src="/img/sklearn-vs-mllib.svg" alt="scikit-learn vs Spark MLlib" style={{maxWidth: '100%', margin: '1rem 0'}} />
+<DocImage src="/img/sklearn-vs-mllib.svg" alt="scikit-learn vs Spark MLlib" style={{maxWidth: '100%', margin: '1rem 0'}} />
 
 | Cecha | scikit-learn | Spark MLlib |
 |-------|-------------|-------------|

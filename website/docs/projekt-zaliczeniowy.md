@@ -6,6 +6,7 @@ description: "Wymagania, kryteria oceny i wytyczne dotyczące projektu zaliczeni
 ---
 
 import Admonition from '@theme/Admonition';
+import DocImage from '@site/src/components/DocImage';
 
 # 🎓 Projekt zaliczeniowy
 
@@ -21,7 +22,7 @@ Projekt realizowany jest **indywidualnie**. Studenci są zachęcani do konsultac
 
 ---
 
-<img src="/img/project-pipeline.svg" alt="Pipeline projektu zaliczeniowego" style={{maxWidth: '100%', margin: '1rem 0 2rem'}} />
+<DocImage src="/img/project-pipeline.svg" alt="Pipeline projektu zaliczeniowego" style={{maxWidth: '100%', margin: '1rem 0 2rem'}} />
 
 ## 📋 Wymagania projektowe
 

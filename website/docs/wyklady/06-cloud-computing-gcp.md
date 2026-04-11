@@ -6,6 +6,7 @@ description: "Cloud computing, Google Cloud Platform: Dataproc, BigQuery, Cloud 
 ---
 
 import Admonition from '@theme/Admonition';
+import DocImage from '@site/src/components/DocImage';
 
 # Wykład 6: Cloud Computing i zarządzanie klastrami Spark w GCP
 
@@ -41,7 +42,7 @@ Analogia: kupno domu (on-premise) vs wynajem mieszkania (cloud). Pay-per-use, el
 
 ### 2. Google Cloud Platform — ekosystem Big Data
 
-<img src="/img/gcp-architecture.svg" alt="Architektura Big Data w GCP" style={{maxWidth: '100%', margin: '1rem 0'}} />
+<DocImage src="/img/gcp-architecture.svg" alt="Architektura Big Data w GCP" style={{maxWidth: '100%', margin: '1rem 0'}} />
 
 | Usługa | Typ | Odpowiednik |
 |--------|-----|-------------|

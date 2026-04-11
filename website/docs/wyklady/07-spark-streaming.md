@@ -6,6 +6,7 @@ description: "Structured Streaming w Spark: okna czasowe, watermarks, integracja
 ---
 
 import Admonition from '@theme/Admonition';
+import DocImage from '@site/src/components/DocImage';
 
 # Wykład 7: Spark Streaming i przetwarzanie strumieniowe danych
 
@@ -37,7 +38,7 @@ Po tym wykładzie będziesz wiedzieć:
 
 ### 1. Batch vs Streaming
 
-<img src="/img/streaming-architecture.svg" alt="Architektura Spark Streaming + Kafka" style={{maxWidth: '100%', margin: '1rem 0'}} />
+<DocImage src="/img/streaming-architecture.svg" alt="Architektura Spark Streaming + Kafka" style={{maxWidth: '100%', margin: '1rem 0'}} />
 
 | Cecha | Batch | Streaming |
 |-------|-------|-----------|
