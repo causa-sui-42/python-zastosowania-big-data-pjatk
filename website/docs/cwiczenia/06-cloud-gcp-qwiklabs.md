@@ -43,8 +43,19 @@ Laboratorium składa się z dwóch części:
 | 7 | Optymalizacja kosztów | Kalkulator kosztów BigQuery vs Dataproc |
 | 🌟 | Bonus: Cloud Skills Boost | Darmowy quest na QwikLabs |
 
-<Admonition type="info" title="Google Cloud Skills Boost">
-  Zalecane darmowe kursy do samodzielnego ćwiczenia:
-  - [Perform Foundational Data, ML, and AI Tasks](https://www.cloudskillsboost.google/course_templates/631)
-  - [Running Apache Spark jobs on Cloud Dataproc](https://www.cloudskillsboost.google/focuses/672)
+<Admonition type="info" title="Google Cloud Skills Boost — ćwicz bez karty kredytowej!">
+  Wszystkie komendy z tego laboratorium możesz przetestować w prawdziwej chmurze GCP **bez karty kredytowej** dzięki Cloud Skills Boost!
+
+  **🟢 Darmowe laby — zacznij od tych:**
+  - [Dataproc: Qwik Start - Command Line](https://www.cloudskillsboost.google/focuses/585) — `gcloud dataproc` 1:1 z tym ćwiczeniem
+  - [Dataproc: Qwik Start - Console](https://www.cloudskillsboost.google/focuses/586) — klaster przez GUI
+  - [BigQuery: Qwik Start - Console](https://www.cloudskillsboost.google/focuses/1145) — SQL na publicznych danych
+  - [Cloud Storage: Qwik Start - Console](https://www.cloudskillsboost.google/focuses/1836) — bucket i upload plików
+
+  **🔵 Zaawansowane laby:**
+  - [Running Apache Spark jobs on Cloud Dataproc](https://www.cloudskillsboost.google/focuses/672) — pełny flow Spark na Dataproc
+  - [Perform Foundational Data, ML, and AI Tasks](https://www.cloudskillsboost.google/course_templates/631) — quest (6h)
+  - [Data Engineering on Google Cloud](https://www.cloudskillsboost.google/paths/16) — ścieżka (16h)
+
+  **🖥️ Google Cloud Shell** — [shell.cloud.google.com](https://shell.cloud.google.com) — darmowy terminal `gcloud` dla każdego użytkownika Google (wystarczy Gmail, bez billing account).
 </Admonition>

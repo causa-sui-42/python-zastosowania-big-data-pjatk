@@ -75,20 +75,61 @@ gcloud dataproc jobs submit pyspark \
 
 ---
 
-## ✅ Co wysłać?
-
-1. 📸 **Screenshot** klastra Dataproc (pokazujący że działa)
-2. 📸 **Screenshot** statusu joba (Succeeded ✅)
-3. 📁 Kod `job_analyze_data.py`
-4. 📸 Pierwsze 5 wierszy z wyniku (z Cloud Storage)
-
----
-
 ## 🎁 Bonus (opcjonalnie)
 
 - ⚙️ Uruchom job używając `gcloud` CLI zamiast GUI
 - 🔄 Dodaj job, który czyta z **BigQuery** zamiast CSV
 - 💾 Zapisz wynik do BigQuery Table zamiast CSV
+
+---
+
+## ☁️ Jak korzystać z GCP bez karty kredytowej?
+
+Nie masz karty kredytowej albo nie chcesz ryzykować kosztów? Masz kilka darmowych opcji:
+
+### Opcja 1: Google Cloud Skills Boost (QwikLabs) — 🏆 POLECANE
+
+Platforma [cloudskillsboost.google](https://www.cloudskillsboost.google/) udostępnia **tymczasowe projekty GCP z aktywnym billingiem** — bez Twojej karty kredytowej. To najlepszy sposób na przetestowanie komend z tego zadania!
+
+**Rekomendowane darmowe laby (0 kredytów):**
+
+| Lab | Temat | Link |
+|-----|-------|------|
+| 🟢 Dataproc: Qwik Start - Console | Tworzenie klastra przez GUI | [cloudskillsboost.google](https://www.cloudskillsboost.google/focuses/586) |
+| 🟢 Dataproc: Qwik Start - Command Line | Komendy `gcloud dataproc` | [cloudskillsboost.google](https://www.cloudskillsboost.google/focuses/585) |
+| 🟢 BigQuery: Qwik Start - Console | Zapytania SQL w BigQuery | [cloudskillsboost.google](https://www.cloudskillsboost.google/focuses/1145) |
+| 🔵 Running Apache Spark jobs on Cloud Dataproc | PySpark job na Dataproc | [cloudskillsboost.google](https://www.cloudskillsboost.google/focuses/672) |
+
+**Rekomendowany quest (seria labów):**
+- 🎓 [Perform Foundational Data, ML, and AI Tasks in Google Cloud](https://www.cloudskillsboost.google/course_templates/631) — obejmuje BigQuery, Dataproc, Cloud Storage
+
+### Opcja 2: Google Cloud Shell — darmowy terminal gcloud
+
+[Google Cloud Shell](https://shell.cloud.google.com) to **darmowy terminal w przeglądarce** dostępny dla każdego użytkownika Google. Wystarczy konto Gmail!
+
+```bash
+# Otwórz: https://shell.cloud.google.com
+# Masz dostępne:
+# ✅ gcloud CLI (pre-instalowane)
+# ✅ 5 GB persistent storage
+# ✅ Dostęp do BigQuery public datasets
+# ❌ Brak własnego projektu z billingiem (komendy dataproc NIE zadziałają bez projektu)
+```
+
+Dla komend `gcloud dataproc` potrzebujesz projektu z billingiem — użyj Cloud Skills Boost!
+
+### Opcja 3: BigQuery Sandbox (bez billing account)
+
+BigQuery oferuje **tryb sandbox** dla kont bez billing account:
+- ✅ 1 TB zapytań miesięcznie za darmo
+- ✅ Publiczne datasety (NYC Taxi, GitHub, Wikipedia...)
+- ❌ Bez trwałych tabel (dane usuwane po 60 dniach)
+
+```bash
+# Sandbox jest aktywny automatycznie gdy nie masz billing account
+# Dostęp: https://console.cloud.google.com/bigquery
+# Wystarczy konto Google!
+```
 
 ---
 
@@ -98,6 +139,7 @@ gcloud dataproc jobs submit pyspark \
 - ☁️ Bucket musi być w tym samym regionie co klaster
 - 🔑 Upewnij się, że masz uprawnienia do Cloud Storage i Dataproc
 - 📝 Logs joba zobaczysz w konsoli GCP: Dataproc → Jobs → [twój job] → Logs
+- 🎓 **Bez karty?** Skorzystaj z Cloud Skills Boost — tymczasowy projekt GCP na czas laba!
 
 **Remember:** Free Tier GCP daje $300 kredytu na start — wystarczy na wiele eksperymentów! 🎉
 

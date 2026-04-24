@@ -69,7 +69,7 @@ Wykonaj minimum **5 różnych operacji**:
 
 ---
 
-## 🔥 Zadanie bonusowe (+2 pkt)
+## 🔥 Zadanie bonusowe (opcjonalnie)
 
 Porównaj wydajność **pandas vs PySpark** na tym samym zadaniu:
 - Wykonaj tę samą agregację w pandas i PySpark

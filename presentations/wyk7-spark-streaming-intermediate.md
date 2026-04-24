@@ -882,6 +882,45 @@ Wymagania:
 
 ---
 
+## 🆓 Streaming w GCP bez karty kredytowej
+
+Chcesz zobaczyć streaming w prawdziwej chmurze? Masz darmowe opcje!
+
+### Cloud Skills Boost — tymczasowe projekty GCP
+
+Platforma 🔗 **https://www.cloudskillsboost.google/** — daje projekt GCP z billingiem na czas laba, **bez Twojej karty kredytowej!**
+
+| Lab (darmowy) | Co ćwiczysz |
+|---------------|-------------|
+| **Cloud Pub/Sub: Qwik Start - Console** | Message broker — odpowiednik Kafki w GCP |
+| **Dataflow: Qwik Start - Templates** | Serverless stream processing (Apache Beam) |
+| **Streaming Analytics into BigQuery** | End-to-end: strumień → BigQuery |
+| **Streaming Data Processing: Pub/Sub to BigQuery** | Pipeline produkcyjny krok po kroku |
+
+### Odpowiedniki z wykładu w chmurze GCP
+
+| Na zajęciach (Colab) | W chmurze GCP | QwikLab |
+|---------------------|---------------|---------|
+| `rate source` | **Cloud Pub/Sub** topic | Cloud Pub/Sub: Qwik Start |
+| `writeStream.format("console")` | **BigQuery** streaming insert | Streaming Analytics into BigQuery |
+| `format("socket")` | **Dataflow** pipeline | Dataflow: Qwik Start - Templates |
+| `checkpointLocation` | **Cloud Storage** checkpoint | (wbudowane w Dataflow) |
+
+### Google Cloud Shell — bez instalacji
+
+```bash
+# Otwórz: https://shell.cloud.google.com (wystarczy konto Gmail!)
+# Pub/Sub przez CLI:
+gcloud pubsub topics create moj-stream
+gcloud pubsub subscriptions create moj-sub --topic=moj-stream
+gcloud pubsub topics publish moj-stream --message='{"temp": 42, "sensor": "A1"}'
+gcloud pubsub subscriptions pull moj-sub --auto-ack
+```
+
+> 🎯 **Start tu:** Lab **"Cloud Pub/Sub: Qwik Start - Console"** → 10 minut → zrozumiesz jak Pub/Sub zastępuje Kafkę w GCP!
+
+---
+
 ## 🔮 Co dalej?
 
 **Ćwiczenia (Lab 7):** Streaming pipeline z socket source + windowed aggregation w Google Colab

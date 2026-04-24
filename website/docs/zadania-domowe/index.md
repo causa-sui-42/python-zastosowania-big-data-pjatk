@@ -39,7 +39,21 @@ Każde zadanie można **pobrać** i otworzyć w Google Colab samodzielnie.
 
 ---
 
-## 📥 Jak korzystać z zadań?
+## 🎓 QwikLabs — ćwicz w prawdziwej chmurze (bez karty kredytowej!)
+
+Zadania 6 i 7 wykorzystują Google Cloud Platform. Możesz przetestować komendy z tych zadań **za darmo** dzięki [Cloud Skills Boost](https://www.cloudskillsboost.google/) — platforma daje Ci tymczasowy projekt GCP z aktywnym billingiem!
+
+| Zadanie | Rekomendowany lab | Opis | Czas |
+|---------|------------------|------|------|
+| **Zad. 6** — GCP Dataproc | [Dataproc: Qwik Start - Command Line](https://www.cloudskillsboost.google/focuses/585) | `gcloud dataproc` — dokładnie komendy z zadania | ~30 min |
+| **Zad. 6** — BigQuery | [BigQuery: Qwik Start - Console](https://www.cloudskillsboost.google/focuses/1145) | SQL na publicznych danych GCP | ~30 min |
+| **Zad. 6** — Pełny flow | [Running Apache Spark jobs on Cloud Dataproc](https://www.cloudskillsboost.google/focuses/672) | Klaster → PySpark job → wyniki | ~1h |
+| **Zad. 7** — Streaming | [Cloud Pub/Sub: Qwik Start - Console](https://www.cloudskillsboost.google/focuses/3719) | Message broker — odpowiednik `rate source` w chmurze | ~30 min |
+| **Zad. 7** — Pipeline | [Streaming Analytics into BigQuery](https://www.cloudskillsboost.google/focuses/1206) | Strumień danych → BigQuery w czasie rzeczywistym | ~1h |
+
+> 💡 **Jak korzystać z Cloud Skills Boost?** Wejdź na [cloudskillsboost.google](https://www.cloudskillsboost.google/), zaloguj się kontem Google, wybierz darmowy lab (oznaczony 🟢) i kliknij "Start Lab". Dostajesz tymczasowe konto GCP z kredytami — zero kosztów dla Ciebie!
+
+> 🖥️ **Google Cloud Shell** — [shell.cloud.google.com](https://shell.cloud.google.com) — darmowy terminal z `gcloud` CLI dla każdego użytkownika Google (wystarczy Gmail, bez billing account).
 
 1. **Pobierz** plik zadania (kliknij link "Pobierz" w tabeli powyżej)
 2. **Otwórz** Google Colab ([colab.research.google.com](https://colab.research.google.com/))

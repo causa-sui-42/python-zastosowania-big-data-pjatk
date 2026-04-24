@@ -1141,7 +1141,49 @@ Zanim zaczniesz pracę z GCP, upewnij się:
 
 ---
 
-## 🎓 Google Cloud Skills Boost (QwikLabs)
+## � Jak używać GCP bez karty kredytowej?
+
+Masz 3 sposoby na ćwiczenie komend z zajęć — **wszystkie bez karty kredytowej!**
+
+| Metoda | Co daje | Ograniczenia | Jak zacząć? |
+|--------|---------|--------------|-------------|
+| ☁️ **Cloud Skills Boost** | Tymczasowy projekt GCP z billingiem | Czas laba (1-8h) | cloudskillsboost.google |
+| 🖥️ **Google Cloud Shell** | Terminal z `gcloud` CLI, 5GB storage | Bez własnego projektu z billingiem | shell.cloud.google.com |
+| 📊 **BigQuery Sandbox** | 1 TB zapytań/msc, publiczne datasety | Brak trwałych tabel (60 dni) | console.cloud.google.com/bigquery |
+
+### ☁️ Google Cloud Shell — darmowy terminal dla każdego!
+
+```bash
+# Otwórz: https://shell.cloud.google.com
+# Wystarczy konto Gmail ✅
+
+# Dostępne od razu:
+gcloud --version          # gcloud CLI gotowy!
+gsutil ls                 # Cloud Storage (tylko public buckets bez projektu)
+bq ls                     # BigQuery CLI
+python3 --version         # Python 3 pre-instalowany
+pip install pyspark        # Możesz instalować pakiety!
+```
+
+### 🏆 Cloud Skills Boost — najlepsze dla Dataproc
+
+```bash
+# W trakcie laba → masz PEŁNY projekt GCP z billingiem na max ~8h
+# Te komendy zadziałają!
+gcloud dataproc clusters create moj-klaster \
+    --region=us-central1 --single-node
+
+gcloud dataproc jobs submit pyspark moj_job.py \
+    --cluster=moj-klaster --region=us-central1
+
+gcloud dataproc clusters delete moj-klaster --region=us-central1
+```
+
+> 🎯 **Rekomendacja:** `Dataproc: Qwik Start - Command Line` → ćwiczysz DOKŁADNIE komendy z wykładu, tymczasowy projekt Google, zero kosztów dla Ciebie!
+
+---
+
+## �🎓 Google Cloud Skills Boost (QwikLabs)
 
 Najlepszy sposób na naukę GCP — **darmowe, praktyczne laby** w prawdziwym środowisku!
 
@@ -1154,14 +1196,24 @@ Najlepszy sposób na naukę GCP — **darmowe, praktyczne laby** w prawdziwym ś
 | 🏗️ **Create and Manage Cloud Resources** | ~4h | Beginner |
 | 📊 **Perform Foundational Data, ML, and AI Tasks** | ~6h | Intermediate |
 | 🔥 **Data Engineering on Google Cloud** | ~16h | Advanced |
+| 🚀 **Running Apache Spark jobs on Cloud Dataproc** | ~2h | Intermediate |
+
+### 🟢 Darmowe laby na start (bez karty kredytowej!):
+
+| Lab | Co ćwiczysz |
+|-----|-------------|
+| **Dataproc: Qwik Start - Command Line** | Komendy `gcloud dataproc` z wykładu |
+| **Dataproc: Qwik Start - Console** | Klaster przez GUI |
+| **BigQuery: Qwik Start - Console** | Zapytania SQL na publicznych danych |
+| **Cloud Storage: Qwik Start - Console** | Bucket, upload plików |
 
 ### Dlaczego warto? 🤔
-- 🖥️ Prawdziwe środowisko GCP (nie symulacja!)
+- 🖥️ Prawdziwe środowisko GCP (nie symulacja!) — te same komendy co na produkcji!
 - 🎖️ Odznaki (badges) do CV i LinkedIn
-- 💰 Darmowe kredyty na czas trwania laba
+- 💰 **Zero Twoich pieniędzy** — tymczasowy projekt z billingiem = bez karty kredytowej!
 - 📝 Krok po kroku — idealne dla początkujących
 
-> 🎯 **Zadanie domowe:** Ukończ quest **"Create and Manage Cloud Resources"** przed następnym wykładem!
+> 🎯 **Zadanie domowe:** Ukończ lab **"Dataproc: Qwik Start - Command Line"** — to DOKŁADNIE komendy z wykładu w prawdziwej chmurze!
 
 ---
 

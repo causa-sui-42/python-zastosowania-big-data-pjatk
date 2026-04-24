@@ -147,14 +147,6 @@ Teraz ręcznie dodawaj pliki CSV do folderu `data/streaming_input/` i obserwuj j
 
 ---
 
-## ✅ Co wysłać?
-
-1. 📸 **Screenshot** działającego streaming query (konsola z wynikami)
-2. 📝 Kod obu zadań (socket + file streaming)
-3. 🤔 **Mini raport**: Jakie są różnice między batch processing a streaming? (2-3 zdania)
-
----
-
 ## 🎁 Bonus
 
 - ⏱️ Zmień okno czasowe na 10 sekund i zobacz jak zmienia się output
@@ -163,10 +155,41 @@ Teraz ręcznie dodawaj pliki CSV do folderu `data/streaming_input/` i obserwuj j
 
 ---
 
+## 🎓 QwikLabs — Streaming w chmurze GCP
+
+Chcesz zobaczyć jak streaming wygląda w produkcyjnym środowisku chmurowym? Skorzystaj z darmowych labów na [Cloud Skills Boost](https://www.cloudskillsboost.google/) — dostajesz tymczasowy projekt GCP bez karty kredytowej!
+
+### Rekomendowane darmowe laby:
+
+| Lab | Temat | Link |
+|-----|-------|------|
+| 🟢 Cloud Pub/Sub: Qwik Start - Console | Streaming message broker Google | [cloudskillsboost.google](https://www.cloudskillsboost.google/focuses/3719) |
+| 🟢 Dataflow: Qwik Start - Templates | Serverless stream processing (Apache Beam) | [cloudskillsboost.google](https://www.cloudskillsboost.google/focuses/1101) |
+| 🔵 Streaming Analytics into BigQuery | Pipeliny danych w czasie rzeczywistym | [cloudskillsboost.google](https://www.cloudskillsboost.google/focuses/1206) |
+| 🔵 Streaming Data Processing: Pub/Sub to BigQuery | End-to-end streaming pipeline | [cloudskillsboost.google](https://www.cloudskillsboost.google/focuses/1159) |
+
+> 💡 **Analogia do ćwiczenia:** `rate source` w Colab = Pub/Sub w chmurze; `file-based streaming` = Cloud Storage triggers; `writeStream.format("console")` = BigQuery streaming insert
+
+### Cloud Shell — darmowy terminal bez karty
+
+Możesz też przetestować komendy strumieniowe przez [Google Cloud Shell](https://shell.cloud.google.com):
+
+```bash
+# Otwórz: https://shell.cloud.google.com (wystarczy konto Gmail)
+# Przykład: wysyłanie wiadomości do Pub/Sub
+gcloud pubsub topics create my-stream-topic
+gcloud pubsub subscriptions create my-sub --topic=my-stream-topic
+gcloud pubsub topics publish my-stream-topic --message="Hello Streaming!"
+gcloud pubsub subscriptions pull my-sub --auto-ack
+```
+
+---
+
 ## 💡 Wskazówki
 
 - `outputMode("complete")` — cały wynik, `outputMode("append")` — tylko nowe rekordy
 - `checkpointLocation` jest WYMAGANY dla streaming jobów — tam Spark zapisuje stan
 - W produkcji zamiast socketu użyjesz Kafki, Kinesis, Pub/Sub, etc.
+- 🎓 **Bez karty?** Cloud Skills Boost daje tymczasowe projekty GCP — idealnie do ćwiczeń!
 
 Powodzenia z real-time! ⚡📊

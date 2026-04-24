@@ -53,10 +53,6 @@ df.createOrReplaceTempView("movies")
 
 ---
 
-## ✅ Jak wysłać?
-
-Stwórz plik `zadanie3_imie_nazwisko.py` lub notebook `.ipynb`, miej plik dost.
-
 **Bonus:** 🌟 Dodaj własne 5 filmów i powtórz analizy!
 
 ---
