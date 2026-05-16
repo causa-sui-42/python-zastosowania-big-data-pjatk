@@ -10,7 +10,7 @@ import DocImage from '@site/src/components/DocImage';
 
 # 🎓 Projekt zaliczeniowy
 
-**Kurs:** Python w Zastosowaniach Big Data &nbsp;|&nbsp; **Semestr:** Letni 2025/2026 &nbsp;|&nbsp; **Termin obrony:** 28.06.2026
+**Kurs:** Python w Zastosowaniach Big Data &nbsp;|&nbsp; **Semestr:** Letni 2025/2026 &nbsp;|&nbsp; **Termin oddania:** 21.06.2026 (godz. 23:59) &nbsp;|&nbsp; **Obrona:** 28.06.2026
 
 ---
 
@@ -64,9 +64,13 @@ Projekt powinien obejmować:
 | Etap | Termin | Opis |
 |------|--------|------|
 | Wybór tematu | do **17.05.2026** | Zgłoś temat prowadzącemu (e-mail lub osobiście na zajęciach) |
-| Konsultacje | **17.05 – 14.06.2026** | Prowadzący dostępny na zajęciach i e-mailem |
-| Oddanie kodu | do **27.06.2026** (dzień przed obroną) | Notebook/skrypty + prezentacja przesłane wg instrukcji |
-| **Obrona projektu** | **28.06.2026** | Ostatnie zajęcia — prezentacja + pytania prowadzącego |
+| Konsultacje | **17.05 – 21.06.2026** | Prowadzący dostępny na zajęciach i e-mailem |
+| **Oddanie projektu** | **21.06.2026, godz. 23:59** 🔴 | Notebook + skrypty + prezentacja — tydzień przed ostatnimi zajęciami. Prace przesłane po terminie **nie będą przyjęte**. |
+| **Obrona projektu** | **28.06.2026** | Ostatnie zajęcia — prezentacja (10–15 min) + pytania prowadzącego |
+
+<Admonition type="danger" title="Nieprzekraczalny termin oddania: 21 czerwca 2026, godz. 23:59">
+  Materiały należy przesłać **tydzień przed ostatnimi zajęciami**, które odbędą się **28 czerwca 2026**. Jest to termin nieprzekraczalny — prace nadesłane po 21.06.2026 o 23:59 nie będą oceniane. Obrona projektu odbywa się podczas ostatnich zajęć: **28.06.2026**.
+</Admonition>
 
 ---
 
@@ -87,6 +91,31 @@ Projekt powinien obejmować:
 - ❌ Prezentacja złożona z samego kodu bez wyjaśnień
 - ❌ Zbyt mały projekt (5 slajdów, 10 linii kodu)
 - ❌ Zbyt duży projekt bez fokusa (100 slajdów, bez wniosków)
+
+---
+
+## 📓 Przykładowy projekt — Notebook demonstracyjny
+
+Poniżej znajdziesz **kompletny przykładowy projekt zaliczeniowy** zrealizowany w Google Colab. Notebook ilustruje oczekiwaną strukturę, poziom szczegółowości i sposób prezentacji wyników.
+
+<DownloadLink href="/notebooks/projekt-zaliczeniowy-przyklad.ipynb">📥 <strong>Pobierz: projekt-zaliczeniowy-przyklad.ipynb</strong></DownloadLink>
+
+### Co zawiera przykładowy notebook?
+
+| Sekcja | Co pokazuje? |
+|--------|--------------|
+| **1. Konfiguracja środowiska** | Instalacja PySpark w Colab, importy, inicjalizacja SparkSession |
+| **2. Generowanie i ładowanie danych** | Tworzenie syntetycznego zbioru 500 000 rekordów; konwersja pandas → Spark |
+| **3. EDA (Analiza eksploracyjna)** | Statystyki opisowe, rozkłady, analiza per linia lotnicza i godzina; wykresy matplotlib/seaborn |
+| **4. Spark SQL** | Zaawansowane zapytania SQL, CTE, funkcje okienkowe (RANK), analiza sezonowa |
+| **5. Feature Engineering** | Tworzenie nowych cech: pora dnia, sezon, długość lotu, presja opóźnień |
+| **6. Modelowanie ML (MLlib)** | Pipeline: StringIndexer + VectorAssembler + RandomForestClassifier |
+| **7. Ewaluacja modelu** | AUC-ROC, Accuracy, Precision, Recall, F1; macierz błędów; feature importance |
+| **8. Wnioski** | Interpretacja wyników, refleksje, możliwe rozszerzenia |
+
+:::caution Uwaga!
+Przykładowy notebook dotyczy **analizy opóźnień lotów** — możesz go użyć jako **wzorca struktury**, ale Twój projekt musi dotyczyć **innego tematu** i korzystać z **własnego zbioru danych**!
+:::
 
 ---
 
