@@ -7,6 +7,7 @@ description: "Wymagania, kryteria oceny i wytyczne dotyczące projektu zaliczeni
 
 import Admonition from '@theme/Admonition';
 import DocImage from '@site/src/components/DocImage';
+import DownloadLink from '@site/src/components/DownloadLink';
 
 # 🎓 Projekt zaliczeniowy
 
