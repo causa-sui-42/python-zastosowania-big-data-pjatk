@@ -50,7 +50,7 @@ export function findClosestLecture(schedule: Zajecia[]): Zajecia | null {
 /**
  * Get the link to the closest lecture
  */
-export function getClosestLectureLink(schedule: Zajecia[]): string {
+export function getClosestLectureLink(schedule: Zajecia[], fallback: string = '/zaoczne/materialy/wyklady'): string {
   const closest = findClosestLecture(schedule);
-  return closest?.wykladHref || '/materialy/wyklady';
+  return closest?.wykladHref || fallback;
 }

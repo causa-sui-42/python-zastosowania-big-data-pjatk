@@ -36,16 +36,45 @@ const config: Config = {
     [
       'classic',
       {
-        docs: {
-          sidebarPath: './sidebars.ts',
-          routeBasePath: 'materialy',
-          showLastUpdateTime: enableGitMetadata,
-        },
+        docs: false,
         blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
       } satisfies Preset.Options,
+    ],
+  ],
+
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'zaoczne',
+        path: 'docs/zaoczne',
+        routeBasePath: 'zaoczne/materialy',
+        sidebarPath: './sidebars.zaoczne.ts',
+        showLastUpdateTime: enableGitMetadata,
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'stacjonarne',
+        path: 'docs/stacjonarne',
+        routeBasePath: 'stacjonarne/materialy',
+        sidebarPath: './sidebars.stacjonarne.ts',
+        showLastUpdateTime: enableGitMetadata,
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'zasoby',
+        path: 'docs/zasoby',
+        routeBasePath: 'zasoby',
+        sidebarPath: './sidebars.zasoby.ts',
+        showLastUpdateTime: enableGitMetadata,
+      },
     ],
   ],
 
@@ -57,9 +86,9 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     announcementBar: {
-      id: 'semester-2026',
+      id: 'semester-2026-2027-winter',
       content:
-        'Semestr letni 2025/2026 — materiały są regularnie aktualizowane. Sprawdzaj nowe ćwiczenia!',
+        '🎉 Nowy semestr zimowy 2026/2027 — ruszyły materiały dla Studiów stacjonarnych! Studia zaoczne pozostają dostępne jako archiwum semestru letniego 2025/2026.',
       backgroundColor: '#4f46e5',
       textColor: '#ffffff',
       isCloseable: true,
@@ -72,14 +101,33 @@ const config: Config = {
       },
       items: [
         {
-          label: 'Wykłady',
-          to: '/materialy/wyklady',
+          label: 'Strona główna',
+          to: '/',
           position: 'left',
         },
         {
-          label: 'Ćwiczenia',
-          to: '/materialy/cwiczenia',
+          label: '🌙 Zaoczne',
           position: 'left',
+          items: [
+            { label: '📖 Wykłady', to: '/zaoczne/materialy/wyklady' },
+            { label: '🧪 Ćwiczenia', to: '/zaoczne/materialy/cwiczenia' },
+            { label: '📝 Zadania domowe', to: '/zaoczne/materialy/zadania-domowe' },
+            { label: '📅 Plan zajęć', to: '/zaoczne/plan-zajec' },
+            { label: 'ℹ️ O kursie', to: '/zaoczne/o-kursie' },
+          ],
+        },
+        {
+          label: '☀️ Stacjonarne',
+          position: 'left',
+          items: [
+            { label: '📖 Wykłady', to: '/stacjonarne/materialy/wyklady' },
+            { label: '🧪 Ćwiczenia', to: '/stacjonarne/materialy/cwiczenia' },
+            { label: '📝 Zadania domowe', to: '/stacjonarne/materialy/zadania-domowe' },
+            { label: '🎓 Projekt zaliczeniowy', to: '/stacjonarne/materialy/projekt-zaliczeniowy' },
+            { label: '📝 Egzamin teoretyczny', to: '/stacjonarne/materialy/egzamin' },
+            { label: '📅 Plan zajęć', to: '/stacjonarne/plan-zajec' },
+            { label: 'ℹ️ O kursie', to: '/stacjonarne/o-kursie' },
+          ],
         },
         {
           label: 'Fiszki',
@@ -87,19 +135,9 @@ const config: Config = {
           position: 'left',
         },
         {
-          label: 'Materiały',
-          to: '/materialy/zasoby',
+          label: 'Zasoby',
+          to: '/zasoby',
           position: 'left',
-        },
-        {
-          label: 'Plan zajęć',
-          to: '/plan-zajec',
-          position: 'left',
-        },
-        {
-          label: 'O kursie',
-          to: '/o-kursie',
-          position: 'right',
         },
       ],
     },
@@ -107,20 +145,32 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Kurs',
+          title: 'Studia zaoczne',
           items: [
-            { label: 'Wykłady', to: '/materialy/wyklady' },
-            { label: 'Ćwiczenia', to: '/materialy/cwiczenia' },
-            { label: 'Zadania domowe', to: '/materialy/zadania-domowe' },
-            { label: 'Fiszki', to: '/fiszki' },
+            { label: 'Wykłady', to: '/zaoczne/materialy/wyklady' },
+            { label: 'Ćwiczenia', to: '/zaoczne/materialy/cwiczenia' },
+            { label: 'Zadania domowe', to: '/zaoczne/materialy/zadania-domowe' },
+            { label: 'Plan zajęć', to: '/zaoczne/plan-zajec' },
+            { label: 'O kursie', to: '/zaoczne/o-kursie' },
           ],
         },
         {
-          title: 'Zasoby',
+          title: 'Studia stacjonarne',
           items: [
-            { label: 'Materiały dodatkowe', to: '/materialy/zasoby' },
-            { label: 'Plan zajęć', to: '/plan-zajec' },
-            { label: 'O kursie', to: '/o-kursie' },
+            { label: 'Wykłady', to: '/stacjonarne/materialy/wyklady' },
+            { label: 'Ćwiczenia', to: '/stacjonarne/materialy/cwiczenia' },
+            { label: 'Zadania domowe', to: '/stacjonarne/materialy/zadania-domowe' },
+            { label: 'Projekt zaliczeniowy', to: '/stacjonarne/materialy/projekt-zaliczeniowy' },
+            { label: 'Egzamin teoretyczny', to: '/stacjonarne/materialy/egzamin' },
+            { label: 'Plan zajęć', to: '/stacjonarne/plan-zajec' },
+            { label: 'O kursie', to: '/stacjonarne/o-kursie' },
+          ],
+        },
+        {
+          title: 'Wspólne',
+          items: [
+            { label: 'Fiszki', to: '/fiszki' },
+            { label: 'Materiały dodatkowe', to: '/zasoby' },
           ],
         },
         {
@@ -132,7 +182,7 @@ const config: Config = {
             },
             {
               label: 'Konsultacje: Podczas zajęć',
-              href: '/o-kursie#konsultacje',
+              href: '/zaoczne/o-kursie#konsultacje',
             },
           ],
         },
@@ -149,3 +199,4 @@ const config: Config = {
 };
 
 export default config;
+
