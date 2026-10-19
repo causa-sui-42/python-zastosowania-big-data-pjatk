@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkpython_zastosowania_big_data_pjatk=globalThis.webpackChunkpython_zastosowania_big_data_pjatk||[]).push([[1158],{6434(a){a.exports=JSON.parse('{"name":"docusaurus-plugin-content-docs","id":"stacjonarne"}')}}]);
