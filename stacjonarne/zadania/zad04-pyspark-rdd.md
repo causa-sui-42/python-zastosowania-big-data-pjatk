@@ -74,6 +74,122 @@ Wykonaj minimum **3 różne agregacje** przy użyciu `reduceByKey`, np.:
 
 ---
 
+## 💡 Rozwiązanie krok po kroku (przykład)
+
+<details>
+<summary><strong>📖 Kliknij, aby zobaczyć pełne przykładowe rozwiązanie (na przykładowym zbiorze danych)</strong></summary>
+
+Poniższy przykład pokazuje pełne rozwiązanie **wszystkich części** zadania na przykładowym, syntetycznie wygenerowanym logu serwera WWW (Opcja C). Twoje zadanie dotyczy **innego, samodzielnie wybranego** zbioru tekstowego/logu — potraktuj poniższy kod jako wzorzec do adaptacji, nie do kopiowania 1:1.
+
+### Krok 0: Generowanie przykładowego logu serwera
+
+```python
+!pip install -q pyspark
+from pyspark.sql import SparkSession
+import random
+from datetime import datetime, timedelta
+
+spark = SparkSession.builder.appName("Zadanie4").master("local[*]").getOrCreate()
+sc = spark.sparkContext
+
+random.seed(42)  # powtarzalność wyników
+
+endpointy = ["/home", "/produkty", "/koszyk", "/login", "/api/status", "/checkout"]
+kody_http = [200, 200, 200, 301, 404, 500]  # 200 dominuje, jak w realnym ruchu
+adresy_ip = [f"10.0.0.{i}" for i in range(1, 51)]
+
+linie_logu = []
+start = datetime(2024, 1, 1)
+for i in range(6000):  # min. 5000 rekordów
+    czas = start + timedelta(seconds=i * 3)
+    linia = (f"{czas.isoformat()} {random.choice(adresy_ip)} "
+             f"{random.choice(endpointy)} {random.choice(kody_http)} "
+             f"{random.randint(5, 900)}ms")
+    linie_logu.append(linia)
+```
+
+### Krok 1: Setup i wczytanie (Część 1)
+
+```python
+rdd = sc.parallelize(linie_logu)
+print("Liczba elementów RDD:", rdd.count())
+print("Pierwsze 5 linii:")
+for linia in rdd.take(5):
+    print(linia)
+```
+
+### Krok 2: Parsowanie i filtrowanie (Część 2)
+
+```python
+def parsuj(linia: str) -> dict:
+    """Zamienia surową linię logu na ustrukturyzowany słownik."""
+    czesci = linia.split()
+    return {
+        "timestamp": czesci[0],
+        "ip": czesci[1],
+        "endpoint": czesci[2],
+        "kod_http": int(czesci[3]),
+        "czas_ms": int(czesci[4].replace("ms", "")),
+    }
+
+rdd_sparsowane = rdd.map(parsuj)
+print(rdd_sparsowane.take(3))
+
+# Filtrowanie: tylko błędy HTTP (4xx i 5xx) - typowe kryterium analizy logów
+rdd_bledy = rdd_sparsowane.filter(lambda r: r["kod_http"] >= 400)
+print("Liczba błędów HTTP:", rdd_bledy.count())
+```
+
+### Krok 3: Agregacje po kluczu (Część 3) — minimum 3 różne
+
+```python
+# 1. Zliczanie requestów per endpoint
+requesty_per_endpoint = (
+    rdd_sparsowane
+    .map(lambda r: (r["endpoint"], 1))
+    .reduceByKey(lambda a, b: a + b)  # reduceByKey > groupByKey: mniej danych w shuffle
+)
+print("Requesty per endpoint:", requesty_per_endpoint.collect())
+
+# 2. Suma czasu odpowiedzi per endpoint
+suma_czasu_per_endpoint = (
+    rdd_sparsowane
+    .map(lambda r: (r["endpoint"], r["czas_ms"]))
+    .reduceByKey(lambda a, b: a + b)
+)
+print("Suma czasu [ms] per endpoint:", suma_czasu_per_endpoint.collect())
+
+# 3. Średni czas odpowiedzi per endpoint (suma + licznik, potem mapValues)
+suma_i_licznik = (
+    rdd_sparsowane
+    .map(lambda r: (r["endpoint"], (r["czas_ms"], 1)))
+    .reduceByKey(lambda a, b: (a[0] + b[0], a[1] + b[1]))
+)
+srednia_per_endpoint = suma_i_licznik.mapValues(lambda x: x[0] / x[1])
+print("Średni czas odpowiedzi [ms] per endpoint:", srednia_per_endpoint.collect())
+```
+
+### Krok 4: Ekstremum i sortowanie (Część 4)
+
+```python
+# Top 10 adresów IP generujących najwięcej requestów
+requesty_per_ip = (
+    rdd_sparsowane
+    .map(lambda r: (r["ip"], 1))
+    .reduceByKey(lambda a, b: a + b)
+)
+top10_ip = requesty_per_ip.takeOrdered(10, key=lambda x: -x[1])
+print("Top 10 najaktywniejszych IP:")
+for ip, liczba in top10_ip:
+    print(f"  {ip}: {liczba} requestów")
+```
+
+**Komentarz (Markdown):** Najaktywniejsze adresy IP generują zauważalnie więcej requestów niż przeciętny użytkownik — w prawdziwym systemie mogłoby to sygnalizować bota, scraper albo klienta API o dużym natężeniu ruchu. Warto porównać ten wynik z rozkładem błędów HTTP (Krok 2) — jeśli najaktywniejsze IP mają też najwyższy odsetek kodów 4xx/5xx, to silny sygnał do dalszego zbadania.
+
+</details>
+
+---
+
 ## 🔥 Zadanie bonusowe (opcjonalnie)
 
 Zaimplementuj prostą regułę wykrywania anomalii (np. słowo/klucz występujący nienaturalnie często w krótkim fragmencie danych) — wyłącznie operacjami RDD, bez `pandas`.
