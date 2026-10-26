@@ -29,22 +29,21 @@ const SYLLABUS: SyllabusItem[] = [
   { nr: 2, tytul: 'Formaty i przechowywanie danych', opis: 'CSV vs Parquet, kompresja, partycjonowanie, przetwarzanie równoległe, Data Lake i Lakehouse.', wykladHref: '/stacjonarne/materialy/wyklady/02-formaty-przechowywanie-danych', labHref: '/stacjonarne/materialy/cwiczenia/02-formaty-danych-hulajnogi' },
   { nr: 3, tytul: 'Big Data i ekosystem Hadoop', opis: '5V, HDFS, MapReduce, YARN — fundamenty przetwarzania danych na skalę.', wykladHref: '/stacjonarne/materialy/wyklady/03-big-data-hadoop-ekosystem', labHref: '/stacjonarne/materialy/cwiczenia/03-mapreduce-analiza-recenzji' },
   { nr: 4, tytul: 'Apache Spark — architektura i RDD', opis: 'SparkSession, RDD, transformacje i akcje, podstawy PySpark.', wykladHref: '/stacjonarne/materialy/wyklady/04-apache-spark-rdd-podstawy', labHref: '/stacjonarne/materialy/cwiczenia/04-pyspark-rdd-logi-serwera' },
-  { nr: 5, tytul: 'Spark SQL i DataFrames', opis: 'Zapytania, transformacje, joiny, schematy danych.', wykladHref: '/stacjonarne/materialy/wyklady/05-spark-sql-dataframes', labHref: '/stacjonarne/materialy/cwiczenia/05-spark-sql-siec-kawiarni' },
-  { nr: 6, tytul: 'Zaawansowany Spark SQL', opis: 'Window functions, Catalyst Optimizer, partycjonowanie i wydajność.', wykladHref: '/stacjonarne/materialy/wyklady/06-spark-sql-zaawansowany', labHref: '/stacjonarne/materialy/cwiczenia/06-window-functions-rowery-miejskie' },
-  { nr: 7, tytul: 'Feature Engineering', opis: 'Przygotowanie danych do ML — encoding, skalowanie, pipeline’y scikit-learn.', wykladHref: '/stacjonarne/materialy/wyklady/07-feature-engineering-ml', labHref: '/stacjonarne/materialy/cwiczenia/07-feature-engineering-esport' },
-  { nr: 8, tytul: 'Modele ML — klasyfikacja i ewaluacja', opis: 'Regresja, klasyfikacja, metryki, cross-validation, tuning.', wykladHref: '/stacjonarne/materialy/wyklady/08-modele-ml-ewaluacja', labHref: '/stacjonarne/materialy/cwiczenia/08-churn-silownia-klasyfikacja' },
-  { nr: 9, tytul: 'Spark MLlib — wprowadzenie', opis: 'ML na dużą skalę — Pipeline, VectorAssembler, klasyfikacja w Spark.', wykladHref: '/stacjonarne/materialy/wyklady/09-mllib-wprowadzenie', labHref: '/stacjonarne/materialy/cwiczenia/09-mllib-ctr-reklamy' },
-  { nr: 10, tytul: 'Zaawansowany MLlib', opis: 'CrossValidator, ParamGridBuilder, klasy niezbalansowane na dużych zbiorach.', wykladHref: '/stacjonarne/materialy/wyklady/10-mllib-zaawansowany', labHref: '/stacjonarne/materialy/cwiczenia/10-mllib-wykrywanie-fraudow' },
-  { nr: 11, tytul: 'Cloud Computing i GCP', opis: 'BigQuery, Dataproc, architektura data lake / data warehouse.', wykladHref: '/stacjonarne/materialy/wyklady/11-cloud-computing-gcp', labHref: '/stacjonarne/materialy/cwiczenia/11-bigquery-przejazdy-taksowek' },
-  { nr: 12, tytul: 'Przetwarzanie strumieniowe', opis: 'Spark Structured Streaming, okna czasowe, wprowadzenie do Apache Kafka.', wykladHref: '/stacjonarne/materialy/wyklady/12-streaming-structured-kafka', labHref: '/stacjonarne/materialy/cwiczenia/12-streaming-jakosc-powietrza' },
-  { nr: 13, tytul: 'Egzamin teoretyczny + obrona projektu', opis: 'Test pisemny obejmujący wykłady 1-12 oraz obrony projektów zaliczeniowych.', wykladHref: '/stacjonarne/materialy/egzamin', labHref: '/stacjonarne/materialy/projekt-zaliczeniowy', specjalny: 'egzamin' },
+  { nr: 5, tytul: 'Spark SQL — od podstaw po zaawansowane zapytania i optymalizację', opis: 'Zapytania, transformacje, joiny, schematy danych, window functions, Catalyst Optimizer i optymalizacja wydajności.', wykladHref: '/stacjonarne/materialy/wyklady/05-spark-sql-dataframes', labHref: '/stacjonarne/materialy/cwiczenia/05-spark-sql-siec-kawiarni' },
+  { nr: 6, tytul: 'Feature Engineering', opis: 'Przygotowanie danych do ML — encoding, skalowanie, pipeline’y scikit-learn.', wykladHref: '/stacjonarne/materialy/wyklady/06-feature-engineering-ml', labHref: '/stacjonarne/materialy/cwiczenia/06-feature-engineering-esport' },
+  { nr: 7, tytul: 'Modele ML — klasyfikacja i ewaluacja', opis: 'Regresja, klasyfikacja, metryki, cross-validation, tuning.', wykladHref: '/stacjonarne/materialy/wyklady/07-modele-ml-ewaluacja', labHref: '/stacjonarne/materialy/cwiczenia/07-churn-silownia-klasyfikacja' },
+  { nr: 8, tytul: 'Spark MLlib — od podstaw po tuning hiperparametrów', opis: 'ML na dużą skalę — Pipeline, VectorAssembler, klasyfikacja w Spark, CrossValidator, ParamGridBuilder, klasy niezbalansowane.', wykladHref: '/stacjonarne/materialy/wyklady/08-mllib-wprowadzenie', labHref: '/stacjonarne/materialy/cwiczenia/08-mllib-ctr-reklamy' },
+  { nr: 9, tytul: 'Cloud Computing i GCP', opis: 'BigQuery, Dataproc, architektura data lake / data warehouse.', wykladHref: '/stacjonarne/materialy/wyklady/09-cloud-computing-gcp', labHref: '/stacjonarne/materialy/cwiczenia/09-bigquery-przejazdy-taksowek' },
+  { nr: 10, tytul: 'Przetwarzanie strumieniowe', opis: 'Spark Structured Streaming, okna czasowe, wprowadzenie do Apache Kafka.', wykladHref: '/stacjonarne/materialy/wyklady/10-streaming-structured-kafka', labHref: '/stacjonarne/materialy/cwiczenia/10-streaming-jakosc-powietrza' },
+  { nr: 11, tytul: 'Test teoretyczny', opis: 'Test pisemny obejmujący wykłady 1-10 — 30 pytań zamkniętych ABCD, bez punktów ujemnych.', wykladHref: '/stacjonarne/materialy/egzamin', specjalny: 'egzamin' },
+  { nr: 12, tytul: 'Obrona projektu zaliczeniowego', opis: 'Krótkie prezentacje (5–10 min) + pytania prowadzącego dotyczące indywidualnego projektu Big Data.', labHref: '/stacjonarne/materialy/projekt-zaliczeniowy', specjalny: 'egzamin' },
 ];
 
 type OcenaItem = { procent: string; tytul: string; opis: string; href?: string };
 
 const OCENA: OcenaItem[] = [
-  { procent: '70%', tytul: 'Egzamin teoretyczny', opis: 'Test pisemny obejmujący materiał z wykładów 1-12, na ostatnich zajęciach 19.01.2027.', href: '/stacjonarne/materialy/egzamin' },
-  { procent: '30%', tytul: 'Projekt zaliczeniowy', opis: 'Indywidualny projekt Big Data — wybór tematu, realizacja, prezentacja i obrona 19.01.2027.', href: '/stacjonarne/materialy/projekt-zaliczeniowy' },
+  { procent: '70%', tytul: 'Test teoretyczny', opis: 'Test pisemny (30 pytań zamkniętych ABCD, bez punktów ujemnych) obejmujący materiał z wykładów 1-10, na zajęciach 15.12.2026.', href: '/stacjonarne/materialy/egzamin' },
+  { procent: '30%', tytul: 'Projekt zaliczeniowy', opis: 'Indywidualny projekt Big Data — wybór tematu, realizacja, oddanie 19.12.2026 i obrona 22.12.2026.', href: '/stacjonarne/materialy/projekt-zaliczeniowy' },
   { procent: '+10%', tytul: 'Aktywność na zajęciach (bonus)', opis: 'Dodatkowe punkty ponad 100% za udział w dyskusjach i aktywną pracę na zajęciach.' },
 ];
 
@@ -86,9 +85,9 @@ export default function StacjonarneOKursie(): ReactNode {
           <section className={styles.section}>
             <Heading as="h2">📚 Program kursu (Syllabus)</Heading>
             <p className={styles.syllabusIntro}>
-              Kurs składa się z <strong>13 cotygodniowych zajęć</strong> (wtorki, 06.10.2026 – 19.01.2027, z przerwą
-              świąteczno-noworoczną 22.12–29.12.2026). Każde zajęcia obejmują wykład teoretyczny oraz praktyczne
-              ćwiczenia. Pełny harmonogram dostępny na stronie{' '}
+              Kurs składa się z <strong>12 cotygodniowych zajęć</strong> (wtorki, 06.10.2026 – 22.12.2026) — 10 zajęć
+              wykładowo-laboratoryjnych, test teoretyczny (15.12.2026) oraz obrona projektu zaliczeniowego (22.12.2026).
+              Semestr kończy się w całości przed przerwą świąteczno-noworoczną. Pełny harmonogram dostępny na stronie{' '}
               <Link to="/stacjonarne/plan-zajec">Plan zajęć</Link>.
             </p>
 
@@ -100,8 +99,8 @@ export default function StacjonarneOKursie(): ReactNode {
                     <h3>{tytul}</h3>
                     <p>{opis}</p>
                     <div className={styles.syllabusLinks}>
-                      {wykladHref && <Link to={wykladHref}>{nr === 13 ? '📝 Egzamin' : `📖 Wykład ${nr}`}</Link>}
-                      {labHref && <Link to={labHref}>{nr === 13 ? '🎓 Projekt' : `🧪 Ćwiczenia ${nr}`}</Link>}
+                      {wykladHref && <Link to={wykladHref}>{nr === 11 ? '📝 Egzamin' : `📖 Wykład ${nr}`}</Link>}
+                      {labHref && <Link to={labHref}>{nr === 12 ? '🎓 Projekt' : `🧪 Ćwiczenia`}</Link>}
                     </div>
                   </div>
                 </div>

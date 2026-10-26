@@ -151,7 +151,7 @@ duckdb.sql("""
 """).df()
 ```
 
-Tę samą ideę — SQL na plikach w Data Lake — zobaczysz w **Spark SQL** (Wykład 5) i **BigQuery** (Wykład 11).
+Tę samą ideę — SQL na plikach w Data Lake — zobaczysz w **Spark SQL** (Wykład 5) i **BigQuery** (Wykład 9).
 
 ---
 

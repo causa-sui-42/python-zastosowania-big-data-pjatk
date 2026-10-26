@@ -1,15 +1,15 @@
 ---
 id: 05-spark-sql-dataframes
-title: "Wykład 5: Spark SQL i DataFrames"
+title: "Wykład 5: Spark SQL — od podstaw po zaawansowane zapytania i optymalizację"
 sidebar_label: "05 — Spark SQL"
-description: "Structured API Sparka — DataFrames, schematy, select/filter/groupBy/agg, joiny i Spark SQL na przykładzie sieci kawiarni."
+description: "Structured API Sparka — DataFrames, schematy, select/filter/groupBy/agg, joiny i Spark SQL na przykładzie sieci kawiarni, a także window functions, UDF i optymalizacja zapytań (Catalyst, Tungsten)."
 ---
 
 import Admonition from '@theme/Admonition';
 
-# Wykład 5: Spark SQL i DataFrames
+# Wykład 5: Spark SQL — od podstaw po zaawansowane zapytania i optymalizację
 
-**Czas trwania:** ~90 minut &nbsp;|&nbsp; **Poziom:** Średni &nbsp;|&nbsp; **Semestr:** Zimowy 2026/2027
+**Czas trwania:** ~180 minut &nbsp;|&nbsp; **Poziom:** Średni/Zaawansowany &nbsp;|&nbsp; **Semestr:** Zimowy 2026/2027
 
 ---
 
@@ -24,6 +24,13 @@ Po tym wykładzie będziesz wiedzieć:
 - Jak wykonywać **joiny** (`inner`, `left`, `broadcast`) i kiedy każdy z nich stosować
 - Jak uruchamiać **surowy SQL** na DataFrames przez `spark.sql()` i tymczasowe widoki
 - Jak porównać składnię **DataFrame API** i **Spark SQL** dla tego samego zadania
+- Jak używać **window functions** (`Window.partitionBy`/`orderBy`, `rank`, `row_number`, `lag`, `lead`, `rowsBetween`) do rankingów i sum narastających
+- Kiedy warto (a kiedy nie warto) pisać własny **UDF** i jak duży jest jego koszt wydajnościowy
+- Jak działa **Catalyst Optimizer** — 4 fazy planowania zapytania i optymalizacje typu predicate pushdown
+- Czym różni się **Tungsten** (silnik wykonawczy) od Catalysta (planista)
+- Jak dobrać strategię partycjonowania: `repartition()` vs `coalesce()`
+- Jak czytać `.explain()` i rozpoznawać kosztowne operacje (`Exchange`, shuffle)
+- Jak korzystać z **cache/persist** i innych wskazówek wydajnościowych
 
 ---
 
@@ -38,6 +45,8 @@ Po tym wykładzie będziesz wiedzieć:
 ---
 
 ## 🗂️ Zakres wykładu
+
+### Część 1: Podstawy Spark SQL
 
 ### 1. Od RDD do DataFrame
 
@@ -135,6 +144,58 @@ Oba podejścia przechodzą przez ten sam **Catalyst Optimizer** i generują iden
 - `crossJoin` / join bez klucza → eksplozja liczby wierszy
 - Sortowanie (`orderBy`) całego dużego DataFrame przed ograniczeniem wyniku
 
+### Część 2: Zaawansowane zapytania i optymalizacja
+
+### 9. Window functions — ranking i analizy sekwencyjne
+
+`groupBy` redukuje liczbę wierszy. Window function dodaje kolumnę obliczoną na "oknie" powiązanych wierszy — **bez** utraty żadnego wiersza.
+
+```python
+from pyspark.sql import functions as F
+from pyspark.sql.window import Window
+
+window_spec = Window.partitionBy("start_station").orderBy(F.desc("duration_min"))
+
+ranked = trips.withColumn("rank", F.rank().over(window_spec))
+```
+
+| Funkcja | Zastosowanie |
+|---------|--------------|
+| `row_number()` | Unikalny numer wiersza w partycji |
+| `rank()` / `dense_rank()` | Ranking z (lub bez) luk przy remisach |
+| `lag()` / `lead()` | Wartość z poprzedniego / następnego wiersza |
+| `sum().over(rowsBetween(...))` | Suma narastająca (running total) |
+
+### 10. UDF (User Defined Functions)
+
+Własne funkcje Pythona rejestrowane w Spark SQL — potężne, ale **kosztowne**, bo Catalyst traktuje je jak "czarną skrzynkę" (brak optymalizacji, serializacja JVM↔Python per wiersz).
+
+### 11. Catalyst Optimizer
+
+Parsed Logical Plan → Analyzed Logical Plan → Optimized Logical Plan → Physical Plan. Optymalizacje: predicate pushdown, column pruning, constant folding, join reordering.
+
+### 12. Tungsten — silnik wykonawczy
+
+Binary in-memory format, whole-stage code generation, zarządzanie pamięcią off-heap — to Tungsten sprawia, że DataFrame/Spark SQL jest szybszy niż surowe RDD.
+
+### 13. Partycjonowanie
+
+`repartition(n)` / `repartition("kolumna")` — zawsze shuffle. `coalesce(n)` — zmniejsza partycje zwykle bez pełnego shuffla.
+
+### 14. Czytanie `.explain()`
+
+Szukanie `Exchange` (shuffle), `BroadcastHashJoin` vs `SortMergeJoin`, `FileScan` z column pruning.
+
+### 15. Cache, persist i inne wskazówki wydajnościowe
+
+`cache()`/`persist()`/`unpersist()`, broadcast join, filtrowanie wcześnie — shuffle późno.
+
+### 16. Częste pułapki (zaawansowane)
+
+- Window function z innym `partitionBy` w tym samym zapytaniu → osobny shuffle za każdym razem
+- UDF zamiast wbudowanej funkcji Spark SQL tam, gdzie wystarczyłaby ona sama
+- Ignorowanie `.explain()` przed optymalizacją wolnego zapytania
+
 ---
 
 ## 🧠 Pytania do przemyślenia
@@ -143,6 +204,9 @@ Oba podejścia przechodzą przez ten sam **Catalyst Optimizer** i generują iden
 1. Dlaczego format kolumnowy (Parquet) jest szybszy niż CSV przy zapytaniach agregujących?
 2. Czym różni się `inner join` od `left_semi join`?
 3. Kiedy warto wymusić `broadcast()` zamiast pozwolić Sparkowi zdecydować automatycznie?
+4. Dlaczego window function z innym `partitionBy` w tym samym zapytaniu powoduje **osobny** shuffle?
+5. Kiedy `row_number()` jest bezpieczniejszym wyborem niż `rank()` do wybrania "top N"?
+6. Co konkretnie różni rolę Catalysta od roli Tungstena?
 :::
 
 ---
@@ -152,11 +216,13 @@ Oba podejścia przechodzą przez ten sam **Catalyst Optimizer** i generują iden
 - [Spark SQL Guide](https://spark.apache.org/docs/latest/sql-programming-guide.html)
 - [PySpark DataFrame API Reference](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/index.html)
 - [Catalyst Optimizer — Deep Dive](https://databricks.com/blog/2015/04/13/deep-dive-into-spark-sqls-catalyst-optimizer.html)
+- [Window Functions API (PySpark)](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/window.html)
+- [Project Tungsten (Databricks)](https://databricks.com/blog/2015/04/28/project-tungsten-bringing-spark-closer-to-bare-metal.html)
 
 ---
 
 ## ➡️ Co dalej?
 
-Na **Laboratorium 5** przećwiczysz Spark SQL i DataFrame API na ~100 000 transakcjach z sieci kawiarni ☕ — przychody, godziny szczytu i ulubione produkty klientów!
+Na **Laboratorium 5** przećwiczysz Spark SQL i DataFrame API — od podstawowych zapytań, przez joiny, aż po window functions i optymalizację — na ~100 000 transakcjach z sieci kawiarni ☕ oraz ~200 000 przejazdach rowerów miejskich 🚲: przychody, godziny szczytu, rankingi stacji, running totals i wykrywanie anomalii.
 
-Na **Wykładzie 6 (10.11.2026)** przejdziemy do **zaawansowanego Spark SQL**: window functions (`rank`, `lag`, `lead`) i optymalizacji zapytań (`explain()`, caching, unikanie shuffli).
+Na **Wykładzie 6 (10.11.2026)** przechodzimy do przygotowania danych do Machine Learning — **Feature Engineering**!

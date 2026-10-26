@@ -10,6 +10,7 @@ export default function StacjonarnePlanZajec(): ReactNode {
   const { siteConfig } = useDocusaurusContext();
   const base = siteConfig.baseUrl.replace(/\/$/, '');
   const last = PLAN_STACJONARNE.length;
+  const testZjazd = last - 1;
   return (
     <Layout
       title="Plan zajęć — Studia stacjonarne"
@@ -22,16 +23,16 @@ export default function StacjonarnePlanZajec(): ReactNode {
             <p className={styles.subtitle}>
               Harmonogram semestru zimowego 2026/2027 — Python w Zastosowaniach Big Data.
               <br />
-              <strong>Studia stacjonarne</strong> — 12 cotygodniowych zajęć we <strong>wtorki</strong> (12 wykładów i 12 ćwiczeń), każde obejmujące wykład i ćwiczenia.
-              Ostatnie zajęcia (nr 13) to <strong>egzamin teoretyczny</strong> (70% oceny) oraz <strong>obrona projektu</strong> (30% oceny) —
-              aktywność na zajęciach daje dodatkowe +10% ponad 100%.
+              <strong>Studia stacjonarne</strong> — 10 cotygodniowych zajęć we <strong>wtorki</strong> (10 wykładów i 10 ćwiczeń), każde obejmujące wykład i ćwiczenia.
+              Zajęcia nr 11 to <strong>test teoretyczny</strong> (70% oceny, 30 pytań zamkniętych ABCD), a zajęcia nr 12 to <strong>obrona projektu</strong> (30% oceny) —
+              aktywność na zajęciach daje dodatkowe +10% ponad 100%. Semestr kończy się w całości przed przerwą świąteczno-noworoczną.
               <br />
               Podane daty są orientacyjne i mogą ulec zmianie — sprawdzaj tę stronę regularnie!
             </p>
             <div className={styles.legend}>
               <span className={`${styles.badge} ${styles.badgeWyklad}`}>Wykład</span>
               <span className={`${styles.badge} ${styles.badgeLab}`}>Ćwiczenia</span>
-              <span className={`${styles.badge} ${styles.badgeEgzamin}`}>Egzamin</span>
+              <span className={`${styles.badge} ${styles.badgeEgzamin}`}>Test</span>
               <span className={`${styles.badge} ${styles.badgeProjekt}`}>Projekt</span>
             </div>
           </div>
@@ -51,12 +52,12 @@ export default function StacjonarnePlanZajec(): ReactNode {
               </thead>
               <tbody>
                 {PLAN_STACJONARNE.map(({ zjazd, data, wyklad, wykladMaterialy, wykladHref, lab, labMaterialy, labHref, zadanieDomowe, zadanieHref }) => (
-                  <tr key={zjazd} className={zjazd === last ? styles.rowWolne : undefined}>
+                  <tr key={zjazd} className={zjazd === last || zjazd === testZjazd ? styles.rowWolne : undefined}>
                     <td className={styles.tdNum}>{zjazd}</td>
                     <td className={styles.tdData}>{data}</td>
                     <td>
-                      <span className={`${styles.badge} ${zjazd === last ? styles.badgeEgzamin : styles.badgeWyklad}`}>
-                        {zjazd === last ? 'Egzamin' : 'Wykład'}
+                      <span className={`${styles.badge} ${zjazd === testZjazd ? styles.badgeEgzamin : styles.badgeWyklad}`}>
+                        {zjazd === testZjazd ? 'Test' : zjazd === last ? 'Podsumowanie' : 'Wykład'}
                       </span>{' '}
                       {wyklad}
                     </td>
@@ -96,9 +97,10 @@ export default function StacjonarnePlanZajec(): ReactNode {
           </div>
 
           <p className={styles.subtitle} style={{ marginTop: '1.5rem' }}>
-            🎄 <strong>Przerwa świąteczno-noworoczna:</strong> brak zajęć 22.12.2026 i 29.12.2026 — zajęcia wznawiamy 12.01.2027.
+            🎄 <strong>Koniec semestru przed przerwą świąteczno-noworoczną:</strong> test teoretyczny odbywa się 15.12.2026, a obrona projektu
+            22.12.2026 — żadne zajęcia nie wypadają już w okresie przerwy świątecznej.
             Szczegóły projektu zaliczeniowego znajdziesz na stronie{' '}
-            <Link to="/stacjonarne/materialy/projekt-zaliczeniowy">Projekt zaliczeniowy</Link>, a przewodnik do egzaminu na stronie{' '}
+            <Link to="/stacjonarne/materialy/projekt-zaliczeniowy">Projekt zaliczeniowy</Link>, a przewodnik do testu teoretycznego na stronie{' '}
             <Link to="/stacjonarne/materialy/egzamin">Egzamin teoretyczny</Link>.
           </p>
         </div>

@@ -21,7 +21,7 @@ const FEATURES: Feature[] = [
     emoji: '📖',
     title: 'Wykłady',
     description:
-      '12 wykładów — od statystyki i formatów danych, przez Hadoop, Spark SQL i MLlib, po Cloud Computing i streaming.',
+      '10 wykładów — od statystyki i formatów danych, przez Hadoop, Spark SQL i MLlib, po Cloud Computing i streaming.',
     href: '/stacjonarne/materialy/wyklady',
     cta: 'Przeglądaj wykłady',
   },
@@ -29,7 +29,7 @@ const FEATURES: Feature[] = [
     emoji: '🧪',
     title: 'Ćwiczenia',
     description:
-      '12 praktycznych laboratoriów — od EDA i Parquet, przez PySpark i MLlib, po BigQuery i Structured Streaming. Pobierz notebooki i uruchom w Google Colab.',
+      '10 praktycznych laboratoriów — od EDA i Parquet, przez PySpark i MLlib, po BigQuery i Structured Streaming. Pobierz notebooki i uruchom w Google Colab.',
     href: '/stacjonarne/materialy/cwiczenia',
     cta: 'Otwórz ćwiczenia',
   },
@@ -53,7 +53,7 @@ const FEATURES: Feature[] = [
     emoji: '📝',
     title: 'Egzamin teoretyczny',
     description:
-      'Ostatnie zajęcia (19.01.2027) — egzamin teoretyczny, 70% oceny. Przewodnik do nauki i przykładowe pytania.',
+      'Zajęcia nr 11 (15.12.2026) — test teoretyczny, 70% oceny, 30 pytań zamkniętych ABCD, bez punktów ujemnych. Przewodnik do nauki i przykładowe pytania.',
     href: '/stacjonarne/materialy/egzamin',
     cta: 'Przygotuj się',
   },
@@ -61,7 +61,7 @@ const FEATURES: Feature[] = [
     emoji: '📅',
     title: 'Plan zajęć',
     description:
-      'Harmonogram semestru zimowego 2026/2027 — 12 cotygodniowych zajęć (wykład + ćwiczenia) we wtorki oraz egzamin i obrona projektu.',
+      'Harmonogram semestru zimowego 2026/2027 — 10 cotygodniowych zajęć (wykład + ćwiczenia) we wtorki oraz test teoretyczny i obrona projektu.',
     href: '/stacjonarne/plan-zajec',
     cta: 'Zobacz plan',
   },
@@ -119,11 +119,11 @@ export default function StacjonarneHome(): ReactNode {
               </Link>
             </div>
             <div className={styles.heroStats}>
-              <div className={styles.stat}><span className={styles.statNum}>12</span><span className={styles.statLabel}>Wykładów</span></div>
+              <div className={styles.stat}><span className={styles.statNum}>10</span><span className={styles.statLabel}>Wykładów</span></div>
               <div className={styles.statDivider} />
-              <div className={styles.stat}><span className={styles.statNum}>12</span><span className={styles.statLabel}>Laboratoriów</span></div>
+              <div className={styles.stat}><span className={styles.statNum}>10</span><span className={styles.statLabel}>Laboratoriów</span></div>
               <div className={styles.statDivider} />
-              <div className={styles.stat}><span className={styles.statNum}>13</span><span className={styles.statLabel}>Zajęć (wtorki)</span></div>
+              <div className={styles.stat}><span className={styles.statNum}>12</span><span className={styles.statLabel}>Zajęć (wtorki)</span></div>
               <div className={styles.statDivider} />
               <div className={styles.stat}><span className={styles.statNum}>100%</span><span className={styles.statLabel}>Colab-ready</span></div>
             </div>

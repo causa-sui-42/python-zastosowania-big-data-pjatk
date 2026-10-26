@@ -11,7 +11,7 @@ import DownloadLink from '@site/src/components/DownloadLink';
 
 # 🎓 Projekt zaliczeniowy
 
-**Kurs:** Python w Zastosowaniach Big Data &nbsp;|&nbsp; **Semestr:** Zimowy 2026/2027 &nbsp;|&nbsp; **Termin oddania:** 16.01.2027 (godz. 23:59) &nbsp;|&nbsp; **Obrona:** 19.01.2027
+**Kurs:** Python w Zastosowaniach Big Data &nbsp;|&nbsp; **Semestr:** Zimowy 2026/2027 &nbsp;|&nbsp; **Termin oddania:** 19.12.2026 (godz. 23:59) &nbsp;|&nbsp; **Obrona:** 22.12.2026
 
 ---
 
@@ -19,7 +19,7 @@ import DownloadLink from '@site/src/components/DownloadLink';
 
 | Składowa | Waga |
 |---|---|
-| Egzamin teoretyczny (19.01.2027) | 70% |
+| Test teoretyczny (15.12.2026) | 70% |
 | **Projekt zaliczeniowy** (ten dokument) | **30%** |
 | Aktywność na zajęciach (bonus) | +10% (ponad 100%) |
 
@@ -78,13 +78,13 @@ Poniższa tabela pokazuje wagi **wewnątrz** komponentu "Projekt" (czyli w ramac
 
 | Etap | Termin | Opis |
 |------|--------|------|
-| Wybór tematu | do **24.11.2026** | Zgłoś temat prowadzącemu (e-mail: melnyk@pjwstk.edu.pl lub osobiście na zajęciach) — najlepiej zaraz po Wykładzie 8 (Modele ML) |
+| Wybór tematu | do **24.11.2026** | Zgłoś temat prowadzącemu (e-mail: melnyk@pjwstk.edu.pl lub osobiście na zajęciach) — najlepiej zaraz po Wykładzie 7 (Modele ML) |
 | Konsultacje | **cały semestr** | Prowadzący dostępny szczególnie po zajęciach oraz e-mailem |
-| **Oddanie projektu** | **16.01.2027, godz. 23:59** 🔴 | Notebook/skrypty + prezentacja. Prace przesłane po terminie **nie będą przyjęte**. |
-| **Obrona projektu** | **19.01.2027** | Ten sam dzień co egzamin teoretyczny — krótkie prezentacje (5–10 min) + pytania prowadzącego. Harmonogram obron w ciągu dnia ustala prowadzący. |
+| **Oddanie projektu** | **19.12.2026, godz. 23:59** 🔴 | Notebook/skrypty + prezentacja. Prace przesłane po terminie **nie będą przyjęte**. |
+| **Obrona projektu** | **22.12.2026** | Ostatnie zajęcia semestru, kilka dni po teście teoretycznym (15.12.2026) — krótkie prezentacje (5–10 min) + pytania prowadzącego. Harmonogram obron w ciągu dnia ustala prowadzący. |
 
-<Admonition type="danger" title="Nieprzekraczalny termin oddania: 16 stycznia 2027, godz. 23:59">
-  Materiały należy przesłać najpóźniej do **16.01.2027, godz. 23:59**. Jest to termin nieprzekraczalny — prace nadesłane później nie będą oceniane. Obrona projektu odbywa się **19.01.2027**, tego samego dnia co egzamin teoretyczny — to jednak **osobna** część oceny (30% projekt vs. 70% egzamin).
+<Admonition type="danger" title="Nieprzekraczalny termin oddania: 19 grudnia 2026, godz. 23:59">
+  Materiały należy przesłać najpóźniej do **19.12.2026, godz. 23:59**. Jest to termin nieprzekraczalny — prace nadesłane później nie będą oceniane. Obrona projektu odbywa się **22.12.2026** — to **osobna** część oceny (30% projekt vs. 70% test teoretyczny) i osobne zajęcia od testu teoretycznego (15.12.2026).
 </Admonition>
 
 ---

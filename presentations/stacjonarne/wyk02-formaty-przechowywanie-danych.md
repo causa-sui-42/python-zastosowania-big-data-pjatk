@@ -244,7 +244,7 @@ df = tabela.to_pandas()                        # konwersja do pandas
 - ✅ **Schema evolution** — dodasz nową kolumnę, stare dane dalej się czytają
 - ❌ Do analityki kolumnowej słabszy niż Parquet
 
-> 🔮 Spotkamy go ponownie na Wykładzie 12 przy **Kafce i streamingu**.
+> 🔮 Spotkamy go ponownie na Wykładzie 10 przy **Kafce i streamingu**.
 
 ---
 
@@ -499,7 +499,7 @@ wynik = duckdb.sql("""
 print(wynik)
 ```
 
-> 💡 Bez bazy danych, bez serwera — SQL wprost na Parquecie. Ta sama idea stoi za **Spark SQL** (Wykład 5) i **BigQuery** (Wykład 11).
+> 💡 Bez bazy danych, bez serwera — SQL wprost na Parquecie. Ta sama idea stoi za **Spark SQL** (Wykład 5) i **BigQuery** (Wykład 9).
 
 ---
 
