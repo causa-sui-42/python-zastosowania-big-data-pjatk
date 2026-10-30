@@ -30,7 +30,7 @@ Po tym wykładzie będziesz wiedzieć:
 
 ## ✅ Materiały do wykładu
 
-📄 **[Otwórz slajdy PDF](/zaoczne/pdfs/wyk7-spark-streaming-intermediate.pdf)**
+📄 **[Otwórz slajdy PDF](pathname:///zaoczne/pdfs/wyk7-spark-streaming-intermediate.pdf)**
 
 ---
 

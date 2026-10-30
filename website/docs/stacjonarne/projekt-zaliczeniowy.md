@@ -134,16 +134,75 @@ Przykładowy notebook dotyczy **rezygnacji subskrybentów platformy streamingowe
 
 ---
 
-## 🎨 Przykładowe tematy
+## 🎨 Propozycje tematów i otwarte zbiory danych
 
-Poniżej kilka inspiracji — możesz wybrać własny temat po konsultacji z prowadzącym:
+Poniżej **rozszerzona lista inspiracji** pogrupowana tematycznie — każda propozycja zawiera przykładowy cel badawczy oraz konkretne źródła otwartych danych (open data). Możesz wybrać jeden z poniższych tematów albo zaproponować własny po konsultacji z prowadzącym.
+
+<Admonition type="tip" title="Jak korzystać z tej listy?">
+  Potraktuj te propozycje jako **punkt wyjścia**, nie gotową receptę. Zmodyfikuj pytanie badawcze, połącz dwa źródła danych, albo zawęź zakres do interesującego Cię wycinka (np. tylko jedno miasto, jeden sezon, jedna kategoria produktów).
+</Admonition>
+
+### 🏃 Sport i zdrowie
 
 1. **Analityka sportowa** — statystyki zawodników/drużyn + predykcja wyników meczów
-2. **Dane klimatyczne** — analiza trendów temperatur i opadów + wykrywanie anomalii pogodowych
-3. **Transport publiczny** — analiza opóźnień i obłożenia linii komunikacji miejskiej
-4. **Analiza sentymentu recenzji e-commerce** — web scraping + NLP + klasyfikacja opinii
-5. **Zużycie energii elektrycznej** — prognozowanie zapotrzebowania + wykrywanie wzorców sezonowych
-6. **Rynek nieruchomości** — przewidywanie cen mieszkań na podstawie cech nieruchomości i lokalizacji
+   - [Kaggle: Football/Soccer datasets](https://www.kaggle.com/datasets?search=football) · [Kaggle: NBA stats](https://www.kaggle.com/datasets?search=nba) · [football-data.co.uk](https://www.football-data.co.uk/) (wyniki i kursy bukmacherskie lig piłkarskich)
+2. **Analiza wydolności i treningu** — dane z zegarków sportowych, predykcja czasu ukończenia biegu
+   - [Kaggle: Running/marathon datasets](https://www.kaggle.com/datasets?search=marathon) · [Strava API](https://developers.strava.com/) (wymaga rejestracji aplikacji)
+3. **Dane epidemiologiczne / zdrowie publiczne** — trendy zachorowań, czynniki ryzyka
+   - [WHO Global Health Observatory](https://www.who.int/data/gho) · [Our World in Data](https://ourworldindata.org/) (gotowe CSV do pobrania) · [data.gov.pl — zdrowie](https://dane.gov.pl/pl/dataset?categories=zdrowie)
+
+### 🌍 Klimat, środowisko i energia
+
+4. **Dane klimatyczne** — trendy temperatur/opadów, wykrywanie anomalii pogodowych
+   - [NOAA Climate Data Online](https://www.ncdc.noaa.gov/cdo-web/) · [Copernicus Climate Data Store](https://cds.climate.copernicus.eu/) · [IMGW-PIB dane publiczne](https://danepubliczne.imgw.pl/)
+5. **Jakość powietrza** — predykcja stężenia PM2.5/PM10, wpływ pogody i ruchu drogowego
+   - [GIOŚ — Główny Inspektorat Ochrony Środowiska](https://powietrze.gios.gov.pl/pjp/archives) · [OpenAQ](https://openaq.org/) · [BigQuery Public Datasets: `openaq`](https://console.cloud.google.com/marketplace/product/openaq/real-time-air-quality)
+6. **Zużycie energii elektrycznej** — prognozowanie zapotrzebowania, wzorce sezonowe, OZE
+   - [Kaggle: Hourly Energy Consumption](https://www.kaggle.com/datasets/robikscube/hourly-energy-consumption) · [ENTSO-E Transparency Platform](https://transparency.entsoe.eu/) (dane europejskiego rynku energii) · [data.gov — energy](https://www.data.gov/)
+
+### 🚕 Transport i miasto
+
+7. **Transport publiczny** — analiza opóźnień i obłożenia linii komunikacji miejskiej
+   - [ZTM Warszawa — otwarte dane](https://api.um.warszawa.pl/) · [data.gov.pl — transport](https://dane.gov.pl/pl/dataset?categories=transport)
+8. **Przejazdy taksówek / ride-sharing** — analiza przestrzenno-czasowa, przewidywanie cen kursów
+   - [NYC TLC Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page) · [BigQuery Public Datasets: `new_york_taxi_trips`](https://console.cloud.google.com/marketplace/product/city-of-new-york/nyc-tlc-trips)
+9. **Współdzielone hulajnogi/rowery miejskie** — wzorce użytkowania, predykcja popytu
+   - [Kaggle: Bike Sharing Dataset](https://www.kaggle.com/datasets/lakshmi25npathi/bike-sharing-dataset) · [Citi Bike System Data (NYC)](https://citibikenyc.com/system-data)
+
+### 🛒 E-commerce, biznes i finanse
+
+10. **Analiza sentymentu recenzji e-commerce** — web scraping + NLP + klasyfikacja opinii
+    - [Kaggle: Amazon Product Reviews](https://www.kaggle.com/datasets?search=amazon+reviews) · [Yelp Open Dataset](https://www.yelp.com/dataset)
+11. **Rynek nieruchomości** — przewidywanie cen mieszkań na podstawie cech nieruchomości i lokalizacji
+    - [Kaggle: Housing Prices datasets](https://www.kaggle.com/datasets?search=housing+prices) · [otodom/olx — web scraping](https://www.otodom.pl/) (własne, zgodne z regulaminem portalu)
+12. **Analiza danych giełdowych / kryptowalut** — trendy, zmienność, strategie inwestycyjne
+    - [Yahoo Finance (`yfinance`)](https://pypi.org/project/yfinance/) · [Kaggle: Stock Market datasets](https://www.kaggle.com/datasets?search=stock+market) · [BigQuery Public Datasets: `bigquery-public-data.crypto_bitcoin`](https://console.cloud.google.com/marketplace/product/bigquery-public-data/crypto-bitcoin)
+13. **Churn (rezygnacja) klientów** — predykcja odejść klientów na podstawie zachowań
+    - [Kaggle: Telco Customer Churn](https://www.kaggle.com/datasets/blastchar/telco-customer-churn) · [Kaggle: Bank Customer Churn](https://www.kaggle.com/datasets?search=bank+customer+churn)
+
+### 🎬 Multimedia, rozrywka i kultura
+
+14. **Rekomendacja filmów** — collaborative filtering z MLlib (ALS)
+    - [MovieLens datasets (GroupLens)](https://grouplens.org/datasets/movielens/) · [Kaggle: TMDB 5000 Movies](https://www.kaggle.com/datasets/tmdb/tmdb-movie-metadata)
+15. **Klasyfikacja gatunków muzycznych** — cechy audio + ML
+    - [Kaggle: GTZAN Genre Collection](https://www.kaggle.com/datasets/andradaolteanu/gtzan-dataset-music-genre-classification) · [Spotify Web API](https://developer.spotify.com/documentation/web-api) (cechy audio utworów)
+16. **Analiza grania e-sportowego** — statystyki meczów, predykcja wyniku drużyny
+    - [Kaggle: League of Legends / Dota 2 / CS:GO datasets](https://www.kaggle.com/datasets?search=esports)
+
+### ☁️ Big Data / Cloud (natywnie "duże" zbiory)
+
+17. **BigQuery Public Datasets (Google Cloud)** — gotowe, ogromne zbiory danych bezpośrednio w GCP, idealne pod PySpark/Spark SQL/BigQuery:
+    - [Przegląd wszystkich zbiorów](https://cloud.google.com/bigquery/public-data) — m.in. `github_repos`, `stackoverflow`, `wikipedia`, `covid19_open_data`, `census_bureau_usa`, `google_trends`
+18. **Dane open data rządowe/samorządowe** — elastyczne tematycznie, dobre pod storytelling lokalny
+    - [data.gov.pl](https://dane.gov.pl/) (Polska) · [data.europa.eu](https://data.europa.eu/en) (UE) · [data.gov](https://www.data.gov/) (USA) · [Eurostat](https://ec.europa.eu/eurostat/web/main/data/database) · [GUS — Bank Danych Lokalnych](https://bdl.stat.gov.pl/bdl/start)
+19. **Repozytorium UCI Machine Learning** — klasyczne zbiory do klasyfikacji/regresji/clusteringu, dobre jako punkt wyjścia do rozszerzenia o większy, podobny zbiór
+    - [UCI Machine Learning Repository](https://archive.ics.uci.edu/)
+20. **Kaggle Datasets (ogólne wyszukiwanie)** — największa biblioteka gotowych zbiorów danych z opisami i przykładowym kodem
+    - [kaggle.com/datasets](https://www.kaggle.com/datasets)
+
+<Admonition type="info" title="Skala danych a wymagania projektu">
+  Jeśli wybrany zbiór danych jest zbyt mały (np. kilkaset wierszy), rozważ: (a) połączenie kilku lat/okresów w jeden większy zbiór, (b) sztuczne powiększenie przez symulację dodatkowych rekordów na bazie rozkładów z prawdziwych danych, lub (c) wybór innego, większego źródła z listy powyżej (np. BigQuery Public Datasets łatwo dają miliony wierszy).
+</Admonition>
 
 ---
 

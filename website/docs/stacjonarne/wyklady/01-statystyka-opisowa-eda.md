@@ -33,7 +33,7 @@ Po tym wykładzie będziesz wiedzieć:
   Slajdy z tego wykładu są dostępne w formacie PDF. Możesz je otworzyć bezpośrednio w przeglądarce lub pobrać.
 </Admonition>
 
-📄 **[Otwórz slajdy PDF](/stacjonarne/pdfs/wyk01-statystyka-opisowa-eda.pdf)**
+📄 **[Otwórz slajdy PDF](pathname:///stacjonarne/pdfs/wyk01-statystyka-opisowa-eda.pdf)**
 
 ---
 

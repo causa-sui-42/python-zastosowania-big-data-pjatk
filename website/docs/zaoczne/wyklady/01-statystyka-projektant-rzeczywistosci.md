@@ -31,7 +31,7 @@ Po tym wykładzie będziesz wiedzieć:
   Slajdy z tego wykładu są dostępne w formacie PDF. Możesz je otworzyć bezpośrednio w przeglądarce lub pobrać.
 </Admonition>
 
-📄 **[Otwórz slajdy PDF](/zaoczne/pdfs/wyk1-statystyka-projektant-rzeczywistosci.pdf)**
+📄 **[Otwórz slajdy PDF](pathname:///zaoczne/pdfs/wyk1-statystyka-projektant-rzeczywistosci.pdf)**
 
 ---
 

@@ -32,7 +32,7 @@ Po tym wykładzie będziesz wiedzieć:
   Slajdy z tego wykładu są dostępne w formacie Markdown (Marp). Możesz je otworzyć bezpośrednio lub wyeksportować do PDF.
 </Admonition>
 
-📄 **[Otwórz slajdy PDF](/zaoczne/pdfs/wyk3-spark-sql-dataframes-intermediate.pdf)**
+📄 **[Otwórz slajdy PDF](pathname:///zaoczne/pdfs/wyk3-spark-sql-dataframes-intermediate.pdf)**
 
 ---
 

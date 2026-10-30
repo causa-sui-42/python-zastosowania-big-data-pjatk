@@ -42,7 +42,7 @@ Po tym wykładzie będziesz wiedzieć:
   Slajdy z tego wykładu są dostępne w formacie Markdown (Marp). Możesz je otworzyć bezpośrednio lub wyeksportować do PDF.
 </Admonition>
 
-📄 **[Otwórz slajdy PDF](/stacjonarne/pdfs/wyk08-mllib-wprowadzenie.pdf)**
+📄 **[Otwórz slajdy PDF](pathname:///stacjonarne/pdfs/wyk08-mllib-wprowadzenie.pdf)**
 
 ---
 

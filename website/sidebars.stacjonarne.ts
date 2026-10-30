@@ -14,6 +14,7 @@ const sidebars: SidebarsConfig = {
         slug: '/wyklady',
       },
       items: [
+        'wyklady/00-python-podstawy-pandas-spark',
         'wyklady/01-statystyka-opisowa-eda',
         'wyklady/02-formaty-przechowywanie-danych',
         'wyklady/03-big-data-hadoop-ekosystem',
@@ -36,6 +37,7 @@ const sidebars: SidebarsConfig = {
         slug: '/cwiczenia',
       },
       items: [
+        'cwiczenia/00-python-podstawy-pandas-spark',
         'cwiczenia/01-eda-statystyki-sportowe',
         'cwiczenia/02-formaty-danych-hulajnogi',
         'cwiczenia/03-mapreduce-analiza-recenzji',

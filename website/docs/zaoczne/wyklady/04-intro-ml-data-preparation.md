@@ -33,7 +33,7 @@ Po tym wykładzie będziesz wiedzieć:
   Slajdy z tego wykładu są dostępne w formacie Markdown (Marp).
 </Admonition>
 
-📄 **[Otwórz slajdy PDF](/zaoczne/pdfs/wyk4-intro-ml-data-preparation-intermediate.pdf)**
+📄 **[Otwórz slajdy PDF](pathname:///zaoczne/pdfs/wyk4-intro-ml-data-preparation-intermediate.pdf)**
 
 ---
 
