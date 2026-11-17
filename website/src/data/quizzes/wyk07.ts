@@ -1,0 +1,260 @@
+import type { QuizQuestion } from '@site/src/components/Quiz';
+
+// Wykład 7: Modele ML — klasyfikacja, regresja i ewaluacja
+export const QUIZ_WYK07: QuizQuestion[] = [
+  {
+    question: 'Czym różni się klasyfikacja od regresji?',
+    options: [
+      'Klasyfikacja przewiduje kategorię (klasę), regresja przewiduje liczbę ciągłą',
+      'Regresja przewiduje kategorię, a klasyfikacja liczbę ciągłą',
+      'To dokładnie to samo zadanie pod różnymi nazwami',
+      'Klasyfikacja dotyczy wyłącznie danych tekstowych',
+    ],
+    correctIndex: 0,
+    explanation: 'Klasyfikacja (np. churn 0/1) przewiduje przynależność do kategorii, a regresja (np. liczba wizyt/miesiąc) przewiduje wartość ciągłą.',
+  },
+  {
+    question: 'Jaka jest podstawowa idea algorytmu Random Forest?',
+    options: [
+      'Pojedyncze, bardzo głębokie drzewo decyzyjne',
+      'Wiele drzew decyzyjnych, których predykcje są uśredniane/głosowane',
+      'Funkcja sigmoidalna nad liniową kombinacją cech',
+      'Model bez żadnych hiperparametrów',
+    ],
+    correctIndex: 1,
+    explanation: 'Random Forest to ensemble wielu drzew decyzyjnych trenowanych na różnych podzbiorach danych/cech, których wyniki są agregowane (głosowanie/średnia) — to zwiększa odporność na overfitting.',
+  },
+  {
+    question: 'Czym różnią się parametry od hiperparametrów modelu?',
+    options: [
+      'Parametry ustala się przed treningiem, hiperparametry model uczy się sam',
+      'Hiperparametry (np. `max_depth`) ustala się przed treningiem, parametry model uczy się sam podczas `fit()`',
+      'To synonimy tego samego pojęcia',
+      'Hiperparametry dotyczą wyłącznie regresji',
+    ],
+    correctIndex: 1,
+    explanation: 'Hiperparametry (np. liczba drzew, głębokość) są decyzjami projektanta przed treningiem; parametry (np. współczynniki modelu) model wyznacza samodzielnie podczas `fit()`.',
+  },
+  {
+    question: 'Co oznacza "underfitting" (zbyt prosty model)?',
+    options: [
+      'Model idealnie dopasowuje się do danych treningowych i testowych',
+      'Model ma wysoki bias — nie wychwytuje nawet podstawowych wzorców, słabo radzi sobie zarówno na train, jak i test',
+      'Model ma zero błędu na zbiorze testowym',
+      'Model zawsze przewiduje tę samą wartość niezależnie od danych wejściowych, co jest pożądane',
+    ],
+    correctIndex: 1,
+    explanation: 'Underfitting (wysoki bias) oznacza, że model jest zbyt prosty, by uchwycić istotne zależności w danych — słabe wyniki zarówno na train, jak i test.',
+  },
+  {
+    question: 'Model ma 99.5% accuracy na danych treningowych, ale tylko 60% na danych testowych. Co to sugeruje?',
+    options: [
+      'Model jest idealnie wytrenowany',
+      'Prawdopodobny overfitting — model "zapamiętał" dane treningowe zamiast nauczyć się generalizujących wzorców',
+      'Dane testowe są błędne',
+      'Należy natychmiast zmniejszyć zbiór treningowy',
+    ],
+    correctIndex: 1,
+    explanation: 'Duża różnica między wynikiem na train i test to klasyczny sygnał overfittingu (wysoka wariancja) — model nauczył się szumu/szczegółów danych treningowych.',
+  },
+  {
+    question: 'Model ma 99% accuracy, ale tylko 1% klientów faktycznie rezygnuje (silnie niezbalansowane klasy). Czy to dobry model?',
+    options: [
+      'Tak, 99% accuracy to zawsze świetny wynik',
+      'Niekoniecznie — model mógł po prostu zawsze przewidywać "brak rezygnacji" i wciąż osiągnąć wysoką accuracy, ignorując klasę mniejszościową',
+      'Tak, pod warunkiem że użyto regresji liniowej',
+      'Nie, bo accuracy nigdy nie powinno przekraczać 90%',
+    ],
+    correctIndex: 1,
+    explanation: 'Przy silnym niezbalansowaniu klas accuracy jest myląca — trzeba sprawdzić precision/recall/F1 dla klasy mniejszościowej (rezygnujących klientów).',
+  },
+  {
+    question: 'Jaki jest wzór na precision?',
+    options: ['TP / (TP + FN)', 'TP / (TP + FP)', '(TP + TN) / (TP + TN + FP + FN)', 'TN / (TN + FP)'],
+    correctIndex: 1,
+    explanation: 'Precision = TP / (TP + FP) — spośród wszystkich przypadków przewidzianych jako pozytywne, ile faktycznie było pozytywnych.',
+  },
+  {
+    question: 'Jaki jest wzór na recall?',
+    options: ['TP / (TP + FN)', 'TP / (TP + FP)', '(TP + TN) / (TP + TN + FP + FN)', 'TN / (TN + FN)'],
+    correctIndex: 0,
+    explanation: 'Recall = TP / (TP + FN) — spośród wszystkich faktycznie pozytywnych przypadków, ile model poprawnie wykrył.',
+  },
+  {
+    question: 'Kiedy priorytetowo traktujemy recall ponad precision?',
+    options: [
+      'Gdy fałszywie pozytywne (FP) są bardzo kosztowne',
+      'Gdy fałszywie negatywne (FN) są bardzo kosztowne, np. przeoczenie klienta, który faktycznie zrezygnuje (churn)',
+      'Zawsze, niezależnie od kontekstu biznesowego',
+      'Tylko przy regresji, nigdy przy klasyfikacji',
+    ],
+    correctIndex: 1,
+    explanation: 'Gdy koszt przeoczenia prawdziwego pozytywnego przypadku (FN) jest wysoki — np. w wykrywaniu chorób czy predykcji odejścia klienta — priorytetem staje się recall.',
+  },
+  {
+    question: 'Co to jest F1-score?',
+    options: [
+      'Suma precision i recall',
+      'Średnia harmoniczna precision i recall, będąca kompromisem między nimi',
+      'Synonim accuracy',
+      'Metryka używana wyłącznie w regresji',
+    ],
+    correctIndex: 1,
+    explanation: 'F1-score to średnia harmoniczna precision i recall — przydatna, gdy chcemy jednej metryki równoważącej oba aspekty, szczególnie przy niezbalansowanych klasach.',
+  },
+  {
+    question: 'Co mierzy ROC-AUC?',
+    options: [
+      'Dokładność modelu dla jednego konkretnego progu klasyfikacji',
+      'Jakość rankingu modelu (zdolność do odróżniania klas) niezależnie od wybranego progu decyzyjnego',
+      'Błąd średniokwadratowy modelu regresji',
+      'Liczbę cech użytych w modelu',
+    ],
+    correctIndex: 1,
+    explanation: 'ROC-AUC (pole pod krzywą ROC) ocenia, jak dobrze model rankinguje przypadki pozytywne wyżej niż negatywne, niezależnie od konkretnego progu klasyfikacji.',
+  },
+  {
+    question: 'Który z poniższych jest metryką stosowaną do ewaluacji regresji, a nie klasyfikacji?',
+    options: ['F1-score', 'ROC-AUC', 'RMSE', 'Precision'],
+    correctIndex: 2,
+    explanation: 'RMSE (pierwiastek błędu średniokwadratowego) to typowa metryka regresji; F1, ROC-AUC i precision dotyczą klasyfikacji.',
+  },
+  {
+    question: 'Czym różni się MAE od RMSE?',
+    options: [
+      'MAE liczy średnią wartość bezwzględną błędów, RMSE podnosi błędy do kwadratu przed uśrednieniem i pierwiastkowaniem, co bardziej "karze" duże błędy',
+      'To dokładnie ta sama metryka',
+      'RMSE jest zawsze mniejsze niż MAE',
+      'MAE dotyczy wyłącznie klasyfikacji',
+    ],
+    correctIndex: 0,
+    explanation: 'Podnoszenie do kwadratu w RMSE sprawia, że duże błędy mają nieproporcjonalnie większy wpływ na wynik niż w MAE, które traktuje wszystkie błędy liniowo.',
+  },
+  {
+    question: 'Co oznacza R² (R-squared) bliskie 1.0 w regresji?',
+    options: [
+      'Model w ogóle nie wyjaśnia zmienności danych',
+      'Model wyjaśnia niemal całą zmienność zmiennej docelowej na podstawie cech',
+      'Model zawsze popełnia maksymalny błąd',
+      'Dane nie zawierają żadnej zmienności',
+    ],
+    correctIndex: 1,
+    explanation: 'R² bliskie 1.0 oznacza, że model bardzo dobrze wyjaśnia wariancję zmiennej docelowej; R² bliskie 0 oznacza, że model nie radzi sobie lepiej niż prosta średnia.',
+  },
+  {
+    question: 'Dlaczego cross-validation daje bardziej wiarygodny obraz jakości modelu niż pojedynczy `train_test_split`?',
+    options: [
+      'Bo trenuje model tylko raz, więc jest szybsze',
+      'Bo uśrednia wyniki po wielu różnych podziałach danych (foldach), zmniejszając wpływ przypadkowego, "szczęśliwego" lub "pechowego" podziału',
+      'Bo cross-validation nie wymaga danych testowych',
+      'Bo zawsze daje wyższy wynik niż pojedynczy split',
+    ],
+    correctIndex: 1,
+    explanation: 'K-fold cross-validation trenuje i testuje model na k różnych podziałach, dając bardziej stabilną (mniej zależną od przypadku) ocenę jakości.',
+  },
+  {
+    question: 'Do czego służy `GridSearchCV`?',
+    options: [
+      'Do automatycznego czyszczenia brakujących danych',
+      'Do systematycznego przeszukania siatki kombinacji hiperparametrów i wyboru najlepszej na podstawie cross-validation',
+      'Do wizualizacji macierzy pomyłek',
+      'Do kodowania zmiennych kategorycznych',
+    ],
+    correctIndex: 1,
+    explanation: '`GridSearchCV` trenuje model dla każdej kombinacji hiperparametrów z podanej siatki, oceniając je przez cross-validation, i wybiera najlepszą kombinację.',
+  },
+  {
+    question: 'Jaka jest podstawowa idea Gradient Boosting?',
+    options: [
+      'Trenowanie wielu niezależnych drzew i uśrednianie ich wyników',
+      'Trenowanie drzew sekwencyjnie, gdzie każde kolejne drzewo poprawia błędy popełnione przez poprzednie',
+      'Użycie wyłącznie jednego, bardzo głębokiego drzewa',
+      'Model bez żadnego treningu, oparty wyłącznie na regułach eksperckich',
+    ],
+    correctIndex: 1,
+    explanation: 'Gradient Boosting buduje drzewa sekwencyjnie — każde kolejne drzewo jest trenowane tak, by skorygować błędy (rezydua) poprzednich drzew.',
+  },
+  {
+    question: 'Dlaczego nieuczciwe jest porównywanie dwóch modeli trenowanych na różnych podziałach train/test (różny `random_state`)?',
+    options: [
+      'Bo różnice w wynikach mogą wynikać z przypadkowego podziału danych, a nie z faktycznej jakości modeli',
+      'Bo modele zawsze dają identyczne wyniki niezależnie od podziału',
+      'Bo `random_state` nie wpływa na wynik podziału',
+      'Bo porównywanie modeli jest w ogóle niemożliwe',
+    ],
+    correctIndex: 0,
+    explanation: 'Dla uczciwego porównania modeli trzeba użyć tego samego podziału danych (ten sam `random_state`), inaczej różnice w wyniku mogą wynikać z losowości podziału, nie z jakości modelu.',
+  },
+  {
+    question: 'Co pokazuje confusion matrix (macierz pomyłek)?',
+    options: [
+      'Wyłącznie accuracy modelu',
+      'Liczbę prawdziwie pozytywnych, prawdziwie negatywnych, fałszywie pozytywnych i fałszywie negatywnych predykcji',
+      'Rozkład cech wejściowych',
+      'Czas trenowania modelu',
+    ],
+    correctIndex: 1,
+    explanation: 'Confusion matrix to tabela TP/TN/FP/FN, na podstawie której liczy się precision, recall, F1 i accuracy.',
+  },
+  {
+    question: 'Jaki jest typowy algorytm "bazowy" (baseline) do klasyfikacji binarnej, prosty i interpretowalny?',
+    options: ['Gradient Boosting', 'Random Forest', 'Logistic Regression', 'Głęboka sieć neuronowa'],
+    correctIndex: 2,
+    explanation: 'Logistic Regression jest często pierwszym, prostym i szybkim modelem bazowym, z którym porównuje się bardziej złożone algorytmy.',
+  },
+  {
+    question: 'Dlaczego Decision Tree bez ograniczeń (np. `max_depth`) jest podatny na overfitting?',
+    options: [
+      'Bo zawsze ma tylko jeden poziom',
+      'Bo może rosnąć dowolnie głęboko, dopasowując się do każdego pojedynczego przykładu treningowego, w tym do szumu',
+      'Bo nie obsługuje danych numerycznych',
+      'Bo wymaga więcej danych niż inne algorytmy',
+    ],
+    correctIndex: 1,
+    explanation: 'Bez ograniczenia głębokości, drzewo decyzyjne może tworzyć liście odpowiadające pojedynczym przykładom treningowym — idealnie dopasowuje się do train, ale słabo generalizuje.',
+  },
+  {
+    question: 'Jaki jest typowy sposób sprawdzenia overfittingu przy pomocy porównania wyników?',
+    options: [
+      'Porównanie accuracy na train i na test — duża różnica sugeruje overfitting',
+      'Porównanie liczby kolumn w X_train i X_test',
+      'Sprawdzenie wyłącznie czasu trenowania modelu',
+      'Sprawdzenie liczby wierszy w zbiorze danych',
+    ],
+    correctIndex: 0,
+    explanation: 'Jeśli model osiąga znacznie wyższy wynik na danych treningowych niż testowych, to typowy sygnał przeuczenia (overfitting).',
+  },
+  {
+    question: 'Dlaczego data leakage (np. dopasowanie scalera przed splitem) jest szczególnie groźne przy ocenie modelu?',
+    options: [
+      'Bo sztucznie zawyża wyniki ewaluacji, dając fałszywe poczucie, że model działa lepiej niż w rzeczywistości',
+      'Bo zawsze powoduje błąd kompilacji kodu',
+      'Bo jest wymagane do poprawnego działania modelu',
+      'Bo dotyczy wyłącznie regresji, nie klasyfikacji',
+    ],
+    correctIndex: 0,
+    explanation: 'Model "widzący" informacje ze zbioru testowego podczas treningu/preprocessing osiągnie sztucznie wysoki wynik na teście, który nie odzwierciedla rzeczywistej zdolności generalizacji.',
+  },
+  {
+    question: 'Jaki jest typowy pierwszy krok przy podejrzeniu, że model cierpi na wysoką wariancję (overfitting)?',
+    options: [
+      'Natychmiastowe zwiększenie złożoności modelu',
+      'Rozważenie uproszczenia modelu (np. mniejsza głębokość drzewa), regularyzacji lub zebrania większej ilości danych treningowych',
+      'Usunięcie zbioru testowego',
+      'Zignorowanie problemu, bo wysoka wariancja zawsze jest pożądana',
+    ],
+    correctIndex: 1,
+    explanation: 'Typowe remedia na overfitting to: uproszczenie modelu, regularyzacja, więcej danych treningowych lub redukcja liczby cech.',
+  },
+  {
+    question: 'Dlaczego warto ustawiać ten sam `random_state` w `train_test_split` i modelach podczas eksperymentów porównawczych?',
+    options: [
+      'Zapewnia powtarzalność wyników i uczciwe porównanie modeli na dokładnie tych samych danych',
+      'Przyspiesza trening modelu',
+      'Jest wymagane przez bibliotekę scikit-learn, inaczej zgłosi błąd',
+      'Automatycznie poprawia dokładność modelu',
+    ],
+    correctIndex: 0,
+    explanation: 'Ustalony `random_state` gwarantuje powtarzalność eksperymentu — bez niego różnice w wynikach mogłyby wynikać z losowości, a nie z faktycznej jakości modeli.',
+  },
+];

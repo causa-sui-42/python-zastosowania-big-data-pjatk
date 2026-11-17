@@ -1,0 +1,281 @@
+import type { QuizQuestion } from '@site/src/components/Quiz';
+
+// Wykład 8: Spark MLlib — od podstaw po tuning hiperparametrów
+export const QUIZ_WYK08: QuizQuestion[] = [
+  {
+    question: 'Zgodnie z "zasadą kciuka" z wykładu, kiedy warto przejść ze scikit-learn na Spark MLlib?',
+    options: [
+      'Zawsze, niezależnie od rozmiaru danych',
+      'Gdy dane przekraczają ~10 GB lub stale rosną i nie mieszczą się w pamięci jednej maszyny',
+      'Nigdy — scikit-learn zawsze wystarcza',
+      'Tylko gdy dane są w formacie CSV',
+    ],
+    correctIndex: 1,
+    explanation: 'scikit-learn działa na jednej maszynie (RAM); gdy dane rosną poza możliwości jednej maszyny, MLlib pozwala skalować te same koncepcje na klaster.',
+  },
+  {
+    question: 'Do czego służy `VectorAssembler` w Spark MLlib?',
+    options: [
+      'Łączy wiele kolumn cech w jedną kolumnę wektorową, wymaganą przez modele MLlib',
+      'Koduje zmienne kategoryczne na indeksy liczbowe',
+      'Dzieli dane na zbiór treningowy i testowy',
+      'Zapisuje wytrenowany model na dysku',
+    ],
+    correctIndex: 0,
+    explanation: '`VectorAssembler` jest odpowiednikiem macierzy X z scikit-learn — łączy osobne kolumny cech w jedną kolumnę typu wektor, wymaganą przez estymatory MLlib.',
+  },
+  {
+    question: 'Dlaczego `StringIndexer` sam w sobie (bez `OneHotEncoder`) może wprowadzić model w błąd?',
+    options: [
+      'Bo StringIndexer nie działa z danymi tekstowymi',
+      'Bo przypisuje kategoriom kolejne liczby całkowite, co model liniowy może błędnie zinterpretować jako naturalny porządek/odległość między kategoriami',
+      'Bo zawsze zwraca błąd dla więcej niż 2 kategorii',
+      'Bo wymaga wcześniejszego partycjonowania danych',
+    ],
+    correctIndex: 1,
+    explanation: 'StringIndexer koduje kategorie jako indeksy (0, 1, 2, ...) — bez OneHotEncoder model mógłby błędnie założyć, że np. kategoria "2" jest "większa" niż "1", co dla kategorii nominalnych jest fałszywym założeniem.',
+  },
+  {
+    question: 'Jaki jest wzorzec `fit()`/`transform()` kontra `fit()`/`predict()` w porównaniu scikit-learn vs MLlib?',
+    options: [
+      'scikit-learn używa `fit()`/`predict()`, a Spark MLlib `fit()`/`transform()` dla całego Pipeline',
+      'Oba używają identycznie `fit()`/`predict()`',
+      'MLlib w ogóle nie posiada metody `fit()`',
+      'scikit-learn używa `transform()`, a MLlib `predict()`',
+    ],
+    correctIndex: 0,
+    explanation: 'W Spark ML, zarówno przetwarzanie danych (Transformer), jak i predykcja modelu, odbywają się przez `transform()` po wcześniejszym `fit()` całego Pipeline.',
+  },
+  {
+    question: 'Co się stanie, jeśli wywołasz `pipeline.fit()` na całym zbiorze danych zamiast tylko na zbiorze treningowym?',
+    options: [
+      'Nic się nie zmieni, wynik będzie identyczny',
+      'Dojdzie do data leakage — model/transformacje "zobaczą" dane testowe podczas treningu, co zawyży wyniki ewaluacji',
+      'Spark automatycznie wykryje i zablokuje tę operację',
+      'Pipeline zwróci błąd krytyczny',
+    ],
+    correctIndex: 1,
+    explanation: 'Podobnie jak w scikit-learn, `fit()` powinien być wywołany wyłącznie na danych treningowych, by uniknąć "podglądania" danych testowych.',
+  },
+  {
+    question: 'Do czego służy `BinaryClassificationEvaluator` z metryką `areaUnderROC`?',
+    options: [
+      'Do liczenia dokładności (accuracy) modelu',
+      'Do oceny jakości rankingu modelu klasyfikacji binarnej poprzez pole pod krzywą ROC (AUC)',
+      'Do trenowania modelu regresji',
+      'Do wizualizacji danych wejściowych',
+    ],
+    correctIndex: 1,
+    explanation: '`BinaryClassificationEvaluator` z `metricName="areaUnderROC"` oblicza AUC-ROC — standardową metrykę jakości klasyfikacji binarnej w MLlib.',
+  },
+  {
+    question: 'Czym jest `ParamGridBuilder` w kontekście tuningu hiperparametrów?',
+    options: [
+      'Narzędziem do wizualizacji danych w siatce (grid)',
+      'Narzędziem budującym siatkę wszystkich kombinacji hiperparametrów do przetestowania',
+      'Komponentem odpowiedzialnym za partycjonowanie danych',
+      'Synonimem `VectorAssembler`',
+    ],
+    correctIndex: 1,
+    explanation: '`ParamGridBuilder().addGrid(...).addGrid(...).build()` generuje listę wszystkich kombinacji podanych wartości hiperparametrów.',
+  },
+  {
+    question: 'Czym różni się `CrossValidator` od `TrainValidationSplit`?',
+    options: [
+      '`CrossValidator` wykonuje k-fold cross-validation (więcej treningów, solidniejsza ocena), `TrainValidationSplit` używa jednego podziału (szybszy, mniej solidny)',
+      'To dokładnie ten sam mechanizm pod różnymi nazwami',
+      '`TrainValidationSplit` zawsze daje lepsze wyniki',
+      '`CrossValidator` nie obsługuje `ParamGridBuilder`',
+    ],
+    correctIndex: 0,
+    explanation: '`CrossValidator` trenuje `numFolds × len(grid)` razy (solidniej, ale wolniej), a `TrainValidationSplit` tylko `len(grid)` razy (szybciej, przy mniejszej solidności oceny).',
+  },
+  {
+    question: 'Kiedy `TrainValidationSplit` jest rozsądnym kompromisem zamiast `CrossValidator`?',
+    options: [
+      'Nigdy, zawsze lepszy jest CrossValidator',
+      'Przy bardzo dużych zbiorach danych, gdzie liczba treningów w k-fold byłaby zbyt kosztowna obliczeniowo',
+      'Tylko przy modelach regresji liniowej',
+      'Tylko gdy dane mieszczą się w pamięci jednej maszyny',
+    ],
+    correctIndex: 1,
+    explanation: 'Przy ogromnych danych i dużej siatce hiperparametrów, k-fold cross-validation może być zbyt kosztowne — pojedynczy podział (TrainValidationSplit) daje szybszą, choć mniej solidną, ocenę.',
+  },
+  {
+    question: 'Jak w Spark MLlib radzi się sobie z class imbalance poprzez ważenie przykładów?',
+    options: [
+      'Przez parametr `weightCol` przekazywany do modelu (np. RandomForestClassifier)',
+      'Przez automatyczne usuwanie klasy mniejszościowej',
+      'Przez zmianę formatu danych na JSON',
+      'Przez zwiększenie liczby partycji RDD',
+    ],
+    correctIndex: 0,
+    explanation: '`weightCol` pozwala przypisać większą wagę przykładom klasy mniejszościowej podczas treningu, bez konieczności fizycznego duplikowania/usuwania danych.',
+  },
+  {
+    question: 'Dlaczego AUC-PR jest lepszą metryką niż AUC-ROC przy mocno niezbalansowanych danych (np. 1-2% fraudów)?',
+    options: [
+      'Bo AUC-ROC w ogóle nie istnieje dla danych niezbalansowanych',
+      'Bo AUC-ROC uwzględnia True Negatives, których jest bardzo dużo, co "maskuje" słabą jakość wykrywania rzadkiej klasy pozytywnej, podczas gdy AUC-PR skupia się na precision/recall klasy pozytywnej',
+      'Bo AUC-PR jest zawsze wyższe liczbowo niż AUC-ROC',
+      'Bo AUC-PR nie wymaga podziału train/test',
+    ],
+    correctIndex: 1,
+    explanation: 'Przy rzadkiej klasie pozytywnej, dominacja True Negatives sprawia, że AUC-ROC może wyglądać świetnie mimo słabej jakości modelu na klasie mniejszościowej — AUC-PR lepiej to ujawnia.',
+  },
+  {
+    question: 'Czym charakteryzuje się `GBTClassifier` (Gradient-Boosted Trees) w MLlib?',
+    options: [
+      'Trenuje drzewa równolegle i niezależnie od siebie',
+      'Trenuje drzewa sekwencyjnie, każde kolejne poprawiające błędy poprzednich, ale obsługuje wyłącznie klasyfikację binarną w MLlib',
+      'Nie wymaga żadnych hiperparametrów',
+      'Jest dostępny wyłącznie w scikit-learn, nie w Spark MLlib',
+    ],
+    correctIndex: 1,
+    explanation: 'GBTClassifier w Spark MLlib trenuje drzewa sekwencyjnie (jak klasyczny gradient boosting), ale ogranicza się do klasyfikacji binarnej.',
+  },
+  {
+    question: 'Jak zapisujemy wytrenowany `PipelineModel` na dysku, by móc go później wczytać?',
+    code: 'best_model.write().overwrite().save("/tmp/model")\n# ...\nloaded = PipelineModel.load("/tmp/model")',
+    options: [
+      'Przez standardowy moduł Pythona `pickle`',
+      'Przez `.write().overwrite().save(path)` i odczyt `PipelineModel.load(path)`',
+      'Model MLlib nie może być zapisany na dysku',
+      'Tylko poprzez eksport do pliku CSV',
+    ],
+    correctIndex: 1,
+    explanation: 'Spark ML udostępnia własny mechanizm serializacji modeli (`write().save()` / `PipelineModel.load()`), niezależny od standardowego `pickle`.',
+  },
+  {
+    question: 'Co się stanie z czasem trenowania, jeśli podwoisz rozmiar siatki `ParamGridBuilder` przy `numFolds=5` w `CrossValidator`?',
+    options: [
+      'Czas trenowania pozostanie dokładnie taki sam',
+      'Czas trenowania w przybliżeniu podwoi się (liniowo więcej kombinacji × tyle samo foldów)',
+      'Czas trenowania zmniejszy się o połowę',
+      'CrossValidator automatycznie ograniczy liczbę kombinacji',
+    ],
+    correctIndex: 1,
+    explanation: 'Łączna liczba treningów to `numFolds × len(grid)` — podwojenie rozmiaru siatki przy stałym `numFolds` w przybliżeniu podwaja całkowity czas.',
+  },
+  {
+    question: 'Dlaczego brak `.cache()` na `train_df` przed `CrossValidator.fit()` jest częstą pułapką wydajnościową?',
+    options: [
+      'Bo CrossValidator wielokrotnie odczytuje/przelicza te same dane treningowe dla każdego folda i każdej kombinacji hiperparametrów bez cache',
+      'Bo brak cache powoduje błąd kompilacji',
+      'Bo cache jest wymagany wyłącznie dla danych testowych',
+      'Bo CrossValidator nie działa bez jawnego cache',
+    ],
+    correctIndex: 0,
+    explanation: 'Bez `.cache()`, Spark może przeliczać cały lineage danych treningowych od nowa dla każdej kombinacji foldów × hiperparametrów, co znacząco wydłuża czas działania.',
+  },
+  {
+    question: 'Jaka jest różnica między `rawPrediction` a `prediction` w kontekście `BinaryClassificationEvaluator`?',
+    options: [
+      '`rawPrediction` to surowe wyniki modelu (np. logity/prawdopodobieństwa) używane do liczenia AUC, a `prediction` to już ostateczna, przypisana etykieta klasy',
+      'To dokładnie ta sama kolumna, tylko inaczej nazwana',
+      '`prediction` jest wymagane do liczenia AUC, a `rawPrediction` nie ma znaczenia',
+      'Dotyczy to wyłącznie modeli regresji',
+    ],
+    correctIndex: 0,
+    explanation: 'AUC bazuje na uporządkowaniu wyników (rawPrediction/probability), a nie na twardej etykiecie klasy (prediction) — mylenie tych kolumn to typowa pułapka konfiguracji evaluatora.',
+  },
+  {
+    question: 'Dlaczego trzymanie się sztywnego progu decyzyjnego 0.5 bez analizy bywa błędem przy wykrywaniu fraudów?',
+    options: [
+      'Bo próg 0.5 jest zawsze optymalny niezależnie od kosztów FP/FN',
+      'Bo przy mocno niezbalansowanych danych i różnych kosztach fałszywych alarmów/przeoczeń, optymalny próg decyzyjny może być zupełnie inny niż 0.5',
+      'Bo MLlib nie obsługuje progów różnych od 0.5',
+      'Bo próg decyzyjny dotyczy wyłącznie regresji',
+    ],
+    correctIndex: 1,
+    explanation: 'Próg 0.5 jest tylko domyślnym wyborem — w praktyce biznesowej (np. fraud detection) warto dostroić go do realnych kosztów fałszywych alarmów i przeoczeń.',
+  },
+  {
+    question: 'Co robi `OneHotEncoder` w Spark MLlib w porównaniu do `StringIndexer`?',
+    options: [
+      'Zamienia zindeksowane kategorie (liczby) na rzadkie wektory binarne, eliminując fałszywy porządek liczbowy',
+      'Zastępuje `StringIndexer` całkowicie, więc oba nigdy nie są używane razem',
+      'Tylko sortuje dane alfabetycznie',
+      'Działa wyłącznie na kolumnach numerycznych',
+    ],
+    correctIndex: 0,
+    explanation: 'Typowy przepływ to `StringIndexer` → `OneHotEncoder`: najpierw zamiana tekstu na indeksy, potem indeksów na wektory rzadkie bez sztucznej kolejności.',
+  },
+  {
+    question: 'Jaka jest typowa pułapka przy korzystaniu z modeli liniowych (np. LogisticRegression) w MLlib bez `VectorAssembler`?',
+    options: [
+      'Model automatycznie poradzi sobie z osobnymi kolumnami cech',
+      'MLlib nie przyjmuje "gołych" osobnych kolumn — wymaga jednej kolumny typu wektor (`features`), więc brak VectorAssembler spowoduje błąd',
+      'VectorAssembler jest opcjonalny i nie wpływa na wynik',
+      'Dotyczy to wyłącznie modeli klasyfikacji binarnej',
+    ],
+    correctIndex: 1,
+    explanation: 'Modele MLlib oczekują jednej kolumny wektorowej (`featuresCol`) — bez `VectorAssembler` łączącego cechy w wektor, trening/predykcja zakończą się błędem.',
+  },
+  {
+    question: 'Jakie korzyści daje `undersampling` jako alternatywa dla `weightCol` przy class imbalance?',
+    options: [
+      'Zmniejsza liczbę przykładów klasy większościowej, balansując zbiór bez modyfikowania wag modelu, kosztem utraty części danych',
+      'Automatycznie generuje nowe, syntetyczne przykłady klasy mniejszościowej',
+      'Jest dostępny wyłącznie w scikit-learn, nie w Spark',
+      'Zawsze daje lepsze wyniki niż ważenie klas',
+    ],
+    correctIndex: 0,
+    explanation: 'Undersampling redukuje liczność klasy większościowej, by zbliżyć proporcje klas — prostsze niż ważenie, ale kosztem utraty części danych większościowych.',
+  },
+  {
+    question: 'Dlaczego zbyt agresywne wagi klas (`weightCol`) mogą prowadzić do problemów?',
+    options: [
+      'Mogą spowodować nadmierną liczbę fałszywych alarmów (model "przewraża się" ku wykrywaniu klasy mniejszościowej kosztem precyzji)',
+      'Zawsze poprawiają wszystkie metryki jednocześnie',
+      'Nie mają żadnego wpływu na wynik modelu',
+      'Działają wyłącznie z GBTClassifier',
+    ],
+    correctIndex: 0,
+    explanation: 'Zbyt duże wagi klasy mniejszościowej mogą sprawić, że model zacznie zbyt często klasyfikować przypadki jako pozytywne, zwiększając liczbę fałszywych alarmów (spadek precision).',
+  },
+  {
+    question: 'Czym jest Estimator w architekturze Spark ML (`pyspark.ml`)?',
+    options: [
+      'Obiektem posiadającym metodę `fit()`, która tworzy wytrenowany Transformer (np. `LogisticRegression.fit()` zwraca model)',
+      'Synonimem `VectorAssembler`',
+      'Formatem pliku do zapisu danych',
+      'Komponentem odpowiedzialnym wyłącznie za partycjonowanie',
+    ],
+    correctIndex: 0,
+    explanation: 'W Spark ML, Estimator (np. `LogisticRegression`) implementuje `fit()` i zwraca wytrenowany Transformer (model), który z kolei implementuje `transform()`.',
+  },
+  {
+    question: 'Dlaczego `Pipeline` w Spark ML jest wygodny przy łączeniu wielu etapów (StringIndexer, OneHotEncoder, VectorAssembler, model)?',
+    options: [
+      'Bo pozwala wywołać jeden `fit()`/`transform()` na całym łańcuchu etapów naraz, zamiast ręcznie zarządzać każdym z osobna',
+      'Bo automatycznie usuwa potrzebę `VectorAssembler`',
+      'Bo działa wyłącznie z jednym etapem na raz',
+      'Bo Pipeline zastępuje SparkSession',
+    ],
+    correctIndex: 0,
+    explanation: 'Pipeline porządkuje sekwencję transformacji i model w jeden spójny obiekt, znacznie upraszczając trening i późniejsze zastosowanie identycznych kroków na nowych danych.',
+  },
+  {
+    question: 'Jaka jest typowa struktura danych wejściowych oczekiwana przez modele MLlib po przejściu przez `VectorAssembler`?',
+    options: [
+      'Osobne kolumny dla każdej cechy, bez zmian',
+      'Jedna kolumna typu wektor (np. `features`), łącząca wszystkie cechy wejściowe',
+      'Plik tekstowy w formacie JSON',
+      'Zestaw osobnych DataFrame, po jednym na cechę',
+    ],
+    correctIndex: 1,
+    explanation: 'MLlib oczekuje jednej, gęstej lub rzadkiej kolumny wektorowej (`featuresCol`) zawierającej wszystkie cechy razem — stąd kluczowa rola `VectorAssembler`.',
+  },
+  {
+    question: 'Dlaczego porównanie `parallelism` w `CrossValidator` wiąże się z kompromisem między szybkością a zużyciem zasobów?',
+    options: [
+      'Wyższy `parallelism` trenuje więcej modeli jednocześnie (szybciej), ale wymaga więcej zasobów klastra naraz',
+      '`parallelism` nie ma żadnego wpływu na czas ani zasoby',
+      'Wyższy `parallelism` zawsze zmniejsza liczbę potrzebnych zasobów',
+      '`parallelism` dotyczy wyłącznie zapisu modelu na dysk',
+    ],
+    correctIndex: 0,
+    explanation: 'Zwiększenie `parallelism` pozwala trenować więcej kombinacji równolegle (szybciej), kosztem jednoczesnego zużycia większej ilości zasobów obliczeniowych klastra.',
+  },
+];

@@ -25,6 +25,17 @@ Po tym wykładzie będziesz wiedzieć:
 
 ---
 
+<details>
+<summary>📝 **Skrót wykładu (TL;DR)** — kliknij, by rozwinąć</summary>
+
+- Spark jest szybszy niż MapReduce, bo przetwarza dane **w pamięci (RAM)**, nie na dysku między każdym krokiem
+- **Architektura**: Driver (planuje), Cluster Manager (przydziela zasoby), Executory (wykonują zadania)
+- **RDD** = Resilient (odporny dzięki lineage), Distributed (rozproszony), Dataset (zbiór danych)
+- **Transformacje** (`map`, `filter`, `flatMap`, `reduceByKey`) są **leniwe** (lazy) — nic się nie dzieje do wywołania **akcji** (`collect`, `count`, `take`)
+- **Pułapki**: `collect()` na ogromnym RDD (OOM), `groupByKey` zamiast `reduceByKey` (niepotrzebny transfer danych), brak `.cache()` przy wielokrotnym użyciu tego samego RDD
+
+</details>
+
 ## ✅ Materiały do wykładu
 
 <Admonition type="tip" title="Slajdy do pobrania">
@@ -32,6 +43,8 @@ Po tym wykładzie będziesz wiedzieć:
 </Admonition>
 
 📄 **[Otwórz slajdy PDF](pathname:///stacjonarne/pdfs/wyk04-apache-spark-rdd-podstawy.pdf)**
+
+🧾 **[Ściąga jednostronicowa (PDF)](pathname:///stacjonarne/pdfs/wyk04-sciaga.pdf)** &nbsp;|&nbsp; 🧠 **[Rozwiąż quiz (25 pytań)](/stacjonarne/materialy/quiz/04-apache-spark-rdd-podstawy)**
 
 ---
 

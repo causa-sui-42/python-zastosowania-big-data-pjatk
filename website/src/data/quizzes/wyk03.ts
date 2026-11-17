@@ -1,0 +1,235 @@
+import type { QuizQuestion } from '@site/src/components/Quiz';
+
+// Wykład 3: Big Data i ekosystem Hadoop
+export const QUIZ_WYK03: QuizQuestion[] = [
+  {
+    question: 'Które z poniższych pojęć NIE jest częścią modelu 5V Big Data?',
+    options: ['Volume', 'Velocity', 'Validation', 'Veracity'],
+    correctIndex: 2,
+    explanation: 'Model 5V to Volume, Velocity, Variety, Veracity, Value — "Validation" do niego nie należy.',
+  },
+  {
+    question: 'Co opisuje "Veracity" (wiarygodność) w modelu 5V?',
+    options: [
+      'Szybkość napływu danych',
+      'To, że dane bywają błędne, niekompletne lub zaszumione',
+      'Ilość danych mierzoną w petabajtach',
+      'Zróżnicowanie formatów danych',
+    ],
+    correctIndex: 1,
+    explanation: 'Veracity odnosi się do jakości i wiarygodności danych — braki, duplikaty, błędy pomiarowe, dane generowane przez boty itp.',
+  },
+  {
+    question: 'Czy sam duży rozmiar danych automatycznie oznacza "problem Big Data" wymagający klastra?',
+    options: [
+      'Tak, zawsze — rozmiar jest jedynym kryterium',
+      'Niekoniecznie — dopiero kombinacja kilku V (np. duży wolumen + wysoka prędkość) uzasadnia architekturę rozproszoną',
+      'Nie, rozmiar danych nigdy nie ma znaczenia',
+      'Tak, ale tylko jeśli dane są w formacie CSV',
+    ],
+    correctIndex: 1,
+    explanation: 'Baza 50 GB rosnąca wolno i w stabilnym formacie może świetnie działać na jednej maszynie — dopiero połączenie kilku V uzasadnia sięgnięcie po Hadoop/Spark.',
+  },
+  {
+    question: 'Jaką rolę pełni NameNode w HDFS?',
+    options: [
+      'Fizycznie przechowuje bloki danych',
+      'Przechowuje metadane — wie, gdzie leżą bloki, ale sam ich nie przechowuje',
+      'Jest kopią zapasową całego klastra',
+      'Zarządza wyłącznie zadaniami MapReduce',
+    ],
+    correctIndex: 1,
+    explanation: 'NameNode to "mózg" HDFS — zna lokalizacje bloków na DataNode\'ach, ale same dane fizycznie przechowują DataNode.',
+  },
+  {
+    question: 'Jaki jest domyślny replication factor bloków w HDFS?',
+    options: ['1', '2', '3', '5'],
+    correctIndex: 2,
+    explanation: 'Domyślnie każdy blok HDFS jest replikowany na 3 różnych maszynach, co zapewnia odporność na awarie pojedynczych węzłów.',
+  },
+  {
+    question: 'Czy Secondary NameNode w HDFS pełni rolę "backupu awaryjnego" na wypadek awarii NameNode?',
+    options: [
+      'Tak, to jego jedyna funkcja',
+      'Nie — okresowo tworzy migawki metadanych, ale to NIE jest pełnoprawny mechanizm failover',
+      'Tak, automatycznie przejmuje rolę NameNode natychmiast po awarii',
+      'Secondary NameNode przechowuje wszystkie dane użytkownika',
+    ],
+    correctIndex: 1,
+    explanation: 'To częsta pomyłka — Secondary NameNode pomaga zarządzać metadanymi (checkpointing), ale nie jest automatycznym mechanizmem failover.',
+  },
+  {
+    question: 'Co się dzieje, gdy jeden DataNode przestaje wysyłać "heartbeat" do NameNode?',
+    options: [
+      'Cały klaster natychmiast się zatrzymuje',
+      'NameNode zleca utworzenie nowej kopii brakujących bloków z pozostałych replik — klaster "sam się naprawia"',
+      'Dane na tym DataNode są bezpowrotnie tracone bez możliwości odzyskania',
+      'NameNode ignoruje brak heartbeat',
+    ],
+    correctIndex: 1,
+    explanation: 'Dzięki replikacji (domyślnie 3 kopie) i monitorowaniu heartbeat, HDFS automatycznie odtwarza brakujące bloki na innych węzłach.',
+  },
+  {
+    question: 'Jaka jest kolejność trzech faz paradygmatu MapReduce?',
+    options: ['Reduce → Map → Shuffle', 'Map → Shuffle → Reduce', 'Shuffle → Map → Reduce', 'Map → Reduce → Shuffle'],
+    correctIndex: 1,
+    explanation: 'Najpierw Map (przetwarzanie lokalne, produkcja par klucz-wartość), potem Shuffle (grupowanie po kluczu), na końcu Reduce (agregacja wartości dla każdego klucza).',
+  },
+  {
+    question: 'Co zwróci poniższa symulacja MapReduce word count dla `dokumenty = ["a b a", "b c"]`?',
+    code: 'mapped = []\nfor d in dokumenty:\n    mapped.extend((w, 1) for w in d.lower().split())\ngrouped = {}\nfor w, v in mapped:\n    grouped.setdefault(w, []).append(v)\nwynik = {w: sum(v) for w, v in grouped.items()}',
+    options: ["{'a': 1, 'b': 1, 'c': 1}", "{'a': 2, 'b': 2, 'c': 1}", "{'a': 3, 'b': 2, 'c': 1}", 'Funkcja zwróci błąd'],
+    correctIndex: 1,
+    explanation: 'Faza map produkuje pary (słowo, 1) dla każdego wystąpienia; shuffle grupuje po kluczu; reduce sumuje — "a" występuje 2×, "b" 2×, "c" 1×.',
+  },
+  {
+    question: 'Dlaczego klasyczny Hadoop MapReduce jest wolniejszy niż Apache Spark przy zadaniach iteracyjnych?',
+    options: [
+      'Bo MapReduce zapisuje wyniki pośrednie na dysk po każdej fazie, zamiast trzymać je w RAM',
+      'Bo MapReduce nie obsługuje klastrów',
+      'Bo Spark używa wyłącznie jednej maszyny',
+      'Bo MapReduce nie obsługuje liczb zmiennoprzecinkowych',
+    ],
+    correctIndex: 0,
+    explanation: 'Zapis na dysk po każdej fazie jest bezpieczny, ale kosztowny — szczególnie przy algorytmach iteracyjnych (ML), gdzie te same dane są przetwarzane wielokrotnie.',
+  },
+  {
+    question: 'Jaką rolę pełni ResourceManager w YARN?',
+    options: [
+      'Lokalnie monitoruje zasoby jednej maszyny',
+      'Globalnie zarządza zasobami (CPU, RAM) całego klastra',
+      'Przechowuje dane użytkownika na dysku',
+      'Jest odpowiednikiem NameNode z HDFS',
+    ],
+    correctIndex: 1,
+    explanation: 'ResourceManager to centralny komponent YARN zarządzający przydziałem zasobów w całym klastrze; NodeManager działa lokalnie na każdej maszynie.',
+  },
+  {
+    question: 'Dlaczego wprowadzenie YARN "otworzyło drogę" dla Apache Spark?',
+    options: [
+      'Bo YARN zastąpił HDFS',
+      'Bo YARN rozdzielił zarządzanie zasobami od konkretnego frameworka (MapReduce), umożliwiając uruchamianie innych frameworków, w tym Sparka, na tym samym klastrze',
+      'Bo YARN jest szybszy niż Spark',
+      'Bo YARN eliminuje potrzebę replikacji danych',
+    ],
+    correctIndex: 1,
+    explanation: 'Przed YARN zarządzanie zasobami było wbudowane w MapReduce. YARN oddzielił tę funkcję, pozwalając dowolnemu frameworkowi (Spark, Tez, itd.) korzystać z tej samej infrastruktury klastra.',
+  },
+  {
+    question: 'Co to jest ApplicationMaster w architekturze YARN?',
+    options: [
+      'Globalny zarządca zasobów całego klastra',
+      'Jeden na każde uruchomione zadanie — negocjuje zasoby i pilnuje wykonania tego konkretnego zadania',
+      'Replika bloków HDFS',
+      'Interfejs SQL do danych w HDFS',
+    ],
+    correctIndex: 1,
+    explanation: 'ApplicationMaster to instancja powstająca per uruchomione zadanie, odpowiedzialna za negocjację zasobów z ResourceManager i monitorowanie wykonania.',
+  },
+  {
+    question: 'Do czego służy Apache Hive w ekosystemie Hadoop?',
+    options: [
+      'Jest rozproszoną bazą NoSQL działającą na HDFS',
+      'Zapewnia SQL-owy interfejs do danych przechowywanych w HDFS',
+      'Jest narzędziem do importu/eksportu danych z baz SQL',
+      'Jest systemem planowania workflowów typu "cron"',
+    ],
+    correctIndex: 1,
+    explanation: 'Hive tłumaczy zapytania SQL-podobne (HiveQL) na zadania wykonywane nad danymi w HDFS, dając analitykom znajomy interfejs SQL.',
+  },
+  {
+    question: 'Które narzędzie ekosystemu Hadoop służy do planowania i orkiestracji workflowów (jak "cron" dla Big Data)?',
+    options: ['HBase', 'Sqoop', 'Oozie', 'Hive'],
+    correctIndex: 2,
+    explanation: 'Oozie pozwala definiować i harmonogramować złożone workflowy (np. łańcuchy zadań MapReduce/Hive) w ekosystemie Hadoop.',
+  },
+  {
+    question: 'Do czego służy Sqoop?',
+    options: [
+      'Do importu/eksportu danych między HDFS a tradycyjnymi bazami SQL',
+      'Do przechowywania danych w formacie kolumnowym',
+      'Do wizualizacji danych w dashboardach',
+      'Do trenowania modeli ML na HDFS',
+    ],
+    correctIndex: 0,
+    explanation: 'Sqoop umożliwia transfer danych w obie strony między relacyjnymi bazami danych a HDFS.',
+  },
+  {
+    question: 'Czym jest "data skew" w kontekście MapReduce/Spark?',
+    options: [
+      'Błędem w formacie danych wejściowych',
+      'Sytuacją, w której jeden klucz ma znacznie więcej wartości niż pozostałe, powodując nierównomierne obciążenie jednego workera',
+      'Metodą kompresji danych',
+      'Synonimem replikacji bloków',
+    ],
+    correctIndex: 1,
+    explanation: 'Gdy jeden klucz (np. bardzo popularne słowo) dominuje liczebnie, jeden reducer/executor musi przetworzyć nieproporcjonalnie dużo danych, co staje się wąskim gardłem.',
+  },
+  {
+    question: 'Dlaczego replikacja bloków HDFS na różnych szafach serwerowych (racks), a nie tylko różnych dyskach, jest istotna?',
+    options: [
+      'Bo zwiększa to szybkość zapisu',
+      'Bo chroni przed awarią całej szafy (np. utratą zasilania/sieci), a nie tylko pojedynczego dysku czy serwera',
+      'Bo HDFS wymaga minimum dwóch szaf do działania',
+      'Bo zmniejsza to zużycie miejsca na dysku',
+    ],
+    correctIndex: 1,
+    explanation: 'Świadomość topologii racków (rack awareness) pozwala HDFS rozkładać repliki tak, by awaria całej szafy (zasilanie, switch sieciowy) nie spowodowała utraty wszystkich kopii bloku.',
+  },
+  {
+    question: 'Jaki jest domyślny rozmiar bloku danych w HDFS?',
+    options: ['4 KB', '64 KB', '128 MB', '10 GB'],
+    correctIndex: 2,
+    explanation: 'Domyślny rozmiar bloku HDFS to 128 MB (we wcześniejszych wersjach 64 MB) — duże bloki minimalizują narzut metadanych przy ogromnych wolumenach danych.',
+  },
+  {
+    question: 'HBase w ekosystemie Hadoop to:',
+    options: [
+      'Silnik SQL podobny do Hive',
+      'Rozproszona, kolumnowa baza danych NoSQL działająca na HDFS',
+      'Narzędzie do harmonogramowania zadań',
+      'Format plików konkurencyjny wobec Parquet',
+    ],
+    correctIndex: 1,
+    explanation: 'HBase to kolumnowa baza NoSQL budowana na HDFS, przeznaczona do szybkiego, losowego odczytu/zapisu pojedynczych rekordów (czego HDFS sam w sobie nie zapewnia dobrze).',
+  },
+  {
+    question: 'Dlaczego model "jedna duża baza SQL na jednym serwerze" przestaje wystarczać przy prawdziwym Big Data?',
+    options: [
+      'Bo SQL nie obsługuje agregacji',
+      'Bo pojedynczy serwer ma ograniczoną pojemność RAM/dysku/CPU i nie skaluje się poziomo tak łatwo jak architektura rozproszona',
+      'Bo bazy SQL nie obsługują liczb',
+      'Bo SQL jest zbyt szybki dla dużych wolumenów',
+    ],
+    correctIndex: 1,
+    explanation: 'Pojedyncza maszyna ma twardy sufit zasobów (scale up); Big Data wymaga architektur rozproszonych (scale out) jak Hadoop, by przetwarzać dane przekraczające możliwości jednego serwera.',
+  },
+  {
+    question: 'Co oznacza, że zadanie MapReduce jest "odporne na awarie" dzięki architekturze Hadoop?',
+    options: [
+      'Zadanie nigdy się nie kończy błędem',
+      'Jeśli jeden węzeł padnie w trakcie obliczeń, framework automatycznie wznawia pracę na innym węźle z wykorzystaniem replik danych',
+      'Dane są przechowywane wyłącznie w pamięci RAM',
+      'Odporność na awarie dotyczy wyłącznie fazy reduce',
+    ],
+    correctIndex: 1,
+    explanation: 'Dzięki replikacji bloków i możliwości ponownego uruchomienia zadań na innych węzłach, Hadoop toleruje awarie pojedynczych maszyn bez utraty danych czy wyniku.',
+  },
+  {
+    question: 'Oryginalny paper opisujący MapReduce ("MapReduce: Simplified Data Processing on Large Clusters") pochodzi od:',
+    options: ['Apache Software Foundation', 'Dean i Ghemawat (Google, 2004)', 'Databricks', 'Facebooka'],
+    correctIndex: 1,
+    explanation: 'Paper Deana i Ghemawata z Google (2004) zapoczątkował model MapReduce, który następnie zaimplementowano jako open-source w projekcie Apache Hadoop.',
+  },
+  {
+    question: 'Firma ma bazę 50 GB rosnącą o 1 MB dziennie, zawsze w tym samym, czystym formacie CSV. Czy "na pewno" potrzebuje Hadoopa?',
+    options: [
+      'Tak, każda firma z danymi powinna używać Hadoopa',
+      'Niekoniecznie — mały, stabilny wolumen bez wysokiej prędkości/różnorodności może być wygodnie obsłużony na jednej maszynie (np. pandas/klasyczna baza SQL)',
+      'Tak, bo CSV zawsze wymaga klastra',
+      'Nie, ponieważ Hadoop nie obsługuje plików CSV',
+    ],
+    correctIndex: 1,
+    explanation: 'To właśnie przykład, gdzie żadne z 5V nie uzasadnia architektury rozproszonej — tradycyjne narzędzia (pandas, PostgreSQL) w zupełności wystarczą.',
+  },
+];

@@ -27,6 +27,18 @@ Po tym wykładzie będziesz wiedzieć:
 
 ---
 
+<details>
+<summary>📝 **Skrót wykładu (TL;DR)** — kliknij, by rozwinąć</summary>
+
+- **Populacja vs próba**; typy zmiennych: numeryczna (ciągła/dyskretna) i kategoryczna (nominalna/porządkowa)
+- **Tendencja centralna**: średnia (wrażliwa na outliery), mediana (odporna), moda
+- **Rozproszenie**: wariancja, odchylenie standardowe, kwantyle, IQR i reguła wykrywania outlierów (1.5×IQR)
+- **Rozkłady prawdopodobieństwa**: normalny, jednostajny, Poissona, wykładniczy; reguła 68-95-99.7 dla rozkładu normalnego
+- **Workflow EDA**: brakujące dane → rozkłady → korelacje → wizualizacja; pułapki: skośność, korelacja ≠ przyczynowość, kwartet Anscombe'a
+- **Wnioskowanie statystyczne**: przedział ufności, hipoteza zerowa, p-wartość — i jak NIE interpretować p-wartości błędnie
+
+</details>
+
 ## ✅ Materiały do wykładu
 
 <Admonition type="tip" title="Slajdy do pobrania">
@@ -34,6 +46,8 @@ Po tym wykładzie będziesz wiedzieć:
 </Admonition>
 
 📄 **[Otwórz slajdy PDF](pathname:///stacjonarne/pdfs/wyk01-statystyka-opisowa-eda.pdf)**
+
+🧾 **[Ściąga jednostronicowa (PDF)](pathname:///stacjonarne/pdfs/wyk01-sciaga.pdf)** &nbsp;|&nbsp; 🧠 **[Rozwiąż quiz (25 pytań)](/stacjonarne/materialy/quiz/01-statystyka-opisowa-eda)**
 
 ---
 

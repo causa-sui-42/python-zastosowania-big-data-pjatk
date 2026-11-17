@@ -34,6 +34,19 @@ Po tym wykładzie będziesz wiedzieć:
 
 ---
 
+<details>
+<summary>📝 **Skrót wykładu (TL;DR)** — kliknij, by rozwinąć</summary>
+
+- **Streaming** (opóźnienie ms–s) vs **batch** (opóźnienie minuty–godziny); streaming jest zwykle bardziej złożony
+- **Kafka**: topic (kanał logiczny), partition (równoległość), producer (wysyła), consumer (odbiera), broker (serwer)
+- **Structured Streaming**: model **unbounded table** — ten sam DataFrame API co w batch, tylko `readStream`/`writeStream`
+- **Windowed aggregations**: tumbling (rozłączne okna) vs sliding (nakładające się okna)
+- **Watermarking** (`withWatermark`) — pozwala obsłużyć spóźnione dane i zwolnić pamięć stanu agregacji
+- **Output modes**: `append` (tylko finalne wiersze, wymaga watermarku przy agregacjach), `complete` (cała tabela za każdym razem), `update` (tylko zmienione wiersze)
+- Pułapki: brak `checkpointLocation` (utrata stanu po restarcie), brak watermarku przy ciągłych agregacjach (rosnące zużycie pamięci)
+
+</details>
+
 ## ✅ Materiały do wykładu
 
 <Admonition type="tip" title="Slajdy do pobrania">
@@ -41,6 +54,8 @@ Po tym wykładzie będziesz wiedzieć:
 </Admonition>
 
 📄 **[Otwórz slajdy PDF](pathname:///stacjonarne/pdfs/wyk10-streaming-structured-kafka.pdf)**
+
+🧾 **[Ściąga jednostronicowa (PDF)](pathname:///stacjonarne/pdfs/wyk10-sciaga.pdf)** &nbsp;|&nbsp; 🧠 **[Rozwiąż quiz (25 pytań)](/stacjonarne/materialy/quiz/10-streaming-structured-kafka)**
 
 ---
 

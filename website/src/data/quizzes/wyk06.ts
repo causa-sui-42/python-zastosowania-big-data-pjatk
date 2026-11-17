@@ -1,0 +1,275 @@
+import type { QuizQuestion } from '@site/src/components/Quiz';
+
+// Wykład 6: Przygotowanie danych do ML — Feature Engineering
+export const QUIZ_WYK06: QuizQuestion[] = [
+  {
+    question: 'Gdzie w ML workflow mieści się feature engineering?',
+    options: [
+      'Przed EDA, zanim poznamy dane',
+      'Po EDA i czyszczeniu danych, a przed trenowaniem modelu',
+      'Po trenowaniu modelu, jako etap ewaluacji',
+      'Feature engineering nie jest częścią standardowego workflow',
+    ],
+    correctIndex: 1,
+    explanation: 'Typowy workflow to: surowe dane → EDA → czyszczenie → feature engineering → train/test split → trenowanie → ewaluacja.',
+  },
+  {
+    question: 'Dlaczego feature engineering bywa nazywane "najważniejszym krokiem" w ML?',
+    options: [
+      'Bo zawsze zajmuje najmniej czasu',
+      'Bo dobre cechy potrafią przynieść większy wzrost jakości modelu niż sama zmiana algorytmu',
+      'Bo zastępuje potrzebę ewaluacji modelu',
+      'Bo dotyczy wyłącznie danych tekstowych',
+    ],
+    correctIndex: 1,
+    explanation: 'Nawet najlepszy algorytm nie poradzi sobie dobrze ze słabo przygotowanymi cechami — jakość danych wejściowych często ma większe znaczenie niż wybór modelu.',
+  },
+  {
+    question: 'Którą strategię `SimpleImputer` zastosujesz do cechy numerycznej odpornej na outliery?',
+    options: ['strategy="mean"', 'strategy="median"', 'strategy="most_frequent"', 'strategy="constant"'],
+    correctIndex: 1,
+    explanation: 'Mediana jest odporna na wartości odstające, w przeciwieństwie do średniej, która może być przez nie silnie zniekształcona.',
+  },
+  {
+    question: 'Dlaczego dla cech kategorycznych zazwyczaj stosuje się `strategy="most_frequent"` w SimpleImputer?',
+    options: [
+      'Bo mediana nie ma sensu dla kategorii (brak naturalnego porządku liczbowego)',
+      'Bo most_frequent zawsze daje najlepszy model',
+      'Bo kategorie nigdy nie mają braków danych',
+      'Bo most_frequent jest szybsze obliczeniowo niż mediana',
+    ],
+    correctIndex: 0,
+    explanation: 'Mediana/średnia wymagają uporządkowania liczbowego; dla kategorii sensowną strategią imputacji jest użycie najczęściej występującej wartości.',
+  },
+  {
+    question: 'Dlaczego `rank` gracza (Brąz → Srebro → Złoto → ...) koduje się `OrdinalEncoder`, a nie `OneHotEncoder`?',
+    options: [
+      'Bo `rank` ma naturalny porządek, który OrdinalEncoder zachowuje jako liczby rosnące',
+      'Bo OrdinalEncoder jest szybszy obliczeniowo zawsze',
+      'Bo OneHotEncoder nie obsługuje więcej niż 2 kategorii',
+      'Bo rank zawsze jest liczbą, nie tekstem',
+    ],
+    correctIndex: 0,
+    explanation: 'OrdinalEncoder koduje kategorie jako liczby zachowujące ich naturalny porządek, co ma sens dla rang/poziomów — OneHotEncoder zignorowałby tę informację o kolejności.',
+  },
+  {
+    question: 'Dlaczego `country` (kraj gracza) koduje się `OneHotEncoder`, a nie `OrdinalEncoder`?',
+    options: [
+      'Bo kraje nie mają naturalnego porządku — OrdinalEncoder wprowadziłby sztuczną, fałszywą kolejność',
+      'Bo OneHotEncoder jest zawsze szybszy',
+      'Bo `country` nigdy nie jest tekstem',
+      'Bo OrdinalEncoder nie obsługuje więcej niż 10 kategorii',
+    ],
+    correctIndex: 0,
+    explanation: 'Kategorie nominalne (bez naturalnego porządku) powinny być kodowane OneHotEncoder, by model nie "nauczył się" fałszywej zależności liczbowej między kategoriami.',
+  },
+  {
+    question: 'Do czego głównie służy `LabelEncoder`?',
+    options: [
+      'Do kodowania wielu cech kategorycznych naraz w macierzy X',
+      'Głównie do kodowania zmiennej docelowej (targetu) y, np. klasy wygrana/przegrana',
+      'Do skalowania cech numerycznych',
+      'Do tworzenia cech wielomianowych',
+    ],
+    correctIndex: 1,
+    explanation: '`LabelEncoder` jest przeznaczony głównie do kodowania etykiety (y); dla cech wejściowych (X) zwykle lepszym wyborem jest OneHotEncoder lub OrdinalEncoder.',
+  },
+  {
+    question: 'Czym różni się `StandardScaler` od `MinMaxScaler`?',
+    options: [
+      '`StandardScaler` standaryzuje do średniej 0 i odchylenia standardowego 1; `MinMaxScaler` skaluje wartości do zakresu [0, 1]',
+      'To dokładnie ta sama transformacja pod różnymi nazwami',
+      '`MinMaxScaler` działa tylko na danych kategorycznych',
+      '`StandardScaler` zawsze daje wartości dodatnie',
+    ],
+    correctIndex: 0,
+    explanation: 'StandardScaler centruje i skaluje dane względem odchylenia standardowego, a MinMaxScaler liniowo przeskalowuje dane do ustalonego przedziału (domyślnie [0,1]).',
+  },
+  {
+    question: 'Jakim przykładem "ratio feature" (cechy jako stosunku) jest `kda_per_hour = kda / hours_per_week`?',
+    options: [
+      'Binningu wartości ciągłej na kategorie',
+      'Nowej cechy łączącej dwie istniejące cechy w jeden, bardziej informacyjny wskaźnik',
+      'Kodowania zmiennej kategorycznej',
+      'Imputacji braków danych',
+    ],
+    correctIndex: 1,
+    explanation: 'Cechy typu "ratio" łączą dwie zmienne (np. wynik na godzinę gry) w jeden, często bardziej informacyjny wskaźnik niż każda z osobna.',
+  },
+  {
+    question: 'Do czego służy `pd.cut()` w kontekście feature engineering?',
+    options: [
+      'Do usuwania duplikatów',
+      'Do binningu — dzielenia zmiennej ciągłej na kategorie/przedziały',
+      'Do łączenia dwóch DataFrame',
+      'Do liczenia korelacji',
+    ],
+    correctIndex: 1,
+    explanation: '`pd.cut()` dzieli wartości ciągłe na dyskretne przedziały (koszyki), np. godziny gry na "casual/regular/hardcore".',
+  },
+  {
+    question: 'Co robi `PolynomialFeatures(degree=2)` ze scikit-learn?',
+    options: [
+      'Usuwa cechy nieliniowe',
+      'Tworzy nowe cechy będące kwadratami i iloczynami par istniejących cech, pozwalając modelom liniowym wychwycić nieliniowe zależności',
+      'Normalizuje dane do rozkładu normalnego',
+      'Koduje zmienne kategoryczne',
+    ],
+    correctIndex: 1,
+    explanation: 'Cechy wielomianowe (np. x², x×y) pozwalają prostym modelom liniowym modelować bardziej złożone, nieliniowe zależności w danych.',
+  },
+  {
+    question: 'Jaka jest jedna z podstawowych strategii radzenia sobie z niezbalansowanymi klasami?',
+    options: [
+      'Usunięcie wszystkich przykładów klasy mniejszościowej',
+      'Użycie `class_weight="balanced"` lub oversamplingu (np. SMOTE)',
+      'Zignorowanie problemu — nie ma on znaczenia',
+      'Zmiana wszystkich cech numerycznych na kategoryczne',
+    ],
+    correctIndex: 1,
+    explanation: 'Ważenie klas lub oversampling (SMOTE) to standardowe techniki przeciwdziałania sytuacji, gdy jedna klasa dominuje liczebnie nad drugą.',
+  },
+  {
+    question: 'Dlaczego przy niezbalansowanych klasach accuracy bywa mylącą metryką?',
+    options: [
+      'Bo accuracy nie istnieje dla klasyfikacji binarnej',
+      'Bo model przewidujący zawsze klasę większościową może osiągnąć wysoką accuracy, mimo że kompletnie ignoruje klasę mniejszościową',
+      'Bo accuracy zawsze wynosi 50%',
+      'Bo accuracy dotyczy wyłącznie regresji',
+    ],
+    correctIndex: 1,
+    explanation: 'Przy np. 99% klasy większościowej, model zawsze zwracający tę klasę osiągnie 99% accuracy, mimo że jest kompletnie bezużyteczny do wykrywania klasy mniejszościowej.',
+  },
+  {
+    question: 'Do czego służy `ColumnTransformer` w scikit-learn?',
+    options: [
+      'Do trenowania modelu końcowego',
+      'Do zastosowania różnych transformacji (np. skalowanie, encoding) do różnych podzbiorów kolumn w jednym spójnym obiekcie',
+      'Do wizualizacji danych',
+      'Do dzielenia danych na train/test',
+    ],
+    correctIndex: 1,
+    explanation: '`ColumnTransformer` pozwala jednocześnie stosować różne transformacje do różnych grup kolumn (np. StandardScaler do numerycznych, OneHotEncoder do kategorycznych).',
+  },
+  {
+    question: 'Jaka jest rola `Pipeline` w scikit-learn?',
+    options: [
+      'Łączy kolejne kroki przetwarzania (imputacja, skalowanie, model) w jeden spójny obiekt z metodami `fit`/`predict`',
+      'Służy wyłącznie do wizualizacji wyników',
+      'Automatycznie generuje nowe dane syntetyczne',
+      'Jest używana tylko w PySpark, nie w scikit-learn',
+    ],
+    correctIndex: 0,
+    explanation: 'Pipeline porządkuje cały proces (preprocessing + model) w jeden obiekt, co eliminuje ręczne powtarzanie kroków i redukuje ryzyko błędów.',
+  },
+  {
+    question: 'Czym jest "data leakage" w kontekście train/test split?',
+    options: [
+      'Utratą danych podczas zapisu na dysk',
+      'Sytuacją, w której informacja ze zbioru testowego "wycieka" do procesu trenowania, sztucznie zawyżając wyniki ewaluacji',
+      'Błędem formatu pliku CSV',
+      'Synonimem brakujących wartości',
+    ],
+    correctIndex: 1,
+    explanation: 'Data leakage występuje, gdy model (pośrednio) "widzi" informacje ze zbioru testowego podczas treningu — np. przez dopasowanie scalera do całego zbioru przed podziałem.',
+  },
+  {
+    question: 'Dlaczego `scaler.fit()` wywołane na całym zbiorze danych przed podziałem train/test jest błędem?',
+    options: [
+      'Bo scaler nigdy nie powinien być używany',
+      'Bo statystyki (np. średnia, odchylenie std) użyte do skalowania "widzą" dane testowe, co jest formą data leakage i zawyża wyniki',
+      'Bo scaler działa tylko na kolumnach tekstowych',
+      'Bo scaler automatycznie usuwa zbiór testowy',
+    ],
+    correctIndex: 1,
+    explanation: 'Poprawnie: `fit()` wykonujemy wyłącznie na `X_train`, a `transform()` (bez ponownego fit) stosujemy zarówno do `X_train`, jak i `X_test`.',
+  },
+  {
+    question: 'Jaki jest poprawny porządek operacji, by uniknąć data leakage?',
+    options: [
+      'fit_transform() na całym zbiorze → train/test split → trening modelu',
+      'train/test split → fit() tylko na X_train → transform() na X_train i X_test → trening modelu',
+      'trening modelu → train/test split → fit_transform()',
+      'Kolejność nie ma żadnego znaczenia',
+    ],
+    correctIndex: 1,
+    explanation: 'Najpierw dzielimy dane, potem dopasowujemy transformacje (np. scaler, imputer) wyłącznie na zbiorze treningowym, a następnie stosujemy je (bez ponownego fit) również na zbiorze testowym.',
+  },
+  {
+    question: 'Kiedy binning (`pd.cut()`) może zaszkodzić modelowi zamiast pomóc?',
+    options: [
+      'Nigdy — binning zawsze poprawia jakość modelu',
+      'Gdy sztucznie "spłaszcza" informację ciągłą na zbyt mało kategorii, tracąc istotne niuanse danych',
+      'Gdy stosujemy go do zmiennych kategorycznych',
+      'Gdy liczba przedziałów jest zbyt duża',
+    ],
+    correctIndex: 1,
+    explanation: 'Zbyt agresywny binning (np. tylko 2 szerokie przedziały) może zredukować precyzyjną informację ciągłą do grubej kategorii, tracąc sygnał przydatny dla modelu.',
+  },
+  {
+    question: 'Co zwraca `OneHotEncoder(handle_unknown="ignore")` dla nowej, nieznanej kategorii w zbiorze testowym?',
+    options: [
+      'Zgłasza błąd i przerywa program',
+      'Koduje ją jako wektor samych zer, zamiast zgłaszać błąd',
+      'Automatycznie trenuje model od nowa',
+      'Usuwa cały wiersz z danych',
+    ],
+    correctIndex: 1,
+    explanation: 'Parametr `handle_unknown="ignore"` pozwala bezpiecznie obsłużyć nowe, niewidziane wcześniej kategorie w danych testowych/produkcyjnych, zamiast rzucać wyjątek.',
+  },
+  {
+    question: 'Dlaczego dane kategorie rangi (`rank_order`) trzeba jawnie podać do `OrdinalEncoder(categories=[...])`?',
+    options: [
+      'Bo inaczej scikit-learn posortuje kategorie alfabetycznie, co może nie odpowiadać faktycznemu porządkowi (np. Brąz < Srebro < Złoto)',
+      'Bo OrdinalEncoder tego nie wymaga, to tylko opcjonalny parametr bez znaczenia',
+      'Bo jest to wymagane przez format Parquet',
+      'Bo OrdinalEncoder działa wyłącznie z liczbami',
+    ],
+    correctIndex: 0,
+    explanation: 'Jawne podanie listy kategorii w logicznej kolejności gwarantuje, że encoder odwzoruje je na rosnące liczby zgodnie z rzeczywistym porządkiem, a nie alfabetycznym.',
+  },
+  {
+    question: 'Jaką zaletę ma stosowanie `Pipeline` + `ColumnTransformer` zamiast ręcznego, osobnego przetwarzania kolumn?',
+    options: [
+      'Mniejsze ryzyko pomyłek i spójne zastosowanie tych samych transformacji przy trenowaniu i przewidywaniu',
+      'Automatyczne usuwanie wszystkich braków danych bez imputacji',
+      'Eliminację potrzeby podziału train/test',
+      'Gwarancję 100% accuracy modelu',
+    ],
+    correctIndex: 0,
+    explanation: 'Pipeline zapewnia, że dokładnie te same kroki (fit na treningu, transform wszędzie) zostaną zastosowane konsekwentnie, co znacznie redukuje ryzyko błędów i data leakage.',
+  },
+  {
+    question: 'Co się stanie, jeśli zapomnisz dodać `("ord", OrdinalEncoder(...), ordinal_features)` do `ColumnTransformer`, zostawiając tylko `"num"` i `"cat"`?',
+    options: [
+      'Kolumny ordinal_features zostaną automatycznie pominięte/odrzucone z finalnego zbioru cech przekazywanego do modelu (domyślnie `remainder="drop"`)',
+      'Program zgłosi błąd krytyczny i się zatrzyma',
+      'Kolumny automatycznie zostaną zakodowane jako OneHotEncoder',
+      'Model automatycznie doda brakujące kolumny ze średnią wartością',
+    ],
+    correctIndex: 0,
+    explanation: 'Domyślne zachowanie `ColumnTransformer` to `remainder="drop"` — kolumny nieujęte jawnie w żadnym transformerze są pomijane w wyniku, co może być niezauważonym błędem.',
+  },
+  {
+    question: 'Dlaczego w pipeline ML ważne jest zachowanie tej samej kolejności kolumn/cech między treningiem a predykcją?',
+    options: [
+      'Nie jest to istotne, modele ignorują kolejność kolumn',
+      'Modele (zwłaszcza liniowe) interpretują cechy pozycyjnie — niespójna kolejność/liczba cech prowadzi do błędnych predykcji lub błędów',
+      'Kolejność kolumn wpływa tylko na szybkość wczytywania danych',
+      'Dotyczy to wyłącznie PySpark, nie scikit-learn',
+    ],
+    correctIndex: 1,
+    explanation: 'Pipeline gwarantuje spójność — dokładnie te same transformacje i kolejność cech są stosowane zarówno przy `fit()`, jak i przy `predict()` na nowych danych.',
+  },
+  {
+    question: 'Dlaczego cechy wielomianowe (`PolynomialFeatures`) warto skalować po ich utworzeniu?',
+    options: [
+      'Bo nowe cechy (np. x²) mogą mieć zupełnie inną skalę wartości niż cechy oryginalne, co szkodzi modelom wrażliwym na skalę (np. regresji liniowej)',
+      'Bo skalowanie jest wymagane wyłącznie dla zmiennych kategorycznych',
+      'Bo PolynomialFeatures automatycznie usuwa potrzebę encodingu',
+      'Bo bez skalowania PolynomialFeatures zgłosi błąd',
+    ],
+    correctIndex: 0,
+    explanation: 'Podniesienie cechy do kwadratu może drastycznie zwiększyć jej zakres wartości — modele wrażliwe na skalę (np. regresja z regularyzacją) wymagają wtedy ponownego skalowania.',
+  },
+];

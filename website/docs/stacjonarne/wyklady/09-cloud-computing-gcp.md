@@ -30,6 +30,18 @@ Po tym wykładzie będziesz wiedzieć:
 
 ---
 
+<details>
+<summary>📝 **Skrót wykładu (TL;DR)** — kliknij, by rozwinąć</summary>
+
+- Chmura = płacisz za **zużycie**, nie za posiadanie sprzętu — opłacalne przy nieregularnym obciążeniu
+- Modele usług: **IaaS** (Compute Engine — surowe maszyny), **PaaS** (Dataproc — zarządzany Spark/Hadoop), **SaaS** (BigQuery — gotowy serverless warehouse)
+- **Data lake** (GCS, dowolny format) vs **data warehouse** (BigQuery, dane ustrukturyzowane) vs **lakehouse** (BigLake — łączy oba światy)
+- **BigQuery**: silnik Dremel, płatność za **przeskanowane bajty** (nie za zwrócone wiersze); `dry_run=True` by sprawdzić koszt przed uruchomieniem
+- Obniżanie kosztów: wybieraj tylko potrzebne kolumny (unikaj `SELECT *`), **`PARTITION BY`** i **`CLUSTER BY`**
+- **Dataproc**: ephemeral klastry — twórz na czas zadania i usuwaj od razu po (`--max-idle`, `clusters delete`), by nie płacić za bezczynność
+
+</details>
+
 ## ✅ Materiały do wykładu
 
 <Admonition type="tip" title="Slajdy do pobrania">
@@ -37,6 +49,8 @@ Po tym wykładzie będziesz wiedzieć:
 </Admonition>
 
 📄 **[Otwórz slajdy PDF](pathname:///stacjonarne/pdfs/wyk09-cloud-computing-gcp.pdf)**
+
+🧾 **[Ściąga jednostronicowa (PDF)](pathname:///stacjonarne/pdfs/wyk09-sciaga.pdf)** &nbsp;|&nbsp; 🧠 **[Rozwiąż quiz (25 pytań)](/stacjonarne/materialy/quiz/09-cloud-computing-gcp)**
 
 ---
 

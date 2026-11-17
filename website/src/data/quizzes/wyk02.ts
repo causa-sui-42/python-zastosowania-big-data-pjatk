@@ -1,0 +1,245 @@
+import type { QuizQuestion } from '@site/src/components/Quiz';
+
+// Wykład 2: Dane w skali — formaty i przechowywanie danych
+export const QUIZ_WYK02: QuizQuestion[] = [
+  {
+    question: 'Zgodnie z "zasadą kciuka" z wykładu, ile RAM-u potrzebuje pandas względem rozmiaru pliku CSV, który wczytuje?',
+    options: ['Tyle samo, co rozmiar pliku', 'Około 5-10× więcej niż rozmiar pliku', 'Zawsze mniej niż rozmiar pliku', 'Dokładnie połowę rozmiaru pliku'],
+    correctIndex: 1,
+    explanation: 'Pandas tworzy dodatkowe struktury w pamięci (typy obiektowe, indeksy, kopie przy operacjach), więc potrzebuje zwykle 5-10× więcej RAM niż surowy rozmiar pliku CSV.',
+  },
+  {
+    question: 'Dlaczego w Big Data to zwykle odczyt/zapis danych (I/O), a nie samo liczenie, jest "najdroższy"?',
+    options: [
+      'Bo CPU zawsze jest wolniejszy niż dysk',
+      'Bo przesyłanie danych z dysku/sieci jest zwykle wolniejsze niż operacje w pamięci RAM, a przy dużych wolumenach ten koszt dominuje',
+      'Bo liczenie statystyk jest zabronione w Big Data',
+      'Bo dane w Big Data zawsze są przechowywane w RAM',
+    ],
+    correctIndex: 1,
+    explanation: 'Odczyt z dysku/sieci jest rzędy wielkości wolniejszy niż operacje w RAM — dlatego formaty i techniki minimalizujące ilość odczytywanych danych (np. column pruning) mają tak duże znaczenie.',
+  },
+  {
+    question: 'Czym różni się format wierszowy od kolumnowego?',
+    options: [
+      'Format wierszowy zapisuje rekord po rekordzie, kolumnowy — kolumnę po kolumnie',
+      'Format kolumnowy jest zawsze mniejszy niż wierszowy niezależnie od danych',
+      'Format wierszowy nie obsługuje liczb',
+      'To określenia dotyczące wyłącznie baz NoSQL',
+    ],
+    correctIndex: 0,
+    explanation: 'Wierszowy (CSV, JSON, Avro) układa dane rekord po rekordzie; kolumnowy (Parquet, ORC) grupuje wartości tej samej kolumny razem, co ułatwia kompresję i selektywny odczyt.',
+  },
+  {
+    question: 'Analityk czyta z tabeli o 200 kolumnach tylko 3 kolumny. Dlaczego zapytanie na pliku Parquet będzie szybsze niż na CSV?',
+    options: [
+      'Parquet zawsze trzyma dane w RAM',
+      'Parquet jest formatem kolumnowym, więc można odczytać tylko potrzebne kolumny (column pruning)',
+      'CSV nie obsługuje więcej niż 100 kolumn',
+      'Parquet nie stosuje żadnej kompresji',
+    ],
+    correctIndex: 1,
+    explanation: 'Column pruning w formacie kolumnowym pozwala pominąć odczyt pozostałych 197 kolumn, bo wartości tej samej kolumny leżą fizycznie razem na dysku.',
+  },
+  {
+    question: 'Czym jest "predicate pushdown" w kontekście Parquet?',
+    options: [
+      'Mechanizmem szyfrowania danych',
+      'Możliwością pominięcia całych bloków danych, które na pewno nie spełniają warunku WHERE, dzięki przechowywanym statystykom min/max',
+      'Sposobem łączenia dwóch plików Parquet w jeden',
+      'Metodą kompresji danych tekstowych',
+    ],
+    correctIndex: 1,
+    explanation: 'Parquet przechowuje statystyki (min/max) dla bloków danych, dzięki czemu silnik zapytań może pominąć bloki na pewno niepasujące do filtra — bez ich odczytu z dysku.',
+  },
+  {
+    question: 'Który format jest szczególnie preferowany przy strumieniach danych (np. Kafka), bo jest wierszowy, ale posiada schemat?',
+    options: ['CSV', 'Avro', 'Parquet', 'Arrow'],
+    correctIndex: 1,
+    explanation: 'Avro to wierszowy format binarny ze zdefiniowanym schematem, dobrze dopasowany do zapisu rekord po rekordzie w systemach strumieniowych jak Kafka.',
+  },
+  {
+    question: 'Do czego służy Apache Arrow?',
+    options: [
+      'Do zapisu danych na dysku w formacie skompresowanym',
+      'Do reprezentacji danych kolumnowych w pamięci RAM, ułatwiając wymianę danych między pandas, Spark, DuckDB bez kosztownej serializacji',
+      'Do tworzenia harmonogramów zadań (jak cron)',
+      'Jest alternatywą dla HDFS',
+    ],
+    correctIndex: 1,
+    explanation: 'Arrow definiuje uniwersalny, kolumnowy format danych w pamięci — narzędzia mogą wymieniać dane bez kosztownej konwersji/serializacji.',
+  },
+  {
+    question: 'Który kodek kompresji jest domyślnym wyborem w Parquet ze względu na bardzo dobrą szybkość przy rozsądnej kompresji?',
+    options: ['gzip', 'snappy', 'bzip2', 'brak kompresji'],
+    correctIndex: 1,
+    explanation: 'Snappy to domyślny, bardzo szybki kodek kompresji w Parquet, dobry kompromis między szybkością a rozmiarem dla "gorących", często czytanych danych.',
+  },
+  {
+    question: 'Kiedy warto wybrać gzip zamiast snappy/zstd?',
+    options: [
+      'Gdy priorytetem jest maksymalna szybkość odczytu',
+      'Dla archiwalnych, rzadko czytanych danych, gdzie liczy się mniejszy rozmiar, a nie szybkość',
+      'Nigdy — gzip jest zawsze gorszy',
+      'Tylko dla danych tekstowych w formacie JSON',
+    ],
+    correctIndex: 1,
+    explanation: 'gzip kompresuje mocniej, ale wolniej — sprawdza się dla danych rzadko odczytywanych (archiwa), gdzie oszczędność miejsca jest ważniejsza niż szybkość dekompresji.',
+  },
+  {
+    question: 'Dlaczego zamiana typu `object` na `category` w pandas potrafi znacząco zmniejszyć zużycie RAM?',
+    options: [
+      'Bo category usuwa duplikaty wierszy',
+      'Bo przy ograniczonej liczbie unikalnych wartości category przechowuje je raz i referencje zamiast wielokrotnie powtarzanych łańcuchów tekstowych',
+      'Bo category konwertuje tekst na liczby zmiennoprzecinkowe',
+      'Bo category automatycznie kompresuje plik na dysku',
+    ],
+    correctIndex: 1,
+    explanation: 'Typ `category` przechowuje unikalne wartości raz (jako "poziomy") i referencje do nich, co jest dużo tańsze pamięciowo niż powtarzanie tych samych stringów w kolumnie `object`.',
+  },
+  {
+    question: 'Co oznacza partycjonowanie danych w stylu Hive (np. `miasto=Kraków/`)?',
+    options: [
+      'Szyfrowanie danych według klucza miasta',
+      'Organizację danych w katalogi według wartości kolumny, co pozwala zapytaniom czytać tylko pasujące katalogi',
+      'Usuwanie powtarzających się miast z danych',
+      'Metodę kompresji specyficzną dla danych geograficznych',
+    ],
+    correctIndex: 1,
+    explanation: 'Partycjonowanie Hive-style tworzy strukturę katalogów według wartości kolumny, dzięki czemu silnik zapytań z filtrem po tej kolumnie czyta tylko odpowiednie podkatalogi.',
+  },
+  {
+    question: 'Dlaczego partycjonowanie po kolumnie `user_id` z milionem unikalnych wartości to zazwyczaj zły pomysł?',
+    options: [
+      'Tworzy to miliony bardzo małych plików/katalogów, co pogarsza wydajność (problem małych plików)',
+      'Parquet nie obsługuje partycjonowania po kolumnach tekstowych',
+      '`user_id` nie może być użyty jako klucz partycji',
+      'Zwiększa to współczynnik kompresji danych',
+    ],
+    correctIndex: 0,
+    explanation: 'Partycjonowanie po kolumnie o bardzo wysokiej kardynalności generuje ogromną liczbę malutkich plików — każde ich otwarcie (szczególnie w chmurze) ma swój koszt.',
+  },
+  {
+    question: 'Jaki jest zalecany, orientacyjny rozmiar pojedynczego pliku danych w Data Lake, by uniknąć "problemu małych plików"?',
+    options: ['1-10 KB', '128 MB – 1 GB', 'Dokładnie 1 MB', 'Bez znaczenia, zawsze jak najmniejsze pliki'],
+    correctIndex: 1,
+    explanation: 'Zbyt małe pliki (KB) generują narzut na każde ich otwarcie; zbyt duże utrudniają równoległość — 128 MB-1 GB to typowy, praktyczny kompromis.',
+  },
+  {
+    question: 'Czym różni się "scale up" od "scale out"?',
+    options: [
+      'Scale up to większa, mocniejsza maszyna; scale out to więcej maszyn (klaster)',
+      'Scale up zawsze oznacza chmurę, scale out — on-premise',
+      'To dokładnie to samo, tylko różne nazewnictwo',
+      'Scale out dotyczy wyłącznie baz danych NoSQL',
+    ],
+    correctIndex: 0,
+    explanation: 'Scale up (pionowe skalowanie) dodaje zasoby do jednej maszyny; scale out (poziome skalowanie) dodaje kolejne maszyny do klastra — podstawa architektur rozproszonych jak Hadoop/Spark.',
+  },
+  {
+    question: 'Jaki wzorzec programowania ilustruje poniższy kod z `ProcessPoolExecutor`?',
+    code: 'with ProcessPoolExecutor() as pool:\n    wyniki = list(pool.map(przetworz_partycje, pliki))\nwynik = sum(wyniki)',
+    options: ['ETL', 'map → reduce', 'MVC', 'CRUD'],
+    correctIndex: 1,
+    explanation: 'Każdy proces niezależnie przetwarza swoją partycję (map), a wyniki cząstkowe są agregowane (reduce) — dokładnie ten sam wzorzec, który poznamy w skali klastra na Wykładzie 3.',
+  },
+  {
+    question: 'Czym różni się Data Warehouse od Data Lake pod względem momentu narzucania schematu?',
+    options: [
+      'Data Warehouse: schema-on-write; Data Lake: schema-on-read',
+      'Data Warehouse: schema-on-read; Data Lake: schema-on-write',
+      'Oba zawsze wymagają schematu przy zapisie',
+      'Żadne z nich nie wymaga schematu',
+    ],
+    correctIndex: 0,
+    explanation: 'Data Warehouse narzuca ustrukturyzowany schemat już przy zapisie danych; Data Lake przechowuje dane surowe i nadaje im strukturę dopiero przy odczycie (schema-on-read).',
+  },
+  {
+    question: 'Co to jest "Lakehouse" (np. Delta Lake, Apache Iceberg)?',
+    options: [
+      'Wyłącznie inna nazwa dla tradycyjnego Data Warehouse',
+      'Architektura łącząca elastyczność Data Lake z gwarancjami transakcyjnymi i wydajnością Data Warehouse',
+      'Produkt dostępny wyłącznie w AWS',
+      'Format pliku konkurencyjny wobec CSV',
+    ],
+    correctIndex: 1,
+    explanation: 'Lakehouse łączy tanie przechowywanie dowolnych danych (jak Data Lake) z transakcyjnością, schematem i wydajnością zapytań (jak Data Warehouse).',
+  },
+  {
+    question: 'W architekturze medalionowej (Bronze/Silver/Gold), co znajduje się w warstwie Gold?',
+    options: [
+      'Surowe, nieprzetworzone dane źródłowe',
+      'Dane oczyszczone, ale jeszcze nieagregowane',
+      'Gotowe, zagregowane dane/raporty biznesowe (KPI)',
+      'Wyłącznie logi błędów systemu',
+    ],
+    correctIndex: 2,
+    explanation: 'Bronze = surowe dane, Silver = oczyszczone i ustandaryzowane, Gold = zagregowane dane gotowe do konsumpcji biznesowej (dashboardy, raporty).',
+  },
+  {
+    question: 'Jaka jest główna zaleta silnika typu DuckDB przy pracy z plikami Parquet?',
+    options: [
+      'Wymaga uruchomienia pełnego klastra Hadoop',
+      'Pozwala uruchamiać zapytania SQL bezpośrednio na plikach, bez ładowania wszystkiego do pamięci jednej struktury DataFrame',
+      'Zastępuje całkowicie potrzebę formatu Parquet',
+      'Działa wyłącznie w chmurze Google',
+    ],
+    correctIndex: 1,
+    explanation: 'DuckDB umożliwia uruchamianie SQL bezpośrednio na plikach Parquet (lokalnie lub w Data Lake), z automatycznym column pruning i predicate pushdown.',
+  },
+  {
+    question: 'Dlaczego typy danych takie jak `int8` zamiast `int64` mają znaczenie w dużych zbiorach danych?',
+    options: [
+      'Nie mają żadnego znaczenia, Python zawsze używa tyle samo pamięci',
+      'Mniejszy typ danych zajmuje mniej pamięci RAM — przy milionach wierszy różnica jest znacząca',
+      'int8 obsługuje większy zakres liczb niż int64',
+      'int8 jest wymagany przez format Parquet',
+    ],
+    correctIndex: 1,
+    explanation: 'Dobór najmniejszego wystarczającego typu danych (np. int8 dla wartości 0-127 zamiast int64) może zmniejszyć zużycie pamięci kilkukrotnie przy dużych zbiorach.',
+  },
+  {
+    question: 'Co oznacza czytanie pliku "w kawałkach" (`chunksize=` w pandas)?',
+    options: [
+      'Wczytywanie całego pliku do pamięci naraz',
+      'Przetwarzanie pliku porcjami, bez wczytywania całości do RAM jednocześnie',
+      'Dzielenie pliku na osobne pliki na dysku',
+      'Kompresowanie pliku przed odczytem',
+    ],
+    correctIndex: 1,
+    explanation: '`chunksize` pozwala iterować po pliku kawałek po kawałku, co umożliwia przetwarzanie plików większych niż dostępny RAM.',
+  },
+  {
+    question: 'Dlaczego Arrow jest szczególnie przydatny przy przekazywaniu danych między pandas a Spark?',
+    options: [
+      'Bo eliminuje potrzebę posiadania schematu',
+      'Bo oba narzędzia mogą współdzielić ten sam format danych w pamięci, unikając kosztownej serializacji/deserializacji',
+      'Bo Arrow automatycznie trenuje modele ML',
+      'Bo Arrow zastępuje HDFS',
+    ],
+    correctIndex: 1,
+    explanation: 'Dzięki wspólnemu formatowi w pamięci (Arrow), konwersja danych między ekosystemami (np. `toPandas()` w Sparku) jest znacznie szybsza.',
+  },
+  {
+    question: 'Jaki jest typowy przykład zastosowania JSON Lines (format wierszowy, bez wymuszonego schematu)?',
+    options: [
+      'Przechowywanie skompresowanych obrazów binarnych',
+      'Logi aplikacji i dane z API, gdzie struktura rekordów może się nieznacznie różnić',
+      'Jedyny format obsługiwany przez BigQuery',
+      'Format wymagany przez HDFS do replikacji bloków',
+    ],
+    correctIndex: 1,
+    explanation: 'JSON Lines (jeden obiekt JSON na linię) jest popularny w logach i API właśnie dlatego, że nie wymaga sztywnego, jednolitego schematu dla każdego rekordu.',
+  },
+  {
+    question: 'Dlaczego w analityce (odczyt dużej liczby wierszy, agregacje) format kolumnowy kompresuje się zwykle lepiej niż wierszowy?',
+    options: [
+      'Bo kolumnowy zawsze usuwa duplikaty',
+      'Bo podobne do siebie wartości tej samej kolumny leżą fizycznie obok siebie, co ułatwia algorytmom kompresji znajdowanie powtarzalnych wzorców',
+      'Bo kolumnowy nie obsługuje liczb zmiennoprzecinkowych',
+      'Bo wierszowy zawsze jest szyfrowany',
+    ],
+    correctIndex: 1,
+    explanation: 'Sąsiadujące, podobne wartości (np. wszystkie miasta w jednej kolumnie) kompresują się efektywniej niż przeplatane wartości różnych typów w układzie wierszowym.',
+  },
+];

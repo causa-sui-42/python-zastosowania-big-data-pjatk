@@ -30,6 +30,19 @@ Po tym wykładzie będziesz wiedzieć:
 
 ---
 
+<details>
+<summary>📝 **Skrót wykładu (TL;DR)** — kliknij, by rozwinąć</summary>
+
+- Feature engineering mieści się **między EDA a treningiem modelu** — często najważniejszy krok całego procesu ML
+- **Braki danych**: `SimpleImputer` — mediana dla cech numerycznych (odporna na outliery), `most_frequent` dla kategorycznych
+- **Encoding**: `OneHotEncoder` (kategorie nominalne, bez porządku), `OrdinalEncoder` (kategorie z naturalnym porządkiem), `LabelEncoder` (zwykle do etykiety/targetu)
+- **Skalowanie**: `StandardScaler` (średnia 0, odchylenie 1) vs `MinMaxScaler` (zakres [0,1])
+- Nowe cechy: cechy typu **ratio** (stosunek), **binning** (`pd.cut()`), `PolynomialFeatures` (interakcje/nieliniowość)
+- `Pipeline` + `ColumnTransformer` — spójne, powtarzalne przetwarzanie różnych typów kolumn naraz
+- **Data leakage**: zawsze `fit()` tylko na danych treningowych, `transform()` na train i test
+
+</details>
+
 ## ✅ Materiały do wykładu
 
 <Admonition type="tip" title="Slajdy do pobrania">
@@ -37,6 +50,8 @@ Po tym wykładzie będziesz wiedzieć:
 </Admonition>
 
 📄 **[Otwórz slajdy PDF](pathname:///stacjonarne/pdfs/wyk06-feature-engineering-ml.pdf)**
+
+🧾 **[Ściąga jednostronicowa (PDF)](pathname:///stacjonarne/pdfs/wyk06-sciaga.pdf)** &nbsp;|&nbsp; 🧠 **[Rozwiąż quiz (25 pytań)](/stacjonarne/materialy/quiz/06-feature-engineering-ml)**
 
 ---
 

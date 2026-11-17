@@ -1,0 +1,261 @@
+import type { QuizQuestion } from '@site/src/components/Quiz';
+
+// Wykład 9: Cloud Computing i GCP — BigQuery, Dataproc
+export const QUIZ_WYK09: QuizQuestion[] = [
+  {
+    question: 'Jaka jest główna idea przejścia obciążeń Big Data do chmury, zilustrowana analogią "wynajem vs zakup domu"?',
+    options: [
+      'Płacisz raz za sprzęt na zawsze',
+      'Płacisz za zużycie zasobów, a nie za ich posiadanie — kluczowe przy nieprzewidywalnych, okazjonalnych obciążeniach',
+      'Chmura zawsze jest droższa niż on-premise',
+      'Chmura eliminuje potrzebę przechowywania jakichkolwiek danych',
+    ],
+    correctIndex: 1,
+    explanation: 'Model chmurowy (pay-as-you-go) jest szczególnie opłacalny przy nierównomiernym zapotrzebowaniu na zasoby — nie trzeba utrzymywać drogiej infrastruktury "na zapas".',
+  },
+  {
+    question: 'Który model usług chmurowych reprezentuje BigQuery?',
+    options: ['IaaS', 'PaaS', 'SaaS', 'Żaden z powyższych'],
+    correctIndex: 2,
+    explanation: 'BigQuery to w pełni zarządzany, gotowy do użycia serwis (SaaS) — użytkownik nie zarządza ani infrastrukturą, ani środowiskiem uruchomieniowym.',
+  },
+  {
+    question: 'Który model usług reprezentuje Dataproc (zarządzany Spark/Hadoop)?',
+    options: ['IaaS', 'PaaS', 'SaaS', 'On-premise'],
+    correctIndex: 1,
+    explanation: 'Dataproc dostarcza zarządzaną platformę (system operacyjny + runtime Spark/Hadoop), czyli PaaS — użytkownik wciąż konfiguruje klaster, ale nie zarządza niskopoziomową infrastrukturą.',
+  },
+  {
+    question: 'Który model usług reprezentuje Compute Engine?',
+    options: ['IaaS', 'PaaS', 'SaaS', 'FaaS'],
+    correctIndex: 0,
+    explanation: 'Compute Engine dostarcza surowe maszyny wirtualne (IaaS) — pełna kontrola nad systemem operacyjnym i oprogramowaniem.',
+  },
+  {
+    question: 'Czym jest Google Cloud Storage (GCS) w ekosystemie Big Data GCP?',
+    options: [
+      'Serverless data warehouse do zapytań SQL',
+      'Object storage pełniący rolę data lake — przechowuje surowe pliki w dowolnym formacie',
+      'Zarządzanym klastrem Spark',
+      'Narzędziem do przetwarzania strumieniowego',
+    ],
+    correctIndex: 1,
+    explanation: 'GCS to tanie, skalowalne przechowywanie obiektowe — typowy fundament data lake, na którym mogą pracować BigQuery, Dataproc czy Dataflow.',
+  },
+  {
+    question: 'Na jakim silniku zapytań zbudowany jest BigQuery, umożliwiającym masywnie równoległe wykonywanie zapytań SQL?',
+    options: ['Dremel', 'MapReduce', 'YARN', 'Tungsten'],
+    correctIndex: 0,
+    explanation: 'BigQuery opiera się na wewnętrznej technologii Google — silniku Dremel (plus storage Colossus) — zaprojektowanym do bardzo szybkich zapytań SQL na petabajtach danych.',
+  },
+  {
+    question: 'Za co faktycznie płacisz w typowym modelu rozliczania zapytań BigQuery (on-demand)?',
+    options: [
+      'Za liczbę zwróconych wierszy wyniku',
+      'Za liczbę przeskanowanych bajtów danych, niezależnie od liczby zwróconych wierszy',
+      'Za czas trwania zapytania w sekundach',
+      'Za liczbę użytych tabel w zapytaniu',
+    ],
+    correctIndex: 1,
+    explanation: 'BigQuery (on-demand) nalicza opłaty na podstawie ilości danych faktycznie przeskanowanych przez zapytanie, a nie liczby zwróconych wierszy.',
+  },
+  {
+    question: 'Dlaczego `SELECT COUNT(*)` może być dużo tańsze niż `SELECT *` na tej samej tabeli w BigQuery?',
+    options: [
+      'Bo COUNT(*) nie musi skanować wszystkich kolumn danych, podczas gdy SELECT * odczytuje każdą kolumnę',
+      'Bo obie operacje zawsze kosztują dokładnie tyle samo',
+      'Bo COUNT(*) jest obsługiwany wyłącznie w trybie dry_run',
+      'Bo SELECT * jest zabroniony w BigQuery',
+    ],
+    correctIndex: 0,
+    explanation: 'Dzięki architekturze kolumnowej, BigQuery może policzyć liczbę wierszy bez odczytywania zawartości wszystkich kolumn, podczas gdy `SELECT *` wymaga odczytania każdej z nich.',
+  },
+  {
+    question: 'Do czego służy `dry_run=True` w `QueryJobConfig` biblioteki google-cloud-bigquery?',
+    options: [
+      'Faktycznie uruchamia zapytanie i zwraca wynik',
+      'Pozwala oszacować liczbę bajtów do zeskanowania (a więc koszt) BEZ faktycznego wykonania zapytania',
+      'Automatycznie optymalizuje zapytanie SQL',
+      'Usuwa tabelę wynikową po zapytaniu',
+    ],
+    correctIndex: 1,
+    explanation: '`dry_run=True` to kluczowe narzędzie kontroli kosztów — pozwala sprawdzić `total_bytes_processed` przed faktycznym uruchomieniem (i opłaceniem) zapytania.',
+  },
+  {
+    question: 'Jak partycjonowanie (`PARTITION BY DATE(...)`) obniża koszty zapytań w BigQuery odpytywanych codziennie po dacie?',
+    options: [
+      'Nie ma żadnego wpływu na koszt',
+      'Zapytanie z filtrem na kolumnie partycjonującej skanuje tylko pasujące partycje (dni), zamiast całej tabeli',
+      'Partycjonowanie automatycznie usuwa stare dane',
+      'Partycjonowanie wymaga przechowywania danych w formacie CSV',
+    ],
+    correctIndex: 1,
+    explanation: 'Zapytanie z `WHERE DATE(kolumna) = "2026-01-01"` na partycjonowanej tabeli skanuje tylko tę jedną partycję, drastycznie zmniejszając liczbę przeskanowanych bajtów (i koszt).',
+  },
+  {
+    question: 'Do czego służy `CLUSTER BY` w BigQuery (obok `PARTITION BY`)?',
+    options: [
+      'Do fizycznego sortowania/grupowania danych wewnątrz partycji według podanych kolumn, co przyspiesza filtrowanie po tych kolumnach',
+      'Do tworzenia kopii zapasowej tabeli',
+      'Do automatycznego szyfrowania danych',
+      'Do łączenia wielu tabel w jedną',
+    ],
+    correctIndex: 0,
+    explanation: 'Clustering porządkuje dane wewnątrz każdej partycji według wskazanych kolumn, co dodatkowo ogranicza ilość skanowanych danych przy filtrach na tych kolumnach.',
+  },
+  {
+    question: 'Co zwraca `client.query(sql).to_dataframe()` w bibliotece google-cloud-bigquery?',
+    options: [
+      'Obiekt Spark DataFrame',
+      'Bezpośrednio pandas DataFrame z wynikiem zapytania',
+      'Plik CSV zapisany na dysku',
+      'Listę krotek Pythona',
+    ],
+    correctIndex: 1,
+    explanation: '`.to_dataframe()` konwertuje wynik zapytania BigQuery bezpośrednio na pandas DataFrame, gotowy do dalszej analizy w Pythonie.',
+  },
+  {
+    question: 'Czym jest Dataproc?',
+    options: [
+      'Serverless data warehouse do zapytań SQL',
+      'Zarządzaną usługą uruchamiania klastrów Spark/Hadoop w chmurze GCP',
+      'Narzędziem do przetwarzania strumieniowego opartym na Apache Beam',
+      'Systemem plików rozproszonych konkurencyjnym wobec HDFS',
+    ],
+    correctIndex: 1,
+    explanation: 'Dataproc pozwala szybko tworzyć i kasować w pełni zarządzane klastry Spark/Hadoop, bez ręcznej konfiguracji infrastruktury.',
+  },
+  {
+    question: 'Co oznacza "ephemeral klaster" Dataproc?',
+    options: [
+      'Klaster działający bezterminowo 24/7',
+      'Klaster tworzony na czas wykonania konkretnego zadania i usuwany zaraz po jego zakończeniu, by nie generować niepotrzebnych kosztów',
+      'Klaster, który nigdy nie może zostać usunięty',
+      'Klaster dostępny wyłącznie w trybie demo',
+    ],
+    correctIndex: 1,
+    explanation: 'Model ephemeral (tymczasowy) jest kosztowo efektywny — klaster istnieje tylko tak długo, jak trwa konkretne zadanie, np. dzięki `--max-idle=1h` lub ręcznemu `clusters delete`.',
+  },
+  {
+    question: 'Jaki jest typowy błąd kosztowy związany z Dataproc wymieniony na wykładzie?',
+    options: [
+      'Zbyt częste tworzenie nowych klastrów',
+      'Zapomniany, działający 24/7 klaster, mimo że nie jest aktywnie używany',
+      'Używanie zbyt małej liczby workerów',
+      'Uruchamianie zadań PySpark zamiast Scala',
+    ],
+    correctIndex: 1,
+    explanation: 'Niekasowany, bezczynny klaster generuje koszty bez żadnej wartości — stąd znaczenie `--max-idle` oraz dyscypliny sprzątania po sobie (`clusters delete`).',
+  },
+  {
+    question: 'Czym różni się data lake od data warehouse pod względem przechowywanych danych?',
+    options: [
+      'Data lake przechowuje dane surowe w dowolnym formacie, data warehouse — dane ustrukturyzowane',
+      'Data lake przechowuje wyłącznie dane ustrukturyzowane',
+      'Data warehouse przechowuje wyłącznie pliki wideo i audio',
+      'Nie ma żadnej różnicy między nimi',
+    ],
+    correctIndex: 0,
+    explanation: 'Data lake (np. Cloud Storage) akceptuje dowolny format danych surowych; data warehouse (np. BigQuery) wymaga ustrukturyzowanych, zdefiniowanych schematów.',
+  },
+  {
+    question: 'Czym jest BigLake w kontekście architektury lakehouse w GCP?',
+    options: [
+      'Nazwą nowej usługi do przechowywania kopii zapasowych',
+      'Warstwą łączącą elastyczność data lake (Cloud Storage) z wydajnością i zarządzaniem danymi jak w data warehouse (BigQuery)',
+      'Zamiennikiem dla Dataproc',
+      'Formatem pliku konkurencyjnym wobec Parquet',
+    ],
+    correctIndex: 1,
+    explanation: 'BigLake pozwala BigQuery odpytywać dane leżące w Cloud Storage tak, jakby były natywnymi tabelami BigQuery — to realizacja koncepcji lakehouse w GCP.',
+  },
+  {
+    question: 'Jaka jest typowa pułapka bezpieczeństwa związana z GCS wymieniona na wykładzie?',
+    options: [
+      'Zbyt mała liczba replik danych',
+      'Publiczne buckety GCS bez świadomej konfiguracji IAM (uprawnień dostępu)',
+      'Zbyt duża kompresja plików',
+      'Brak partycjonowania danych tekstowych',
+    ],
+    correctIndex: 1,
+    explanation: 'Nieświadome pozostawienie bucketu GCS publicznie dostępnego to częsty i poważny błąd bezpieczeństwa — zawsze należy świadomie skonfigurować uprawnienia IAM.',
+  },
+  {
+    question: 'Jak uruchamia się zadanie PySpark na klastrze Dataproc z linii komend?',
+    code: 'gcloud dataproc jobs submit pyspark analiza.py \\\n    --cluster=moj-klaster --region=europe-central2',
+    options: [
+      '`gcloud dataproc jobs submit pyspark <plik.py> --cluster=<nazwa> --region=<region>`',
+      '`spark-submit --cluster gcp`',
+      '`bq query --use_legacy_sql=false`',
+      '`gsutil cp analiza.py gs://bucket/`',
+    ],
+    correctIndex: 0,
+    explanation: 'Polecenie `gcloud dataproc jobs submit pyspark` wysyła skrypt PySpark do wykonania na wskazanym, istniejącym klastrze Dataproc.',
+  },
+  {
+    question: 'Dlaczego `SELECT *` na dużych tabelach BigQuery jest uznawane za typową pułapkę kosztową?',
+    options: [
+      'Bo skanuje wszystkie kolumny niezależnie od tego, czy są potrzebne, zwiększając liczbę przeskanowanych bajtów (i koszt)',
+      'Bo BigQuery nie obsługuje `SELECT *`',
+      'Bo powoduje usunięcie tabeli',
+      'Bo działa wyłącznie z tabelami partycjonowanymi',
+    ],
+    correctIndex: 0,
+    explanation: 'Wybieranie tylko potrzebnych kolumn (zamiast `SELECT *`) jest jednym z najprostszych sposobów ograniczenia kosztów zapytań w architekturze kolumnowej BigQuery.',
+  },
+  {
+    question: 'Kiedy opłaca się utrzymywać klaster Dataproc 24/7 zamiast modelu ephemeral?',
+    options: [
+      'Gdy obciążenie jest stałe i intensywne przez cały czas, a koszt uruchamiania/zamykania klastra przewyższałby koszt stałego utrzymania',
+      'Zawsze — model 24/7 jest tańszy niezależnie od obciążenia',
+      'Nigdy, ephemeral jest zawsze lepszy',
+      'Tylko gdy dane są przechowywane w formacie CSV',
+    ],
+    correctIndex: 0,
+    explanation: 'Dla sporadycznych, okazjonalnych zadań ephemeral jest tańszy; dla stałego, ciągłego obciążenia utrzymywanie klastra non-stop bywa bardziej opłacalne i wygodniejsze operacyjnie.',
+  },
+  {
+    question: 'Do czego służą "secondary workers" (preemptible) w konfiguracji klastra Dataproc?',
+    options: [
+      'Do tańszego, opcjonalnego zwiększenia mocy obliczeniowej klastra kosztem możliwości ich przerwania przez dostawcę chmury',
+      'Do przechowywania metadanych klastra',
+      'Do zarządzania siecią VPC',
+      'Do automatycznego tworzenia kopii zapasowych',
+    ],
+    correctIndex: 0,
+    explanation: 'Workery preemptible/spot są znacznie tańsze, ale mogą zostać odebrane przez dostawcę w dowolnym momencie — dobre do zadań odpornych na przerwania, nie do krytycznych procesów.',
+  },
+  {
+    question: 'Dlaczego w analizie Big Data w chmurze warto rozróżniać koszty "storage" (przechowywanie) od kosztów "compute" (obliczenia)?',
+    options: [
+      'Bo to zawsze te same koszty, rozróżnienie nie ma znaczenia',
+      'Bo pozwala to świadomie optymalizować wydatki osobno — np. tanie przechowywanie surowych danych (GCS) i płatne obliczenia tylko wtedy, gdy są faktycznie potrzebne (Dataproc/BigQuery)',
+      'Bo storage zawsze kosztuje więcej niż compute',
+      'Bo compute dotyczy wyłącznie Dataproc, a storage wyłącznie BigQuery',
+    ],
+    correctIndex: 1,
+    explanation: 'Model chmurowy pozwala oddzielić tanie, długoterminowe przechowywanie danych od kosztownych, ale krótkotrwałych obliczeń — klucz do optymalizacji kosztów Big Data w chmurze.',
+  },
+  {
+    question: 'Jaką zaletę ma format Parquet przechowywany w Cloud Storage i odpytywany przez BigQuery jako tabela zewnętrzna (external table)?',
+    options: [
+      'Pozwala odpytywać dane SQL-em bez konieczności ich wcześniejszego załadowania (importu) do natywnego storage\'u BigQuery',
+      'Automatycznie usuwa potrzebę partycjonowania',
+      'Jest jedynym formatem obsługiwanym przez Dataproc',
+      'Eliminuje całkowicie koszty zapytań',
+    ],
+    correctIndex: 0,
+    explanation: 'Tabele zewnętrzne (external tables) w BigQuery pozwalają odpytywać dane leżące bezpośrednio w Cloud Storage (np. Parquet) bez kosztownego i czasochłonnego etapu importu.',
+  },
+  {
+    question: 'Dlaczego region (np. `europe-central2`) ma znaczenie przy tworzeniu klastra Dataproc lub zbiorów danych BigQuery?',
+    options: [
+      'Wpływa na zgodność z przepisami o lokalizacji danych (np. RODO), opóźnienia sieciowe oraz czasem koszty',
+      'Nie ma żadnego znaczenia, region jest tylko etykietą kosmetyczną',
+      'Region zawsze musi być identyczny z regionem domowym konta Google',
+      'Dotyczy wyłącznie Compute Engine, nigdy BigQuery/Dataproc',
+    ],
+    correctIndex: 0,
+    explanation: 'Wybór regionu wpływa na lokalizację fizycznego przechowywania danych (istotne np. dla zgodności z RODO), opóźnienia dostępu oraz niekiedy ceny usług.',
+  },
+];

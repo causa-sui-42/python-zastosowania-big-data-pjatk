@@ -1,0 +1,256 @@
+import type { QuizQuestion } from '@site/src/components/Quiz';
+
+// Wykład 1: Statystyka opisowa i eksploracyjna analiza danych
+export const QUIZ_WYK01: QuizQuestion[] = [
+  {
+    question: 'Czym różni się populacja od próby?',
+    options: [
+      'Populacja to podzbiór próby',
+      'Próba to podzbiór wszystkich możliwych obserwacji (populacji), na którym faktycznie pracujemy',
+      'To synonimy — nie ma różnicy',
+      'Populacja zawsze jest mniejsza niż próba',
+    ],
+    correctIndex: 1,
+    explanation: 'Populacja to wszystkie możliwe obserwacje zjawiska, a próba to konkretny, dostępny podzbiór, na którym liczymy statystyki i z którego wnioskujemy o populacji.',
+  },
+  {
+    question: 'Jaki typ zmiennej reprezentuje "kategoria wiekowa" (np. 18-29, 30-39, 40+)?',
+    options: [
+      'Numeryczna ciągła',
+      'Numeryczna dyskretna',
+      'Kategoryczna nominalna',
+      'Kategoryczna porządkowa',
+    ],
+    correctIndex: 3,
+    explanation: 'Kategorie wiekowe mają naturalny porządek (18-29 < 30-39 < 40+), więc to zmienna kategoryczna porządkowa (ordinalna).',
+  },
+  {
+    question: 'Zbiór czasów ukończenia maratonu ma średnią 260 min i medianę 230 min. Co to sugeruje?',
+    options: [
+      'Rozkład jest idealnie symetryczny',
+      'Rozkład jest prawoskośny lub zawiera wysokie wartości odstające',
+      'Dane na pewno mają rozkład normalny',
+      'Odchylenie standardowe musi wynosić zero',
+    ],
+    correctIndex: 1,
+    explanation: 'Duża różnica między średnią a medianą (średnia > mediana) sugeruje skośność prawostronną — kilku bardzo wolnych zawodników "ciągnie" średnią w górę.',
+  },
+  {
+    question: 'Która miara tendencji centralnej jest najbardziej odporna na wartości odstające (outliery)?',
+    options: ['Średnia', 'Mediana', 'Suma', 'Wariancja'],
+    correctIndex: 1,
+    explanation: 'Mediana (środkowa wartość po posortowaniu) nie zależy od skrajnych wartości tak mocno jak średnia, która jest wrażliwa na outliery.',
+  },
+  {
+    question: 'Czym jest IQR (rozstęp międzykwartylowy)?',
+    options: [
+      'Różnicą między maksimum a minimum',
+      'Różnicą między trzecim a pierwszym kwartylem (Q3 − Q1)',
+      'Drugą potęgą odchylenia standardowego',
+      'Sumą wszystkich kwantyli',
+    ],
+    correctIndex: 1,
+    explanation: 'IQR = Q3 − Q1 opisuje rozrzut "środkowych" 50% danych i jest podstawą klasycznej metody wykrywania outlierów.',
+  },
+  {
+    question: 'Według klasycznej reguły IQR, wartość jest uznawana za outlier, jeśli jest:',
+    options: [
+      'Mniejsza niż Q1 − 1.5×IQR lub większa niż Q3 + 1.5×IQR',
+      'Mniejsza niż średnia - 1 odchylenie standardowe',
+      'Dowolną wartością spoza przedziału [Q1, Q3]',
+      'Zawsze wartością ujemną',
+    ],
+    correctIndex: 0,
+    explanation: 'To standardowa reguła "1.5×IQR" używana m.in. do rysowania wąsów na boxplocie i automatycznego wykrywania wartości odstających.',
+  },
+  {
+    question: 'Zgodnie z regułą 68-95-99.7 dla rozkładu normalnego, ile obserwacji mieści się w przedziale μ ± 1σ?',
+    options: ['~50%', '~68%', '~95%', '~99.7%'],
+    correctIndex: 1,
+    explanation: 'Dla rozkładu normalnego: μ±1σ obejmuje ~68%, μ±2σ ~95%, μ±3σ ~99.7% obserwacji.',
+  },
+  {
+    question: 'Który rozkład prawdopodobieństwa najlepiej opisuje liczbę zdarzeń w ustalonym przedziale czasu (np. liczbę biegaczy mijających punkt kontrolny na minutę)?',
+    options: ['Rozkład normalny', 'Rozkład jednostajny', 'Rozkład Poissona', 'Rozkład wykładniczy'],
+    correctIndex: 2,
+    explanation: 'Rozkład Poissona modeluje liczbę rzadkich, niezależnych zdarzeń w ustalonym czasie lub przestrzeni.',
+  },
+  {
+    question: 'Który rozkład opisuje czas oczekiwania/odstęp między kolejnymi niezależnymi zdarzeniami?',
+    options: ['Rozkład normalny', 'Rozkład jednostajny', 'Rozkład Poissona', 'Rozkład wykładniczy'],
+    correctIndex: 3,
+    explanation: 'Rozkład wykładniczy opisuje czas między kolejnymi zdarzeniami procesu Poissona, np. odstępy czasowe między zawodnikami przekraczającymi metę.',
+  },
+  {
+    question: 'Co oznacza w pandas wynik `df["czas"].mean() - df["czas"].median()` bliski zeru?',
+    options: [
+      'Dane na pewno są błędne',
+      'Rozkład jest w przybliżeniu symetryczny, bez silnej skośności/outlierów',
+      'W zbiorze nie ma żadnych wartości numerycznych',
+      'Trzeba koniecznie usunąć kolumnę "czas"',
+    ],
+    correctIndex: 1,
+    explanation: 'Gdy średnia i mediana są bliskie sobie, rozkład jest zazwyczaj w miarę symetryczny — to szybki "test" na skośność.',
+  },
+  {
+    question: 'Jaka jest pierwsza czynność w typowym workflow EDA po wczytaniu danych?',
+    options: [
+      'Natychmiastowe trenowanie modelu ML',
+      'Podejrzenie struktury danych (`.head()`, `.info()`, `.dtypes`)',
+      'Usunięcie wszystkich wierszy z brakami',
+      'Rysowanie wykresu kołowego',
+    ],
+    correctIndex: 1,
+    explanation: 'EDA zaczyna się od zrozumienia struktury danych (typy, kształt), zanim przejdzie się do jakości danych, statystyk i wizualizacji.',
+  },
+  {
+    question: 'Który wykres najlepiej nadaje się do porównania rozkładu zmiennej numerycznej między kilkoma grupami i wykrywania outlierów?',
+    options: ['Histogram', 'Boxplot', 'Wykres kołowy', 'Heatmapa korelacji'],
+    correctIndex: 1,
+    explanation: 'Boxplot pokazuje medianę, kwartyle i outliery jednocześnie dla wielu grup obok siebie — idealny do porównań.',
+  },
+  {
+    question: 'Dlaczego "korelacja nie oznacza przyczynowości"?',
+    options: [
+      'Bo korelacja zawsze wynosi zero',
+      'Bo dwie zmienne mogą być silnie powiązane statystycznie z powodu wspólnej trzeciej przyczyny (zmiennej zakłócającej), a nie dlatego, że jedna powoduje drugą',
+      'Bo przyczynowość zawsze implikuje korelację ujemną',
+      'Bo korelacja dotyczy wyłącznie zmiennych kategorycznych',
+    ],
+    correctIndex: 1,
+    explanation: 'Klasyczny przykład: sprzedaż lodów i liczba utonięć są skorelowane latem, ale to pogoda (zmienna zakłócająca) wpływa na obie, a nie jedna na drugą.',
+  },
+  {
+    question: 'Czym jest "kwartet Anscombe\'a"?',
+    options: [
+      'Zestawem czterech rozkładów normalnych o różnej wariancji',
+      'Zestawem czterech zbiorów danych o niemal identycznych statystykach opisowych, ale kompletnie różnym kształcie po narysowaniu wykresu',
+      'Nazwą funkcji w pandas do liczenia kwartyli',
+      'Testem statystycznym do porównywania dwóch średnich',
+    ],
+    correctIndex: 1,
+    explanation: 'Kwartet Anscombe\'a to klasyczny przykład pokazujący, że identyczne statystyki (średnia, wariancja, korelacja) mogą ukrywać zupełnie inne wzorce — zawsze trzeba też rysować wykres.',
+  },
+  {
+    question: 'W teście hipotez, czym jest hipoteza zerowa (H0)?',
+    options: [
+      'Hipotezą, którą zawsze chcemy udowodnić',
+      'Założeniem "brak efektu/różnicy", które próbujemy obalić danymi',
+      'Hipotezą, która zawsze jest prawdziwa',
+      'Synonimem p-wartości',
+    ],
+    correctIndex: 1,
+    explanation: 'H0 to domyślne założenie braku efektu (np. "brak różnicy między grupami"). Test statystyczny ocenia, czy dane dostarczają wystarczająco mocnych dowodów, by je odrzucić.',
+  },
+  {
+    question: 'Jak poprawnie zinterpretować p-wartość = 0.03 w teście t-studenta?',
+    options: [
+      'Istnieje 3% szans, że hipoteza zerowa jest prawdziwa',
+      'Prawdopodobieństwo uzyskania wyniku co najmniej tak ekstremalnego jak zaobserwowany, zakładając że H0 jest prawdziwa, wynosi 3%',
+      'Efekt jest na pewno silny i ważny praktycznie',
+      'Test się nie powiódł i trzeba go powtórzyć',
+    ],
+    correctIndex: 1,
+    explanation: 'P-wartość NIE jest prawdopodobieństwem prawdziwości H0 — to prawdopodobieństwo zaobserwowania tak ekstremalnego wyniku przy założeniu, że H0 jest prawdziwa.',
+  },
+  {
+    question: 'Dlaczego w analizie Big Data (miliony rekordów) trzeba być szczególnie ostrożnym z p-wartościami?',
+    options: [
+      'Bo przy bardzo dużych próbach niemal każda, nawet znikoma różnica, wychodzi "statystycznie istotna"',
+      'Bo p-wartość nie działa dla dużych zbiorów danych',
+      'Bo Big Data zawsze ma rozkład normalny',
+      'Bo testy statystyczne wymagają małych prób',
+    ],
+    correctIndex: 0,
+    explanation: 'Przy milionach obserwacji nawet praktycznie nieistotna różnica staje się "istotna statystycznie" — dlatego warto patrzeć też na wielkość efektu (effect size), nie tylko na p-wartość.',
+  },
+  {
+    question: 'Co zwraca `df["czas_min"].quantile([0.25, 0.5, 0.75])` w pandas?',
+    options: [
+      'Średnią, medianę i modę',
+      'Wartości odpowiadające Q1, Q2 (mediana) i Q3',
+      'Minimum, maksimum i rozstęp',
+      'Liczbę braków danych',
+    ],
+    correctIndex: 1,
+    explanation: '`.quantile()` zwraca wartości dzielące dane w podanych proporcjach — 0.25 to Q1, 0.5 to mediana, 0.75 to Q3.',
+  },
+  {
+    question: 'Jaka jest typowa "złota zasada" przy interpretacji średniej w statystyce opisowej?',
+    options: [
+      'Zawsze ufać wyłącznie średniej, nigdy nie liczyć mediany',
+      'Zawsze porównywać średnią z medianą — duża różnica sugeruje skośność lub outliery',
+      'Średnia jest bezużyteczna i nie powinna być liczona',
+      'Średnią liczy się tylko dla zmiennych kategorycznych',
+    ],
+    correctIndex: 1,
+    explanation: 'Porównanie średniej i mediany to szybki, praktyczny test na obecność skośności lub wartości odstających w danych.',
+  },
+  {
+    question: 'Co oznacza symetryczny rozkład normalny ("krzywa dzwonowa")?',
+    options: [
+      'Wszystkie wartości są równie prawdopodobne',
+      'Wartości skupiają się wokół średniej, a prawdopodobieństwo maleje symetrycznie w obie strony',
+      'Rozkład ma tylko dwie możliwe wartości',
+      'Rozkład dotyczy wyłącznie zmiennych kategorycznych',
+    ],
+    correctIndex: 1,
+    explanation: 'Rozkład normalny jest symetryczny względem średniej, a jego kształt opisują dokładnie dwa parametry: średnia (μ) i odchylenie standardowe (σ).',
+  },
+  {
+    question: 'Który rozkład charakteryzuje się tym, że "wszystkie wartości są jednakowo prawdopodobne"?',
+    options: ['Rozkład normalny', 'Rozkład jednostajny', 'Rozkład Poissona', 'Rozkład wykładniczy'],
+    correctIndex: 1,
+    explanation: 'Rozkład jednostajny (uniform) — np. rzut uczciwą kostką — ma stałe, równe prawdopodobieństwo dla każdej możliwej wartości.',
+  },
+  {
+    question: 'Dlaczego wariancja sama w sobie jest trudna do bezpośredniej interpretacji w oryginalnych jednostkach danych?',
+    options: [
+      'Bo zawsze wynosi zero',
+      'Bo jest wyrażona w kwadracie jednostek oryginalnej zmiennej (np. minuty²)',
+      'Bo jest zawsze ujemna',
+      'Bo nie zależy od rozrzutu danych',
+    ],
+    correctIndex: 1,
+    explanation: 'Wariancja to średni kwadrat odchyleń od średniej, więc jej jednostka to kwadrat jednostki oryginalnej — dlatego częściej używa się odchylenia standardowego (pierwiastek z wariancji), które wraca do oryginalnych jednostek.',
+  },
+  {
+    question: 'Jaki jest sens porównania liczby duplikatów (`df.duplicated().sum()`) na etapie EDA?',
+    options: [
+      'Pozwala policzyć medianę zbioru',
+      'Pomaga wykryć błędnie zaimportowane lub powielone rekordy przed dalszą analizą',
+      'Jest wymagane wyłącznie przy rysowaniu histogramów',
+      'Zastępuje liczenie braków danych',
+    ],
+    correctIndex: 1,
+    explanation: 'Sprawdzenie duplikatów to standardowy krok sprawdzania jakości danych — powielone rekordy mogą sztucznie zawyżać liczności i zniekształcać statystyki.',
+  },
+  {
+    question: 'Co oznacza przedział ufności (CI) na poziomie 95% dla średniej populacji?',
+    options: [
+      'Że 95% obserwacji w próbie mieści się w tym przedziale',
+      'Że przy wielokrotnym powtarzaniu badania, w 95% przypadków taki przedział obejmowałby prawdziwą średnią populacji',
+      'Że prawdziwa średnia populacji z pewnością leży w tym przedziale',
+      'Że błąd pomiaru wynosi dokładnie 5%',
+    ],
+    correctIndex: 1,
+    explanation: 'Przedział ufności dotyczy długookresowej częstości "trafień" metody szacowania, a nie konkretnej, pojedynczej próby — to częsta pułapka interpretacyjna.',
+  },
+  {
+    question: 'Dlaczego zbyt mała próba jest ryzykowna przy wnioskowaniu o populacji?',
+    options: [
+      'Bo mała próba zawsze daje błędne dane',
+      'Bo niepewność estymatorów (np. średniej) rośnie, gdy liczba obserwacji jest mała',
+      'Bo mała próba nigdy nie ma rozkładu normalnego',
+      'Bo wymaga użycia wyłącznie mediany zamiast średniej',
+    ],
+    correctIndex: 1,
+    explanation: 'Im mniej obserwacji, tym większy błąd standardowy estymatora i szersze przedziały ufności — wnioski stają się mniej wiarygodne.',
+  },
+  {
+    question: 'Którą funkcję pandas wywołasz, by uzyskać komplet statystyk opisowych (count, mean, std, min, kwantyle, max) w jednej linii?',
+    options: ['.info()', '.describe()', '.dtypes', '.shape'],
+    correctIndex: 1,
+    explanation: '`.describe()` to najszybszy sposób na kompletny przegląd statystyk opisowych wszystkich kolumn numerycznych DataFrame.',
+  },
+];

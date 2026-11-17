@@ -1,0 +1,270 @@
+import type { QuizQuestion } from '@site/src/components/Quiz';
+
+// Wykład 10: Przetwarzanie strumieniowe — Structured Streaming i Kafka
+export const QUIZ_WYK10: QuizQuestion[] = [
+  {
+    question: 'Czym różni się przetwarzanie strumieniowe od batch processing pod względem opóźnienia?',
+    options: [
+      'Streaming ma opóźnienie rzędu milisekund-sekund, batch — minut-godzin',
+      'Batch zawsze jest szybszy niż streaming',
+      'Oba mają identyczne opóźnienie',
+      'Streaming dotyczy wyłącznie danych tekstowych',
+    ],
+    correctIndex: 0,
+    explanation: 'Streaming przetwarza dane niemal natychmiast po ich wystąpieniu (ms-s), podczas gdy batch zwykle działa cyklicznie na zgromadzonych danych (minuty-godziny).',
+  },
+  {
+    question: 'Co to jest "topic" w Apache Kafka?',
+    options: [
+      'Fizyczny serwer przechowujący dane',
+      'Logiczny kanał danych — np. jeden temat odpowiada jednemu typowi zdarzenia',
+      'Aplikacja wysyłająca dane',
+      'Mechanizm kompresji wiadomości',
+    ],
+    correctIndex: 1,
+    explanation: 'Topic to logiczna kategoria/kanał, do którego producenci wysyłają, a konsumenci odczytują powiązane ze sobą wiadomości.',
+  },
+  {
+    question: 'Dlaczego Kafka dzieli topic na partycje zamiast przechowywać wiadomości w jednej długiej kolejce?',
+    options: [
+      'Partycje umożliwiają równoległe przetwarzanie i skalowanie odczytu/zapisu na wiele konsumentów/brokerów jednocześnie',
+      'Partycje są wymagane wyłącznie dla małych topiców',
+      'Partycje automatycznie usuwają duplikaty wiadomości',
+      'Partycje zastępują potrzebę posiadania brokerów',
+    ],
+    correctIndex: 0,
+    explanation: 'Podział na partycje pozwala równolegle przetwarzać dane przez wielu konsumentów i rozkładać obciążenie na wiele brokerów — klucz do skalowalności Kafki.',
+  },
+  {
+    question: 'Jaką rolę pełni "broker" w architekturze Kafka?',
+    options: [
+      'Aplikacja wysyłająca dane do topiku',
+      'Serwer Kafki przechowujący i serwujący dane danego topiku',
+      'Mechanizm agregacji okienkowej w Sparku',
+      'Komponent Hadoop zarządzający metadanymi',
+    ],
+    correctIndex: 1,
+    explanation: 'Broker to fizyczny/logiczny serwer w klastrze Kafka, który przechowuje partycje topiców i obsługuje żądania producentów oraz konsumentów.',
+  },
+  {
+    question: 'Na czym polega model "unbounded table" w Spark Structured Streaming?',
+    options: [
+      'Strumień danych jest traktowany jak nieskończona tabela, do której stale dopisywane są nowe wiersze, a standardowe operacje DataFrame/SQL działają bez zmian',
+      'Dane są przechowywane wyłącznie w pamięci RAM bez możliwości zapisu',
+      'Tabela ma zawsze dokładnie jeden wiersz',
+      'Model dotyczy wyłącznie przetwarzania wsadowego (batch)',
+    ],
+    correctIndex: 0,
+    explanation: 'To kluczowa koncepcja Structured Streaming — ten sam DataFrame API, którego używamy w batch, działa też dla strumieni, traktowanych jako ciągle rosnąca tabela.',
+  },
+  {
+    question: 'Którą metodą czytamy strumień danych w Spark Structured Streaming (zamiast statycznego odczytu)?',
+    options: ['spark.read', 'spark.readStream', 'spark.load', 'spark.stream'],
+    correctIndex: 1,
+    explanation: '`spark.readStream` inicjuje odczyt strumieniowy (np. z Kafki, plików JSON), analogicznie do `spark.read` dla danych statycznych (batch).',
+  },
+  {
+    question: 'Co robi `.withWatermark("timestamp", "10 minutes")` w zapytaniu streamingowym?',
+    options: [
+      'Usuwa kolumnę "timestamp" z wyniku',
+      'Określa, że dane spóźnione o więcej niż 10 minut względem najnowszego zaobserwowanego czasu są odrzucane, a pamięć stanu agregacji jest zwalniana',
+      'Przyspiesza przetwarzanie 10-krotnie',
+      'Konwertuje strumień na dane statyczne (batch)',
+    ],
+    correctIndex: 1,
+    explanation: 'Watermarking pozwala Sparkowi wiedzieć, kiedy bezpiecznie "zamknąć" i zwolnić z pamięci stan agregacji dla danego okna czasowego, obsługując jednocześnie umiarkowanie spóźnione dane.',
+  },
+  {
+    question: 'Co się stanie z odczytem czujnika, który dotrze po upływie okna watermarku?',
+    options: [
+      'Zostanie automatycznie przetworzony z najwyższym priorytetem',
+      'Zostanie odrzucony — watermark określa maksymalny akceptowalny czas opóźnienia',
+      'Spowoduje natychmiastowe zatrzymanie całego strumienia',
+      'Zostanie zapisany do osobnego pliku błędów automatycznie',
+    ],
+    correctIndex: 1,
+    explanation: 'Dane spóźnione ponad próg ustalony przez watermark są odrzucane — to świadomy kompromis między kompletnością danych a ograniczonym zużyciem pamięci.',
+  },
+  {
+    question: 'Który output mode jest wymagany/typowy przy agregacjach (`groupBy`) w Structured Streaming, zapisujący całą tabelę wyników za każdym razem?',
+    options: ['append', 'complete', 'update', 'overwrite'],
+    correctIndex: 1,
+    explanation: '`complete` output mode zapisuje całą zaktualizowaną tabelę wyników przy każdym wyzwoleniu — typowy wybór dla pełnych agregacji typu `groupBy`.',
+  },
+  {
+    question: 'Kiedy wybierzesz `outputMode("update")` zamiast `outputMode("complete")` dla tej samej agregacji?',
+    options: [
+      'Gdy chcemy zapisywać tylko wiersze, które faktycznie się zmieniły, zamiast całej tabeli wyników za każdym razem — mniejszy narzut zapisu',
+      'Gdy nie chcemy używać żadnej agregacji',
+      '`update` i `complete` są zawsze identyczne',
+      'Gdy dane nie mają żadnego znacznika czasu',
+    ],
+    correctIndex: 0,
+    explanation: '`update` zapisuje tylko zmienione wiersze wynikowe, co jest bardziej efektywne niż `complete`, zapisujące całą tabelę za każdym razem.',
+  },
+  {
+    question: 'Dlaczego `outputMode("append")` z `groupBy()` bez watermarku powoduje błąd wykonania?',
+    options: [
+      'Bo append wymaga gwarancji, że dany wiersz wynikowy nigdy się już nie zmieni — bez watermarku Spark nie potrafi tego zagwarantować dla trwającej agregacji',
+      'Bo append nie istnieje w Structured Streaming',
+      'Bo groupBy nie jest obsługiwane w trybie streamingowym w ogóle',
+      'Bo append zawsze wymaga formatu Parquet',
+    ],
+    correctIndex: 0,
+    explanation: 'Append mode zapisuje tylko finalne, niezmienne już wiersze — bez watermarku Spark nie wie, kiedy agregacja dla danego okna jest "zamknięta", więc odrzuca taką konfigurację.',
+  },
+  {
+    question: 'Dlaczego brak `checkpointLocation` jest poważnym problemem w aplikacji Structured Streaming?',
+    options: [
+      'Nie ma żadnego wpływu na działanie aplikacji',
+      'Aplikacja traci stan przetwarzania (np. offsety Kafki, stan agregacji) po restarcie, co może prowadzić do utraty lub duplikacji danych',
+      'checkpointLocation jest wymagany wyłącznie w trybie batch',
+      'Powoduje spowolnienie zapisu o dokładnie 50%',
+    ],
+    correctIndex: 1,
+    explanation: 'Checkpoint przechowuje metadane postępu przetwarzania — bez niego, po awarii/restarcie, aplikacja nie wie, od którego miejsca w strumieniu kontynuować.',
+  },
+  {
+    question: 'Czym jest "tumbling window" w kontekście windowed aggregations?',
+    options: [
+      'Oknem czasowym, które się nie nakłada z innymi (np. kolejne, rozłączne przedziały 5-minutowe)',
+      'Oknem, które zawsze obejmuje całą historię strumienia',
+      'Synonimem watermarku',
+      'Mechanizmem partycjonowania Kafki',
+    ],
+    correctIndex: 0,
+    explanation: 'Tumbling window dzieli czas na stałe, nienakładające się przedziały (np. 0-5 min, 5-10 min), w przeciwieństwie do sliding window, które może się nakładać.',
+  },
+  {
+    question: 'Jaka jest różnica między tumbling window a sliding window?',
+    options: [
+      'Tumbling window nie nakłada się z sąsiednimi oknami, sliding window może się nakładać (np. okno 10-minutowe co 5 minut)',
+      'Sliding window dotyczy wyłącznie danych statycznych',
+      'Tumbling window zawsze obejmuje tylko jeden rekord',
+      'To dokładnie ta sama koncepcja',
+    ],
+    correctIndex: 0,
+    explanation: 'Sliding window pozwala na częstsze "odświeżanie" wyniku z zachowaniem dłuższego okresu agregacji (okna mogą się częściowo pokrywać), co jest przydatne np. do wygładzonych trendów.',
+  },
+  {
+    question: 'Dlaczego brak watermarku przy ciągłych agregacjach w Structured Streaming grozi rosnącym zużyciem pamięci (OOM)?',
+    options: [
+      'Bo bez watermarku Spark musi w nieskończoność przechowywać stan agregacji dla wszystkich dotychczasowych okien czasowych, bo nie wie, kiedy można je bezpiecznie usunąć',
+      'Bo brak watermarku automatycznie wyłącza cache',
+      'Bo watermark jest wymagany wyłącznie dla danych statycznych',
+      'Bo bez watermarku Spark nie obsługuje żadnych agregacji',
+    ],
+    correctIndex: 0,
+    explanation: 'Watermark informuje silnik, kiedy dane dla danego okna czasowego na pewno się już nie zmienią, pozwalając zwolnić pamięć — bez niego stan rośnie w nieskończoność.',
+  },
+  {
+    question: 'Dlaczego testowanie aplikacji Structured Streaming warto zacząć od źródła typu `rate`/pliki, zamiast od razu od prawdziwej Kafki?',
+    options: [
+      'Bo Kafka nigdy nie działa z PySpark',
+      'Bo prostsze źródła pozwalają szybko zweryfikować logikę agregacji/watermarku bez dodatkowej złożoności konfiguracji klastra Kafka',
+      'Bo źródło "rate" jest wymagane prawnie',
+      'Bo pliki JSON są jedynym obsługiwanym formatem w Structured Streaming',
+    ],
+    correctIndex: 1,
+    explanation: 'Testowanie na prostszych źródłach (pliki, generator "rate") pozwala odizolować i zweryfikować logikę przetwarzania, zanim dołoży się złożoność prawdziwego klastra Kafka.',
+  },
+  {
+    question: 'Jaki jest typowy przykład zastosowania batch processing (a nie streamingu) wymieniony na wykładzie?',
+    options: [
+      'Alert o przekroczeniu normy PM2.5 w czasie rzeczywistym',
+      'Miesięczny raport jakości powietrza',
+      'Odczyt z czujnika co sekundę',
+      'Natychmiastowa reakcja na zdarzenie w aplikacji mobilnej',
+    ],
+    correctIndex: 1,
+    explanation: 'Miesięczny raport to typowy przykład przetwarzania wsadowego — nie wymaga natychmiastowej reakcji, może być liczony cyklicznie na zgromadzonych danych.',
+  },
+  {
+    question: 'Jak w architekturze Kafka + Spark zazwyczaj wygląda przepływ danych od czujników do systemu alertów?',
+    options: [
+      'Czujniki (producers) → Kafka topic → Spark Structured Streaming (agregacje, watermark, alerty) → dashboard/system alertów/data lake',
+      'Spark → Kafka → czujniki',
+      'Czujniki zapisują bezpośrednio do data lake, z pominięciem Kafki i Sparka',
+      'Dashboard wysyła dane do czujników przez Kafkę',
+    ],
+    correctIndex: 0,
+    explanation: 'Typowy potok: producenci (czujniki) publikują dane do Kafki, Spark Structured Streaming konsumuje je i przetwarza (agregacje, detekcja anomalii), a wynik trafia do systemów końcowych.',
+  },
+  {
+    question: 'Jaką rolę pełni "consumer" w architekturze Kafka?',
+    options: [
+      'Wysyła dane do topiku',
+      'Odbiera i przetwarza dane z topiku',
+      'Przechowuje metadane klastra',
+      'Zarządza replikacją partycji',
+    ],
+    correctIndex: 1,
+    explanation: 'Consumer to aplikacja (np. zadanie Spark Structured Streaming) subskrybująca i odczytująca wiadomości z jednego lub więcej topiców Kafki.',
+  },
+  {
+    question: 'Dlaczego w środowisku Google Colab (bez dostępu do prawdziwego klastra Kafka) stosuje się symulację strumienia plikami JSON?',
+    options: [
+      'Bo pliki JSON są jedynym formatem obsługiwanym przez Spark',
+      'Bo Spark `readStream` czyta pliki JSON w ten sam sposób, jak czytałby strumień z Kafki — pozwala to ćwiczyć tę samą logikę bez infrastruktury Kafka',
+      'Bo Colab nie obsługuje żadnych bibliotek Pythona do streamingu',
+      'Bo pliki JSON automatycznie emulują watermarking',
+    ],
+    correctIndex: 1,
+    explanation: 'Generator plików JSON jako źródło `readStream` pozwala przećwiczyć dokładnie tę samą logikę (okna, watermark, output modes), jaką zastosowalibyśmy przy prawdziwej Kafce, bez potrzeby stawiania klastra.',
+  },
+  {
+    question: 'Jaką rolę pełni "producer" w architekturze Kafka?',
+    options: [
+      'Aplikacja/urządzenie wysyłające dane do topiku',
+      'Aplikacja odbierająca i przetwarzająca dane z topiku',
+      'Serwer przechowujący metadane klastra',
+      'Mechanizm agregacji okienkowej w Sparku',
+    ],
+    correctIndex: 0,
+    explanation: 'Producenci (np. czujniki IoT, aplikacje) publikują wiadomości do wybranego topiku Kafki, skąd mogą je odczytać konsumenci.',
+  },
+  {
+    question: 'Dlaczego `window(col("timestamp"), "5 minutes")` w połączeniu z `groupBy` tworzy agregację okienkową, a nie zwykłe grupowanie?',
+    options: [
+      '`window()` dzieli oś czasu na 5-minutowe przedziały i grupuje zdarzenia według tego, do którego przedziału czasowego należą, zamiast grupować po stałej wartości kolumny',
+      '`window()` jest synonimem `groupBy()` i nie wnosi niczego nowego',
+      '`window()` działa wyłącznie w trybie batch, nigdy w streamingu',
+      '`window()` zastępuje potrzebę posiadania kolumny `timestamp`',
+    ],
+    correctIndex: 0,
+    explanation: '`window()` tworzy dynamiczną kolumnę reprezentującą przedział czasowy (np. 10:00-10:05), po której można grupować — to podstawa agregacji okienkowych w Structured Streaming.',
+  },
+  {
+    question: 'Czym różni się przetwarzanie strumieniowe od batch pod względem złożoności implementacji?',
+    options: [
+      'Streaming jest zazwyczaj prostszy, bo dane napływają w mniejszych porcjach',
+      'Streaming jest zazwyczaj bardziej złożony — trzeba uwzględnić spóźnione dane, stan między mikro-batchami, odporność na awarie w czasie rzeczywistym itd.',
+      'Oba podejścia mają identyczną złożoność implementacji',
+      'Złożoność nie zależy od rodzaju przetwarzania, tylko od rozmiaru danych',
+    ],
+    correctIndex: 1,
+    explanation: 'Streaming wymaga dodatkowych mechanizmów (watermarking, checkpointing, obsługa spóźnionych danych), których batch processing zwykle nie potrzebuje — stąd wyższa złożoność.',
+  },
+  {
+    question: 'Dlaczego Structured Streaming pozwala używać dokładnie tego samego DataFrame API co w trybie batch?',
+    options: [
+      'Bo strumień jest reprezentowany jako "nieskończona tabela", na której standardowe operacje select/filter/groupBy działają identycznie jak na danych statycznych',
+      'Bo Spark konwertuje strumień na plik CSV przed przetworzeniem',
+      'Bo streaming i batch to dokładnie ta sama technologia bez żadnych różnic wykonania',
+      'Bo DataFrame API w ogóle nie obsługuje agregacji w trybie streamingowym',
+    ],
+    correctIndex: 0,
+    explanation: 'To fundamentalna zaleta Structured Streaming — programista pisze ten sam kod DataFrame/SQL, a silnik Sparka sam zarządza inkrementalnym wykonaniem na nowo napływających danych.',
+  },
+  {
+    question: 'Jaki jest sens pytania "czy wybierzesz outputMode complete czy update" przy projektowaniu aplikacji streamingowej?',
+    options: [
+      'Wyboru trybu zapisu wyniku pod kątem wydajności i wymagań odbiorcy danych (np. czy potrzebujemy całej tabeli, czy tylko zmian)',
+      'Wyboru formatu pliku wejściowego',
+      'Wyboru liczby partycji Kafki',
+      'Decyzji o tym, czy w ogóle stosować watermark',
+    ],
+    correctIndex: 0,
+    explanation: 'Wybór output mode to świadoma decyzja projektowa — zależy od tego, czego potrzebuje system odbierający wyniki (pełny obraz vs tylko zmiany) oraz od narzutu wydajnościowego zapisu.',
+  },
+];

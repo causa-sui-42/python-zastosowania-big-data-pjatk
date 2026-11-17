@@ -1,0 +1,270 @@
+import type { QuizQuestion } from '@site/src/components/Quiz';
+
+// Wykład 4: Apache Spark — architektura, RDD i podstawy PySpark
+export const QUIZ_WYK04: QuizQuestion[] = [
+  {
+    question: 'Dlaczego Apache Spark jest zwykle szybszy niż klasyczny Hadoop MapReduce?',
+    options: [
+      'Bo Spark zawsze działa na jednej maszynie',
+      'Bo Spark przetwarza dane w pamięci RAM przez cały czas trwania zadania, zamiast zapisywać wyniki pośrednie na dysk',
+      'Bo Spark nie wykonuje żadnych obliczeń',
+      'Bo MapReduce nie obsługuje Pythona',
+    ],
+    correctIndex: 1,
+    explanation: 'Przetwarzanie w pamięci eliminuje kosztowne operacje zapisu/odczytu z dysku między kolejnymi krokami, co jest szczególnie odczuwalne przy algorytmach iteracyjnych.',
+  },
+  {
+    question: 'Jaką rolę pełni Driver w architekturze aplikacji Spark?',
+    options: [
+      'Fizycznie przechowuje wszystkie dane klastra',
+      'Uruchamia kod użytkownika, tworzy SparkSession, planuje zadania i zbiera wyniki',
+      'Jest synonimem Executora',
+      'Zarządza wyłącznie replikacją danych w HDFS',
+    ],
+    correctIndex: 1,
+    explanation: 'Driver to "mózg" aplikacji Spark — tworzy plan wykonania (DAG) i koordynuje pracę executorów.',
+  },
+  {
+    question: 'Co robią Executory w aplikacji Spark?',
+    options: [
+      'Tylko wyświetlają wyniki na ekranie',
+      'Wykonują faktyczne transformacje i przechowują dane w pamięci (cache) na swoich partycjach',
+      'Zarządzają kodem źródłowym aplikacji',
+      'Są odpowiednikiem NameNode w HDFS',
+    ],
+    correctIndex: 1,
+    explanation: 'Executory to procesy robocze uruchomione na węzłach klastra, które realnie wykonują obliczenia zlecone przez Driver.',
+  },
+  {
+    question: 'Co oznacza, że RDD jest "Resilient" (odporny)?',
+    options: [
+      'Że dane nigdy się nie zmieniają',
+      'Że dzięki lineage (historii transformacji) Spark może odtworzyć utracone partycje po awarii',
+      'Że RDD zawsze mieści się w pamięci RAM jednej maszyny',
+      'Że RDD automatycznie się kompresuje',
+    ],
+    correctIndex: 1,
+    explanation: 'Lineage to zapis kolejnych transformacji prowadzących do danego RDD — w razie utraty partycji, Spark może ją odtworzyć, przeliczając odpowiedni fragment lineage.',
+  },
+  {
+    question: 'Czym różnią się transformacje od akcji w Sparku?',
+    options: [
+      'Transformacje są leniwe (budują tylko plan), akcje natychmiast uruchamiają obliczenia',
+      'Akcje są leniwe, a transformacje natychmiastowe',
+      'Nie ma między nimi żadnej różnicy',
+      'Transformacje zawsze zwracają liczbę, a akcje zawsze zwracają RDD',
+    ],
+    correctIndex: 0,
+    explanation: 'Transformacje (np. `map`, `filter`) tworzą nowy plan (DAG) bez liczenia niczego; dopiero akcja (np. `collect`, `count`) wyzwala faktyczne wykonanie.',
+  },
+  {
+    question: 'Która z poniższych operacji jest akcją, a nie transformacją?',
+    options: ['map', 'filter', 'flatMap', 'collect'],
+    correctIndex: 3,
+    explanation: '`collect()` natychmiast uruchamia obliczenia i zwraca wynik do drivera — to klasyczna akcja. Pozostałe to transformacje (leniwe).',
+  },
+  {
+    question: 'Dlaczego warto preferować `reduceByKey` nad `groupByKey`?',
+    options: [
+      '`reduceByKey` redukuje dane lokalnie przed shuffle, zmniejszając ilość danych przesyłanych przez sieć',
+      '`groupByKey` w ogóle nie istnieje w PySpark',
+      '`reduceByKey` zawsze zwraca więcej danych niż `groupByKey`',
+      'Nie ma żadnej różnicy wydajnościowej między nimi',
+    ],
+    correctIndex: 0,
+    explanation: '`reduceByKey` agreguje wartości lokalnie na każdej partycji przed przesłaniem ich przez sieć (shuffle), co znacznie redukuje ruch sieciowy w porównaniu do `groupByKey`.',
+  },
+  {
+    question: 'Co się stanie, jeśli wywołasz `collect()` na RDD zawierającym 500 milionów elementów na maszynie z 8 GB RAM?',
+    options: [
+      'Spark automatycznie podzieli wynik na partie',
+      'Może wystąpić `OutOfMemoryError`, ponieważ wszystkie dane trafiają do pamięci drivera',
+      'Spark zignoruje polecenie',
+      'Operacja zawsze zakończy się sukcesem niezależnie od ilości danych',
+    ],
+    correctIndex: 1,
+    explanation: '`collect()` sprowadza WSZYSTKIE dane do pamięci drivera — przy ogromnych zbiorach to częsta przyczyna awarii z braku pamięci; lepiej użyć `take(n)` lub `count()`.',
+  },
+  {
+    question: 'Co zwraca `sc.parallelize([1, 2, 3, 4, 5], numSlices=2).getNumPartitions()`?',
+    options: ['1', '2', '5', '10'],
+    correctIndex: 1,
+    explanation: 'Parametr `numSlices=2` jawnie ustawia liczbę partycji RDD na 2, niezależnie od liczby elementów.',
+  },
+  {
+    question: 'Jaki jest parametr `.master()` ustawiony na `"local[*]"` w `SparkSession.builder`?',
+    options: [
+      'Uruchamia Sparka na zdalnym klastrze produkcyjnym',
+      'Uruchamia Sparka lokalnie, wykorzystując wszystkie dostępne rdzenie CPU maszyny jako "klaster"',
+      'Wyłącza przetwarzanie równoległe',
+      'Łączy się z klastrem YARN',
+    ],
+    correctIndex: 1,
+    explanation: '`local[*]` to tryb developerski/testowy — Spark symuluje klaster na jednej maszynie, używając wszystkich dostępnych rdzeni.',
+  },
+  {
+    question: 'Dlaczego niemutowalność (immutability) RDD ułatwia odporność na awarie?',
+    options: [
+      'Bo niemutowalne dane nigdy nie są tracone',
+      'Bo skoro RDD się nie zmienia, Spark może bezpiecznie odtworzyć je od nowa z lineage w dowolnym momencie, bez ryzyka niespójności',
+      'Bo niemutowalność przyspiesza zapis na dysk',
+      'Bo immutability eliminuje potrzebę partycjonowania',
+    ],
+    correctIndex: 1,
+    explanation: 'Ponieważ RDD nigdy się nie zmienia po utworzeniu, Spark może zawsze bezpiecznie odtworzyć je z lineage, bez obawy, że stan "w międzyczasie" się zmienił.',
+  },
+  {
+    question: 'Czym jest "lineage" w kontekście RDD?',
+    options: [
+      'Fizyczną lokalizacją danych na dysku',
+      'Historią transformacji prowadzących do powstania danego RDD, używaną do odtworzenia utraconych partycji',
+      'Nazwą klastra Spark',
+      'Synonimem partycji',
+    ],
+    correctIndex: 1,
+    explanation: 'Lineage to graf transformacji (DAG) — Spark śledzi, jak powstał dany RDD, i może go odtworzyć od podstawowych danych źródłowych w razie potrzeby.',
+  },
+  {
+    question: 'Jaki jest cel wywołania `.cache()` na RDD, które jest używane wielokrotnie?',
+    options: [
+      'Usunięcie RDD z pamięci',
+      'Zachowanie wyniku w pamięci, aby uniknąć ponownego przeliczania całego lineage przy każdym kolejnym użyciu',
+      'Zmiana liczby partycji RDD',
+      'Automatyczne partycjonowanie danych wg klucza',
+    ],
+    correctIndex: 1,
+    explanation: 'Bez `cache()`, Spark domyślnie przelicza cały lineage od nowa za każdym razem, gdy RDD jest używane — kosztowne przy wielokrotnym dostępie.',
+  },
+  {
+    question: 'Co zrobi transformacja `logi.filter(lambda l: l.split(" ")[-1].startswith(("4", "5")))`?',
+    options: [
+      'Posortuje logi alfabetycznie',
+      'Wybierze tylko wiersze logów, gdzie ostatni fragment (kod statusu HTTP) zaczyna się od 4 lub 5 (błędy klienta/serwera)',
+      'Policzy liczbę wszystkich logów',
+      'Usunie duplikaty logów',
+    ],
+    correctIndex: 1,
+    explanation: 'Filtr sprawdza, czy kod statusu HTTP (ostatni token w linii logu) zaczyna się od "4" (błędy klienta, np. 404) lub "5" (błędy serwera, np. 500).',
+  },
+  {
+    question: 'Czym jest RDD jako "Dataset" w nazwie "Resilient Distributed Dataset"?',
+    options: [
+      'Zawsze tabelą SQL ze zdefiniowanym schematem',
+      'Kolekcją dowolnych obiektów Python, bez wymogu posiadania schematu',
+      'Plikiem CSV',
+      'Formatem binarnym podobnym do Parquet',
+    ],
+    correctIndex: 1,
+    explanation: 'RDD to niskopoziomowa, "surowa" kolekcja obiektów — w przeciwieństwie do DataFrame, nie wymaga ani nie narzuca schematu (nazw i typów kolumn).',
+  },
+  {
+    question: 'Jaki cluster manager jest wymagany, by uruchomić PySpark w Google Colab bez prawdziwego klastra?',
+    options: [
+      'Zawsze YARN',
+      'Kubernetes',
+      'Tryb lokalny, np. `local[*]`',
+      'Standalone na wielu maszynach fizycznych',
+    ],
+    correctIndex: 2,
+    explanation: 'W środowiskach jak Colab typowo używa się trybu lokalnego (`local[*]`), który nie wymaga zewnętrznego klastra ani cluster managera.',
+  },
+  {
+    question: 'Dlaczego `groupByKey` bywa jednak czasem konieczne (nie da się go prosto zastąpić `reduceByKey`)?',
+    options: [
+      'Gdy potrzebujemy pełnej listy wszystkich wartości dla danego klucza, a nie tylko zagregowanego wyniku (np. do dalszego, bardziej złożonego przetwarzania każdej grupy)',
+      'Zawsze można zastąpić `groupByKey` przez `reduceByKey` bez wyjątków',
+      '`groupByKey` jest szybszy, więc używa się go zamiast `reduceByKey`',
+      '`reduceByKey` nie istnieje dla danych tekstowych',
+    ],
+    correctIndex: 0,
+    explanation: 'Jeśli operacja nie jest prostą redukcją (np. sumą), tylko wymaga dostępu do całej listy wartości danego klucza naraz, `groupByKey` może być konieczny mimo wyższego kosztu shuffle.',
+  },
+  {
+    question: 'Co oznacza "lazy evaluation" w kontekście transformacji Spark?',
+    options: [
+      'Spark wykonuje każdą linię kodu natychmiast po jej napisaniu',
+      'Transformacje budują tylko plan wykonania (DAG) i nic nie liczą, dopóki nie zostanie wywołana akcja',
+      'Program czeka na odpowiedź użytkownika przed każdą operacją',
+      'Dane są zawsze wczytywane dopiero po restarcie klastra',
+    ],
+    correctIndex: 1,
+    explanation: 'Dzięki leniwej ewaluacji Spark może zoptymalizować cały łańcuch transformacji razem, zamiast wykonywać każdy krok osobno i nieoptymalnie.',
+  },
+  {
+    question: 'Co zwróci `pary.reduceByKey(lambda a, b: a + b)` dla `[("/home", 1), ("/home", 1), ("/login", 1)]`?',
+    options: [
+      "[('/home', 1), ('/login', 1)]",
+      "[('/home', 2), ('/login', 1)]",
+      "[('/home', 1), ('/home', 1), ('/login', 1)]",
+      'Błąd — reduceByKey wymaga wcześniejszego sortowania',
+    ],
+    correctIndex: 1,
+    explanation: '`reduceByKey` sumuje wartości o tym samym kluczu — "/home" występuje dwa razy z wartością 1, więc wynik to 2; "/login" występuje raz, więc wynik to 1.',
+  },
+  {
+    question: 'Jakie zadanie pełni `sc.defaultParallelism`?',
+    options: [
+      'Zwraca liczbę executorów aktualnie uruchomionych',
+      'Informuje o domyślnej liczbie partycji, na które Spark dzieli nowe RDD',
+      'Jest synonimem wersji Sparka',
+      'Ustawia maksymalny rozmiar pamięci dla jednego executora',
+    ],
+    correctIndex: 1,
+    explanation: '`sc.defaultParallelism` wskazuje domyślny poziom równoległości (liczbę partycji) używany np. przy `sc.parallelize()` bez jawnie podanego `numSlices`.',
+  },
+  {
+    question: 'Dlaczego Spark skaluje się lepiej niż pojedyncza maszyna z pandas przy bardzo dużych zbiorach danych?',
+    options: [
+      'Bo Spark rozprasza dane i obliczenia na wiele maszyn (executorów) zamiast ograniczać się do RAM jednej maszyny',
+      'Bo Spark zawsze jest szybszy niezależnie od rozmiaru danych',
+      'Bo pandas nie obsługuje liczb zmiennoprzecinkowych',
+      'Bo Spark automatycznie kompresuje cały kod źródłowy',
+    ],
+    correctIndex: 0,
+    explanation: 'Spark dzieli dane na partycje rozproszone na wielu maszynach — gdy dane przerastają RAM jednej maszyny, to właśnie ta cecha pozwala mu dalej działać, gdy pandas by się "wysypał".',
+  },
+  {
+    question: 'Co zwraca `liczby.map(lambda x: x * 2)` zastosowane na RDD `[1, 2, 3]`, zanim wywołamy jakąkolwiek akcję?',
+    options: [
+      'Natychmiast listę [2, 4, 6]',
+      'Nowe RDD reprezentujące plan transformacji — żadne obliczenia jeszcze się nie wykonały',
+      'Błąd składniowy',
+      'Pustą listę',
+    ],
+    correctIndex: 1,
+    explanation: 'To klasyczny przykład lazy evaluation — `map` to transformacja, więc tworzy tylko opis planu; dopiero np. `.collect()` faktycznie policzy wynik.',
+  },
+  {
+    question: 'Jaki jest typowy przykład "pułapki wydajnościowej" przy pracy z RDD wymieniony na wykładzie?',
+    options: [
+      'Zbyt częste używanie `filter()`',
+      'Brak `cache()` przy wielokrotnym użyciu tego samego RDD, powodujący wielokrotne przeliczanie lineage',
+      'Zbyt mała liczba kolumn w danych',
+      'Używanie Pythona zamiast Scali',
+    ],
+    correctIndex: 1,
+    explanation: 'Jeśli to samo RDD jest wykorzystywane w kilku miejscach bez `cache()`/`persist()`, Spark przelicza cały łańcuch transformacji od nowa za każdym razem.',
+  },
+  {
+    question: 'Czym jest Cluster Manager w architekturze Spark (np. standalone, YARN, Kubernetes)?',
+    options: [
+      'Komponentem przydzielającym zasoby obliczeniowe (CPU, RAM) dla aplikacji Spark',
+      'Biblioteką Pythona do analizy danych',
+      'Formatem plików danych',
+      'Synonimem Drivera',
+    ],
+    correctIndex: 0,
+    explanation: 'Cluster Manager (standalone, YARN, Kubernetes lub lokalny `local[*]`) odpowiada za przydzielanie zasobów obliczeniowych, na których Driver uruchamia executory.',
+  },
+  {
+    question: 'Dlaczego porównanie czasu regresji logistycznej (Hadoop MapReduce ~110s/iterację vs Spark ~0.9s/iterację) jest istotne?',
+    options: [
+      'Pokazuje, że MapReduce w ogóle nie obsługuje ML',
+      'Ilustruje ogromną przewagę przetwarzania w pamięci RAM przy algorytmach iteracyjnych, typowych dla uczenia maszynowego',
+      'Pokazuje, że Spark jest wolniejszy od MapReduce',
+      'Dotyczy wyłącznie sortowania danych, nie ML',
+    ],
+    correctIndex: 1,
+    explanation: 'Algorytmy iteracyjne wielokrotnie odczytują te same dane — Spark trzymając je w RAM unika powtarzalnego kosztu I/O, stąd drastyczna różnica w czasie.',
+  },
+];

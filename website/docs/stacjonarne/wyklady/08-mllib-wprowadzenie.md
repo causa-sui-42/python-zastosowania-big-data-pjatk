@@ -36,6 +36,20 @@ Po tym wykładzie będziesz wiedzieć:
 
 ---
 
+<details>
+<summary>📝 **Skrót wykładu (TL;DR)** — kliknij, by rozwinąć</summary>
+
+- Przejście ze scikit-learn na Spark MLlib ma sens, gdy dane przekraczają ~10 GB lub stale rosną
+- `pyspark.ml`: **Estimator** (ma `fit()`), **Transformer** (ma `transform()`), **Pipeline** (łączy etapy), **Evaluator** (ocena jakości)
+- Przygotowanie danych: `StringIndexer` → `OneHotEncoder` → `VectorAssembler` (łączy cechy w jedną kolumnę wektorową)
+- `LogisticRegression` vs `RandomForestClassifier` vs `GBTClassifier` w MLlib
+- `BinaryClassificationEvaluator` (AUC-ROC); pułapki: brak `VectorAssembler`, `fit()` na całym zbiorze zamiast tylko treningowym
+- **Tuning hiperparametrów**: `ParamGridBuilder` (siatka kombinacji), `CrossValidator` (solidniejszy, k-fold) vs `TrainValidationSplit` (szybszy, jeden podział)
+- **Class imbalance**: `weightCol` (ważenie przykładów) lub undersampling; przy mocnym imbalance AUC-PR > AUC-ROC
+- Zapis/odczyt modelu: `model.write().overwrite().save(path)` / `PipelineModel.load(path)`
+
+</details>
+
 ## ✅ Materiały do wykładu
 
 <Admonition type="tip" title="Slajdy do pobrania">
@@ -43,6 +57,8 @@ Po tym wykładzie będziesz wiedzieć:
 </Admonition>
 
 📄 **[Otwórz slajdy PDF](pathname:///stacjonarne/pdfs/wyk08-mllib-wprowadzenie.pdf)**
+
+🧾 **[Ściąga jednostronicowa (PDF)](pathname:///stacjonarne/pdfs/wyk08-sciaga.pdf)** &nbsp;|&nbsp; 🧠 **[Rozwiąż quiz (25 pytań)](/stacjonarne/materialy/quiz/08-mllib-wprowadzenie)**
 
 ---
 

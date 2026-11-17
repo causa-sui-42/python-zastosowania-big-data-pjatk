@@ -1,0 +1,270 @@
+import type { QuizQuestion } from '@site/src/components/Quiz';
+
+// Wykład 5: Spark SQL — od podstaw po zaawansowane zapytania i optymalizację
+export const QUIZ_WYK05: QuizQuestion[] = [
+  {
+    question: 'Dlaczego DataFrame jest uznawany za lepszą abstrakcję niż surowe RDD w większości przypadków?',
+    options: [
+      'Bo DataFrame nigdy nie zawiera błędów',
+      'Bo posiada schemat (nazwy i typy kolumn), co pozwala Catalyst Optimizer zoptymalizować zapytania',
+      'Bo RDD nie obsługuje Pythona',
+      'Bo DataFrame zawsze mieści się w pamięci jednej maszyny',
+    ],
+    correctIndex: 1,
+    explanation: 'Dzięki znajomości schematu, Catalyst Optimizer może analizować i przekształcać zapytania (np. column pruning, predicate pushdown), czego nie da się zrobić dla "nieprzezroczystego" RDD.',
+  },
+  {
+    question: 'Który format ma wbudowany schemat i najszybszy odczyt spośród: CSV, JSON, Parquet?',
+    options: ['CSV', 'JSON', 'Parquet', 'Żaden z nich'],
+    correctIndex: 2,
+    explanation: 'Parquet to format kolumnowy ze zdefiniowanym schematem i bardzo szybkim odczytem, w przeciwieństwie do CSV (brak schematu, wolny odczyt).',
+  },
+  {
+    question: 'Który typ joina zwraca wszystkie wiersze z lewej tabeli oraz pasujące z prawej (z `null` tam, gdzie brak dopasowania)?',
+    options: ['inner', 'left / left_outer', 'full_outer', 'broadcast'],
+    correctIndex: 1,
+    explanation: '`left`/`left_outer` zachowuje wszystkie wiersze z lewej tabeli, uzupełniając `null`-ami kolumny z prawej tam, gdzie nie ma dopasowania.',
+  },
+  {
+    question: 'Kiedy warto wymusić `broadcast()` przy joinie w Spark SQL?',
+    options: [
+      'Gdy obie tabele są bardzo duże',
+      'Gdy jedna z tabel jest wystarczająco mała, by zmieścić się w pamięci każdego executora (np. tabela wymiarowa)',
+      'Nigdy — broadcast jest zawsze wolniejszy',
+      'Tylko przy joinach typu full_outer',
+    ],
+    correctIndex: 1,
+    explanation: 'Broadcast join kopiuje małą tabelę do każdego executora, eliminując kosztowny shuffle dużej tabeli — opłacalne tylko gdy mała tabela faktycznie jest mała.',
+  },
+  {
+    question: 'Co pozwala zrobić `createOrReplaceTempView()` w Spark SQL?',
+    options: [
+      'Trwale zapisuje dane na dysku',
+      'Rejestruje DataFrame jako tymczasowy widok, umożliwiając uruchamianie na nim zapytań `spark.sql("SELECT ...")`',
+      'Usuwa DataFrame z pamięci',
+      'Konwertuje DataFrame na RDD',
+    ],
+    correctIndex: 1,
+    explanation: 'Tymczasowy widok daje "nazwę tabeli" dla DataFrame, umożliwiając pisanie zapytań w czystym SQL przez `spark.sql()`.',
+  },
+  {
+    question: 'Czy DataFrame API i Spark SQL (surowy SQL) różnią się pod względem wydajności dla tego samego zapytania?',
+    options: [
+      'Tak, DataFrame API jest zawsze szybsze',
+      'Tak, SQL jest zawsze szybszy',
+      'Nie — oba przechodzą przez ten sam Catalyst Optimizer i generują identyczny plan wykonania',
+      'Tak, ale tylko dla zapytań z joinami',
+    ],
+    correctIndex: 2,
+    explanation: 'Wybór między DataFrame API a SQL to kwestia czytelności/preferencji — oba kompilują się do tego samego planu fizycznego przez Catalyst.',
+  },
+  {
+    question: 'Do czego służy window function `rank()` w porównaniu do `row_number()`?',
+    options: [
+      '`rank()` przydziela ten sam ranking przy remisach (z lukami w numeracji), `row_number()` zawsze przydziela unikalny, kolejny numer',
+      'To dokładnie ta sama funkcja pod inną nazwą',
+      '`row_number()` działa tylko na kolumnach tekstowych',
+      '`rank()` wymaga wcześniejszego `groupBy()`',
+    ],
+    correctIndex: 0,
+    explanation: 'Przy remisach `rank()` przydziela ten sam ranking kilku wierszom i "przeskakuje" kolejne numery, podczas gdy `row_number()` zawsze daje unikalny numer niezależnie od remisów.',
+  },
+  {
+    question: 'Kiedy `row_number()` jest bezpieczniejszym wyborem niż `rank()` do wybrania "top N" wierszy na grupę?',
+    options: [
+      'Gdy koniecznie chcemy dokładnie N wierszy na grupę, nawet przy remisach wartości',
+      'Gdy nie zależy nam na dokładnej liczbie wierszy wynikowych',
+      'Nigdy, `rank()` zawsze jest lepszy',
+      'Tylko gdy dane są posortowane malejąco',
+    ],
+    correctIndex: 0,
+    explanation: '`rank()` przy remisach może zwrócić więcej niż N wierszy na grupę (bo kilka wierszy dzieli tę samą pozycję); `row_number()` zawsze zwróci dokładnie N.',
+  },
+  {
+    question: 'Dlaczego window function z innym `partitionBy` w tym samym zapytaniu powoduje osobny shuffle za każdym razem?',
+    options: [
+      'Bo Spark nie obsługuje więcej niż jednego okna na zapytanie',
+      'Bo dane muszą zostać przetasowane (shuffle) według nowego klucza partycjonowania za każdym razem, gdy zmienia się `partitionBy`',
+      'Bo window function zawsze działa tylko na jednej partycji',
+      'Bo to tylko teoretyczne ograniczenie, w praktyce nie ma znaczenia',
+    ],
+    correctIndex: 1,
+    explanation: 'Każda unikalna kombinacja `partitionBy`/`orderBy` wymaga innego sposobu rozłożenia danych na partycje, więc Spark musi ponownie przetasować dane.',
+  },
+  {
+    question: 'Dlaczego UDF (User Defined Function) w Spark SQL jest kosztowny wydajnościowo?',
+    options: [
+      'Bo UDF-y nie mogą przyjmować argumentów',
+      'Bo Catalyst traktuje UDF jak "czarną skrzynkę" — brak optymalizacji, a dla UDF w Pythonie dochodzi kosztowna serializacja JVM↔Python per wiersz',
+      'Bo UDF działa tylko na kolumnach tekstowych',
+      'Bo UDF wymaga ręcznego partycjonowania danych',
+    ],
+    correctIndex: 1,
+    explanation: 'Catalyst nie "widzi" wnętrza UDF, więc nie może go zoptymalizować; dodatkowo Python UDF wymaga przesyłania danych między procesem JVM a Pythonem dla każdego wiersza.',
+  },
+  {
+    question: 'Jakie są cztery fazy planowania zapytania w Catalyst Optimizer?',
+    options: [
+      'Parsed Logical Plan → Analyzed Logical Plan → Optimized Logical Plan → Physical Plan',
+      'Map → Shuffle → Reduce → Collect',
+      'Read → Transform → Write → Cache',
+      'Driver → Executor → Task → Stage',
+    ],
+    correctIndex: 0,
+    explanation: 'Catalyst przechodzi przez cztery fazy: parsowanie zapytania, analizę (rozwiązanie referencji), logiczną optymalizację i wreszcie wybór planu fizycznego.',
+  },
+  {
+    question: 'Czym różni się rola Tungstena od roli Catalysta?',
+    options: [
+      'To dokładnie ta sama rzecz pod dwiema nazwami',
+      'Catalyst to planista (optymalizacja logiczna/fizyczna zapytania), Tungsten to silnik wykonawczy (binarny format w pamięci, whole-stage code generation)',
+      'Tungsten planuje zapytania, a Catalyst je wykonuje',
+      'Catalyst dotyczy tylko RDD, a Tungsten tylko DataFrame',
+    ],
+    correctIndex: 1,
+    explanation: 'Catalyst odpowiada za to "co" i "jak" zapytanie zostanie wykonane na poziomie planu; Tungsten odpowiada za efektywne, niskopoziomowe wykonanie tego planu.',
+  },
+  {
+    question: 'Czym różni się `repartition(n)` od `coalesce(n)`?',
+    options: [
+      '`repartition()` zawsze wykonuje pełny shuffle, `coalesce()` zwykle unika pełnego shuffle przy zmniejszaniu liczby partycji',
+      '`coalesce()` zawsze zwiększa liczbę partycji',
+      'To synonimy tej samej operacji',
+      '`repartition()` działa tylko na RDD, nie na DataFrame',
+    ],
+    correctIndex: 0,
+    explanation: '`repartition()` może zarówno zwiększać, jak i zmniejszać liczbę partycji, zawsze z pełnym shuffle; `coalesce()` służy głównie do zmniejszania liczby partycji, zwykle bez pełnego tasowania danych.',
+  },
+  {
+    question: 'Czego szukamy w wyniku `.explain()`, by wykryć kosztowne operacje?',
+    options: [
+      'Liczby kolumn w DataFrame',
+      '`Exchange` (oznaczającego shuffle) oraz typu joina, np. `BroadcastHashJoin` vs `SortMergeJoin`',
+      'Nazwy pliku wejściowego',
+      'Wersji Sparka',
+    ],
+    correctIndex: 1,
+    explanation: '`Exchange` w planie wykonania sygnalizuje kosztowny shuffle danych przez sieć — kluczowy element do analizy przy optymalizacji wolnych zapytań.',
+  },
+  {
+    question: 'Jaka jest różnica między `cache()` a `persist()`?',
+    options: [
+      '`cache()` to skrót dla `persist()` z domyślnym poziomem przechowywania w pamięci (MEMORY_ONLY zazwyczaj), `persist()` pozwala wybrać inny poziom (np. z zapisem na dysk)',
+      '`persist()` działa tylko na RDD, a `cache()` tylko na DataFrame',
+      'Nie ma żadnej różnicy',
+      '`cache()` zapisuje dane trwale na dysku, a `persist()` tylko w RAM',
+    ],
+    correctIndex: 0,
+    explanation: '`cache()` jest wygodnym skrótem dla najczęstszego przypadku; `persist(storageLevel)` daje pełną kontrolę nad tym, gdzie i jak dane są przechowywane.',
+  },
+  {
+    question: 'Dlaczego brak `.otherwise()` w łańcuchu `when()` jest częstą pułapką?',
+    options: [
+      'Powoduje błąd kompilacji',
+      'Powoduje ciche wstawienie wartości `null` dla wierszy niepasujących do żadnego warunku `when()`',
+      'Automatycznie usuwa cały wiersz z wyniku',
+      'Spowalnia działanie programu dziesięciokrotnie',
+    ],
+    correctIndex: 1,
+    explanation: 'Bez `.otherwise()`, wiersze niespełniające żadnego warunku `when()` dostają po cichu wartość `null`, co może być trudne do zauważenia bez dokładnej weryfikacji wyniku.',
+  },
+  {
+    question: 'Co się stanie przy joinie dwóch tabel bez podania klucza (`crossJoin`)?',
+    options: [
+      'Spark automatycznie dobierze najlepszy klucz',
+      'Powstanie iloczyn kartezjański — liczba wierszy wynikowych = liczba_wierszy_A × liczba_wierszy_B, co może "eksplodować" liczbę wyników',
+      'Zapytanie zwróci pusty wynik',
+      'Spark zgłosi błąd i odmówi wykonania zapytania',
+    ],
+    correctIndex: 1,
+    explanation: '`crossJoin` (lub join bez warunku) tworzy iloczyn kartezjański — nawet umiarkowane tabele mogą dać gigantyczną liczbę wierszy wynikowych.',
+  },
+  {
+    question: 'Jak działa `sum().over(Window.partitionBy(...).orderBy(...).rowsBetween(...))`?',
+    options: [
+      'Liczy łączną sumę całej tabeli',
+      'Oblicza sumę narastającą (running total) w obrębie zdefiniowanego okna wierszy',
+      'Usuwa duplikaty z kolumny',
+      'Zawsze zwraca wartość NULL',
+    ],
+    correctIndex: 1,
+    explanation: 'Window function z `rowsBetween` pozwala liczyć agregacje (np. sumę) na ruchomym "oknie" wierszy, np. sumę narastającą od początku partycji do bieżącego wiersza.',
+  },
+  {
+    question: 'Jakie korzyści daje zdefiniowanie jawnego schematu (`StructType`) zamiast polegania na `inferSchema=True`?',
+    options: [
+      'Brak korzyści — `inferSchema` jest zawsze lepsze',
+      'Szybszy odczyt (Spark nie musi skanować danych, by zgadnąć typy) i pewność co do poprawności typów',
+      'Jawny schemat jest wymagany tylko dla plików Parquet',
+      'Jawny schemat automatycznie kompresuje dane',
+    ],
+    correctIndex: 1,
+    explanation: '`inferSchema=True` wymaga dodatkowego przejścia po danych, by odgadnąć typy, co jest wolniejsze i czasem błędne; jawny `StructType` eliminuje ten narzut i niejednoznaczność.',
+  },
+  {
+    question: 'Dlaczego format kolumnowy (Parquet) jest szybszy niż CSV przy zapytaniach agregujących (np. SUM, AVG)?',
+    options: [
+      'Bo Parquet przechowuje dane wyłącznie w pamięci RAM',
+      'Bo silnik czyta tylko kolumny potrzebne do agregacji, pomijając resztę, a dane tej samej kolumny kompresują się lepiej',
+      'Bo CSV nie obsługuje liczb zmiennoprzecinkowych',
+      'Bo Parquet nie wymaga żadnego planu wykonania',
+    ],
+    correctIndex: 1,
+    explanation: 'Column pruning i lepsza kompresja kolumnowa to główne powody przewagi Parquet nad CSV przy typowych zapytaniach analitycznych.',
+  },
+  {
+    question: 'Czym różni się `inner join` od `left_semi join`?',
+    options: [
+      'To dokładnie to samo',
+      '`inner join` zwraca kolumny z obu tabel dla dopasowanych wierszy, `left_semi join` zwraca tylko kolumny lewej tabeli dla wierszy mających dopasowanie w prawej (bez duplikowania przy wielu dopasowaniach)',
+      '`left_semi join` zawsze zwraca wszystkie wiersze z obu tabel',
+      '`inner join` działa tylko na kolumnach tekstowych',
+    ],
+    correctIndex: 1,
+    explanation: '`left_semi` działa jak filtr ("czy istnieje dopasowanie?"), zwracając tylko kolumny lewej strony i максимум jeden wiersz na dopasowanie — przydatne np. do sprawdzania istnienia bez duplikacji.',
+  },
+  {
+    question: 'Jaki jest typowy objaw problemu z kolejnością operacji: filtrowanie wcześnie vs późno w zapytaniu Spark SQL?',
+    options: [
+      'Filtrowanie zawsze powinno być na samym końcu zapytania',
+      'Filtrowanie jak najwcześniej (przed kosztownym shuffle/joinem) zmniejsza ilość danych przetwarzanych w kolejnych krokach',
+      'Kolejność filtrowania nie ma żadnego wpływu na wydajność',
+      'Filtrowanie zawsze musi poprzedzać wczytanie danych',
+    ],
+    correctIndex: 1,
+    explanation: 'Im wcześniej odrzucimy niepotrzebne dane (predicate pushdown, wczesny `filter`), tym mniej danych trzeba przesłać przez sieć i przetworzyć w dalszych krokach.',
+  },
+  {
+    question: 'Dlaczego sortowanie (`orderBy`) całego dużego DataFrame przed ograniczeniem wyniku (np. `.limit(10)`) bywa pułapką wydajnościową?',
+    options: [
+      'Bo `orderBy` nigdy nie działa z `limit`',
+      'Bo globalne sortowanie wymaga pełnego, kosztownego shuffle całych danych, mimo że ostatecznie potrzebujemy tylko kilku wierszy',
+      'Bo `limit` zawsze sortuje dane alfabetycznie',
+      'Bo Spark nie obsługuje sortowania',
+    ],
+    correctIndex: 1,
+    explanation: 'Pełne globalne sortowanie wymaga przesłania (shuffle) wszystkich danych przez sieć, nawet jeśli ostatecznie interesuje nas tylko np. top 10 wierszy — warto rozważyć alternatywy jak `.orderBy(...).limit(n)` z odpowiednią optymalizacją planu.',
+  },
+  {
+    question: 'Co zwraca `StructField("cena", DoubleType(), False)` jako trzeci argument (`False`)?',
+    options: [
+      'Że kolumna jest kluczem głównym',
+      'Że kolumna NIE dopuszcza wartości null (nullable=False)',
+      'Że kolumna jest indeksowana',
+      'Że kolumna zawiera dane tekstowe',
+    ],
+    correctIndex: 1,
+    explanation: 'Trzeci parametr `StructField` to flaga `nullable` — `False` oznacza, że dana kolumna nie powinna zawierać wartości null.',
+  },
+  {
+    question: 'Jaki jest sens porównania "DataFrame API vs SQL" podkreślony na wykładzie?',
+    options: [
+      'SQL jest przestarzały i nie powinien być używany w Sparku',
+      'Oba podejścia przechodzą przez ten sam Catalyst Optimizer, więc wybór to kwestia czytelności kodu, nie wydajności',
+      'DataFrame API działa tylko z plikami Parquet',
+      'SQL nie obsługuje agregacji grupowych',
+    ],
+    correctIndex: 1,
+    explanation: 'Niezależnie od tego, czy piszemy `df.groupBy(...).agg(...)` czy `spark.sql("SELECT ... GROUP BY ...")`, Spark generuje ten sam plan fizyczny.',
+  },
+];

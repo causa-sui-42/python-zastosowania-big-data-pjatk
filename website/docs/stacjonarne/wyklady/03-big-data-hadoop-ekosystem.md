@@ -25,6 +25,17 @@ Po tym wykładzie będziesz wiedzieć:
 
 ---
 
+<details>
+<summary>📝 **Skrót wykładu (TL;DR)** — kliknij, by rozwinąć</summary>
+
+- **5V Big Data**: Volume, Velocity, Variety, Veracity, Value
+- **HDFS**: NameNode (metadane), DataNode (dane), Secondary NameNode, replication factor = 3 domyślnie
+- **MapReduce**: fazy map → shuffle → reduce; wolny, bo zapisuje wyniki pośrednie na dysk
+- **YARN**: ResourceManager (globalny), NodeManager (lokalny), ApplicationMaster, Container
+- **Ekosystem Hadoop**: Hive (SQL nad HDFS), HBase (NoSQL), Sqoop (import/eksport z RDBMS), Oozie (orkiestracja workflow)
+
+</details>
+
 ## ✅ Materiały do wykładu
 
 <Admonition type="tip" title="Slajdy do pobrania">
@@ -32,6 +43,8 @@ Po tym wykładzie będziesz wiedzieć:
 </Admonition>
 
 📄 **[Otwórz slajdy PDF](pathname:///stacjonarne/pdfs/wyk03-big-data-hadoop-ekosystem.pdf)**
+
+🧾 **[Ściąga jednostronicowa (PDF)](pathname:///stacjonarne/pdfs/wyk03-sciaga.pdf)** &nbsp;|&nbsp; 🧠 **[Rozwiąż quiz (25 pytań)](/stacjonarne/materialy/quiz/03-big-data-hadoop-ekosystem)**
 
 ---
 

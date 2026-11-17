@@ -34,6 +34,21 @@ Po tym wykładzie będziesz wiedzieć:
 
 ---
 
+<details>
+<summary>📝 **Skrót wykładu (TL;DR)** — kliknij, by rozwinąć</summary>
+
+- **DataFrame vs RDD**: DataFrame ma schemat i korzysta z Catalyst Optimizer — zwykle wydajniejszy i wygodniejszy
+- Podstawy: `SparkSession`, `StructType`/`StructField`, odczyt CSV/JSON/Parquet
+- Operacje: `select`, `filter`, `withColumn`, `groupBy`, `agg`, `orderBy`
+- **Joiny**: `inner`, `left`, `full_outer`, `broadcast` (dla małej tabeli po stronie)
+- **Spark SQL** (`spark.sql()`, `createOrReplaceTempView`) daje **identyczną wydajność** co DataFrame API — to kwestia stylu, nie szybkości
+- **Window functions**: `row_number()` (zawsze unikalny), `rank()`/`dense_rank()` (remisy), `lag`/`lead`, `rowsBetween`
+- **UDF-y są kosztowne** — Catalyst ich nie optymalizuje (działają jak „czarna skrzynka”)
+- **Catalyst Optimizer** (4 fazy planu) + **Tungsten** (silnik wykonawczy); `.explain()` pokazuje `Exchange` (shuffle), `BroadcastHashJoin` vs `SortMergeJoin`
+- `repartition()` zawsze robi pełny shuffle, `coalesce()` zwykle nie; `cache()`/`persist()` dla danych używanych wielokrotnie
+
+</details>
+
 ## ✅ Materiały do wykładu
 
 <Admonition type="tip" title="Slajdy do pobrania">
@@ -41,6 +56,8 @@ Po tym wykładzie będziesz wiedzieć:
 </Admonition>
 
 📄 **[Otwórz slajdy PDF](pathname:///stacjonarne/pdfs/wyk05-spark-sql-dataframes.pdf)**
+
+🧾 **[Ściąga jednostronicowa (PDF)](pathname:///stacjonarne/pdfs/wyk05-sciaga.pdf)** &nbsp;|&nbsp; 🧠 **[Rozwiąż quiz (25 pytań)](/stacjonarne/materialy/quiz/05-spark-sql-dataframes)**
 
 ---
 

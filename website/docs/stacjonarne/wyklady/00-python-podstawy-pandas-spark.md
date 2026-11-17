@@ -26,6 +26,19 @@ Ten wykład to **wspólny punkt startowy** dla całego kursu — niezależnie od
 
 ---
 
+<details>
+<summary>📝 **Skrót wykładu (TL;DR)** — kliknij, by rozwinąć</summary>
+
+- **Zmienne i typy danych**: `int`, `float`, `str`, `bool`; dynamiczne typowanie Pythona
+- **Sterowanie przepływem**: `if`/`elif`/`else`, `match`/`case`, pętle `for`/`while`
+- **Struktury danych**: listy, krotki (niemutowalne), zbiory (unikalność), słowniki (klucz-wartość); comprehensions jako zwięzły zapis pętli
+- **Funkcje i wyjątki**: `def`, argumenty domyślne/`*args`/`**kwargs`, `try`/`except`/`finally`
+- **pandas `DataFrame`**: tworzenie, filtrowanie (`df[df.col > x]`), `groupby()`, `merge()` — Twoje codzienne narzędzie do analizy danych w pamięci
+- **PySpark**: te same koncepcje (filtrowanie, grupowanie, joiny), ale rozproszone na klaster — potrzebne, gdy dane nie mieszczą się już w pamięci jednej maszyny
+- **Najważniejsza intuicja**: pandas = jedna maszyna, Spark = wiele maszyn pracujących razem nad tymi samymi operacjami
+
+</details>
+
 ## ✅ Materiały do wykładu
 
 <Admonition type="tip" title="Slajdy do pobrania">
@@ -33,6 +46,8 @@ Ten wykład to **wspólny punkt startowy** dla całego kursu — niezależnie od
 </Admonition>
 
 📄 **[Otwórz slajdy PDF](pathname:///stacjonarne/pdfs/wyk00-python-od-podstaw-do-pandas-spark.pdf)**
+
+🧾 **[Ściąga jednostronicowa (PDF)](pathname:///stacjonarne/pdfs/wyk00-sciaga.pdf)** &nbsp;|&nbsp; 🧠 **[Rozwiąż quiz (25 pytań)](/stacjonarne/materialy/quiz/00-python-podstawy-pandas-spark)**
 
 ---
 

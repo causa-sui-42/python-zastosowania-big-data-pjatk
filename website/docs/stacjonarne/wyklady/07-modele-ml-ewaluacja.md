@@ -30,6 +30,19 @@ Po tym wykładzie będziesz wiedzieć:
 
 ---
 
+<details>
+<summary>📝 **Skrót wykładu (TL;DR)** — kliknij, by rozwinąć</summary>
+
+- **Klasyfikacja** (etykiety dyskretne) vs **regresja** (wartości ciągłe) — różne algorytmy i metryki
+- Algorytmy: Logistic Regression, Decision Tree, Random Forest (las drzew + głosowanie), Gradient Boosting (sekwencyjna korekta błędów)
+- **Parametry** (uczone przez model) vs **hiperparametry** (ustawiane przez nas, np. `max_depth`)
+- **Bias-variance tradeoff**: underfitting (zbyt prosty model) vs overfitting (zbyt dopasowany do treningu)
+- **Metryki klasyfikacji**: accuracy (myląca przy imbalance!), precision, recall, F1-score, ROC-AUC, confusion matrix
+- **Metryki regresji**: MAE, RMSE (karze duże błędy mocniej), R² (jaki % wariancji wyjaśnia model)
+- **Cross-validation** daje bardziej wiarygodną ocenę niż pojedynczy `train_test_split`; `GridSearchCV` do strojenia hiperparametrów
+
+</details>
+
 ## ✅ Materiały do wykładu
 
 <Admonition type="tip" title="Slajdy do pobrania">
@@ -37,6 +50,8 @@ Po tym wykładzie będziesz wiedzieć:
 </Admonition>
 
 📄 **[Otwórz slajdy PDF](pathname:///stacjonarne/pdfs/wyk07-modele-ml-ewaluacja.pdf)**
+
+🧾 **[Ściąga jednostronicowa (PDF)](pathname:///stacjonarne/pdfs/wyk07-sciaga.pdf)** &nbsp;|&nbsp; 🧠 **[Rozwiąż quiz (25 pytań)](/stacjonarne/materialy/quiz/07-modele-ml-ewaluacja)**
 
 ---
 

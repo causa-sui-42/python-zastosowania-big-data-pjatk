@@ -27,6 +27,19 @@ Po tym wykładzie będziesz wiedzieć:
 
 ---
 
+<details>
+<summary>📝 **Skrót wykładu (TL;DR)** — kliknij, by rozwinąć</summary>
+
+- Dlaczego w Big Data wąskim gardłem jest **I/O**, a nie CPU
+- **Format wierszowy vs kolumnowy**: CSV/JSON (wierszowy, czytelny, wolny) vs Parquet/Arrow (kolumnowy, szybki do agregacji)
+- **Parquet**: schemat w pliku, column pruning, predicate pushdown, kompresja (snappy, zstd, gzip)
+- **Optymalizacja pamięci**: dobór typów danych, typ `category` w pandas, przetwarzanie w kawałkach (chunks)
+- **Partycjonowanie Hive-style** (`rok=2026/miesiąc=01/...`) i problem zbyt wielu małych plików
+- **Scale up vs scale out**; wzorzec **map → reduce** jako fundament przetwarzania rozproszonego
+- **Data Warehouse vs Data Lake vs Lakehouse**; architektura medalionowa: Bronze (surowe) → Silver (czyste) → Gold (biznesowe)
+
+</details>
+
 ## ✅ Materiały do wykładu
 
 <Admonition type="tip" title="Slajdy do pobrania">
@@ -34,6 +47,8 @@ Po tym wykładzie będziesz wiedzieć:
 </Admonition>
 
 📄 **[Otwórz slajdy PDF](pathname:///stacjonarne/pdfs/wyk02-formaty-przechowywanie-danych.pdf)**
+
+🧾 **[Ściąga jednostronicowa (PDF)](pathname:///stacjonarne/pdfs/wyk02-sciaga.pdf)** &nbsp;|&nbsp; 🧠 **[Rozwiąż quiz (25 pytań)](/stacjonarne/materialy/quiz/02-formaty-przechowywanie-danych)**
 
 ---
 
